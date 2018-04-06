@@ -1,8 +1,7 @@
 # INFINANCE PROJECT
 
-Datos del proyecto
-======
+## Datos del proyecto
 
-## Base de Datos:
+#### Base de Datos:
 u: adminInfinance <br/>
 p: proyectoDAT <br/>
