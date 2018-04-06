@@ -1,1 +1,1 @@
-# infinance
+# INFINANCE PROJECT
