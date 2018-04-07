@@ -7,11 +7,11 @@
 <title>Home</title>
 </head>
 <body>
-    <form action = "/PruebasDAT/Home?page=login" method = "post">
+    <form action = "/infinance/Home?page=login" method = "post">
         <input type="submit" name="login" value="login" />
     </form>
     </br>
-        <form action = "/PruebasDAT/Home?page=register"" method = "post">
+        <form action = "/infinance/Home?page=register"" method = "post">
         <input type="submit" name="register" value="register" />
     </form>
 </body>

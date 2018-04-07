@@ -7,7 +7,7 @@
 <title>Login</title>
 </head>
 <body>
-<form action="/PruebasDAT/Home?page=dologin" method="post">
+<form action="/infinance/Home?page=dologin" method="post">
 
  Usuario:
     <input type="text" name="user">

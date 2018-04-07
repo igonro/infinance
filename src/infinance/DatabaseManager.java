@@ -70,8 +70,8 @@ public class DatabaseManager {
 			//e.printStackTrace();
 			  System.out.println("Message:  " + e.getMessage());                        
 		      System.out.println("SQLSTATE: " + e.getSQLState());            
-		      System.out.println("Código de error SQL: " + e.getErrorCode()); 
-		     // sqle=sqle.getNextException();     // Recuperar excepción de SQL siguiente  
+		      System.out.println("Cï¿½digo de error SQL: " + e.getErrorCode()); 
+		     // sqle=sqle.getNextException();     // Recuperar excepciï¿½n de SQL siguiente  
 		      convertErrorRegisterUser( e.getMessage());
 		      closeConnection(stmt) ;
 		      return -1 ;
@@ -94,7 +94,7 @@ public class DatabaseManager {
 					
 				}
 				else {
-					lastError="El usuario "+user+" y/o la contaseña no son correctos";
+					lastError="El usuario "+user+" y/o la contaseï¿½a no son correctos";
 					closeConnection(stmt) ;
 					return -1; 
 				}
@@ -103,8 +103,8 @@ public class DatabaseManager {
 				//e.printStackTrace();
 				  System.out.println("Message:  " + e.getMessage());                        
 			      System.out.println("SQLSTATE: " + e.getSQLState());            
-			      System.out.println("Código de error SQL: " + e.getErrorCode()); 
-			     // sqle=sqle.getNextException();     // Recuperar excepción de SQL siguiente  
+			      System.out.println("Cï¿½digo de error SQL: " + e.getErrorCode()); 
+			     // sqle=sqle.getNextException();     // Recuperar excepciï¿½n de SQL siguiente  
 			      closeConnection(stmt) ;
 			      return -1 ;
 			}
@@ -146,8 +146,8 @@ public class DatabaseManager {
 				//e.printStackTrace();
 				  System.out.println("Message:  " + e.getMessage());                        
 			      System.out.println("SQLSTATE: " + e.getSQLState());            
-			      System.out.println("Código de error SQL: " + e.getErrorCode()); 
-			     // sqle=sqle.getNextException();     // Recuperar excepción de SQL siguiente  
+			      System.out.println("Cï¿½digo de error SQL: " + e.getErrorCode()); 
+			     // sqle=sqle.getNextException();     // Recuperar excepciï¿½n de SQL siguiente  
 			      lastError="Error desconocido. Ver debug";
 			      closeConnection(stmt) ;
 			      return -1 ;
@@ -177,9 +177,11 @@ public class DatabaseManager {
 	}
 	
 	private static Connection DBInteraction() throws SQLException {
-		String url = "jdbc:mysql://127.0.0.1:3306/infinancedb";
+//		String url = "jdbc:mysql://127.0.0.1:3306/infinancedb";
+		String url = "jdbc:mariadb://127.0.0.1:3306/infinancedb";
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+//			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.mariadb.jdbc.Driver");
 		} catch (java.lang.ClassNotFoundException e) {
 			System.err.print("ClassNotFoundException: ");
 			System.err.println(e.getMessage());

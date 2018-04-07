@@ -8,7 +8,7 @@ Register
 <title>register</title>
 </head>
 <body>
-<form action="/PruebasDAT/Home?page=doregister" method="post">
+<form action="/infinance/Home?page=doregister" method="post">
     Usuario:
     <input type="text" name="user">
     <br/>
