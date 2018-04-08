@@ -67,6 +67,8 @@ public void init() {
 			int iduser = DatabaseManager.login(request.getParameter("user"),request.getParameter("password"));
 			if (iduser == -1) {
 			page = "/login.jsp";
+            request.setAttribute("errorMessage", "Invalid user or password");
+            System.out.println("ERROR");
 			} else {
 				page = "/home.jsp";
 			}
