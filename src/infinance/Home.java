@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Home
  */
-@WebServlet("/Home")
+@WebServlet("/")
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       private static DatabaseManager db;
@@ -26,7 +26,7 @@ public class Home extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 public void init() {
-	//inicialización de la conexione de la base de datos
+	//inicializaciï¿½n de la conexione de la base de datos
 	db = new DatabaseManager();
 	
 }
@@ -34,7 +34,6 @@ public void init() {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		 ServletContext sc = getServletContext();
 		 RequestDispatcher rd = sc.getRequestDispatcher("/home.jsp");
 		 rd.forward(request,response);
@@ -44,40 +43,38 @@ public void init() {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String page = null;
-		String param = request.getParameter("page");
-		
-		if(param.equals("login")){
-			page = "/login.jsp";
-		}else if (param.equals("register")){
-			page = "/register.jsp";
-		}
-		else if (param.equals("doregister")){
-
-			int error = DatabaseManager.register("1",request.getParameter("user"),request.getParameter("password"),request.getParameter("email"),request.getParameter("name"),request.getParameter("lastname"),request.getParameter("phone"));
-			if (error == 0) {
-			page = "/home.jsp";
-			} else {
-				page = "/register.jsp";
-			}
-		}
-		else if (param.equals("dologin")){
-
-			int iduser = DatabaseManager.login(request.getParameter("user"),request.getParameter("password"));
-			if (iduser == -1) {
-			page = "/login.jsp";
-            request.setAttribute("errorMessage", "Invalid user or password");
-            System.out.println("ERROR");
-			} else {
-				page = "/home.jsp";
-			}
-		
-		}
-		
-		getServletContext().getRequestDispatcher(page).forward(request, response);
-	
+//		// TODO Auto-generated method stub
+//		String page = null;
+//		String param = request.getParameter("page");
+//
+//		if (param.equals("login")) {
+//			page = "/login.jsp";
+//		} else if (param.equals("register")) {
+//			page = "/register.jsp";
+//		} else if (param.equals("doregister")) {
+//
+//			int error = DatabaseManager.register("1", request.getParameter("user"), request.getParameter("password"),
+//					request.getParameter("email"), request.getParameter("name"), request.getParameter("lastname"),
+//					request.getParameter("phone"));
+//			if (error == 0) {
+//				page = "/home.jsp";
+//			} else {
+//				page = "/register.jsp";
+//			}
+//		} else if (param.equals("dologin")) {
+//
+//			int iduser = DatabaseManager.login(request.getParameter("user"), request.getParameter("password"));
+//			if (iduser == -1) {
+//				page = "/login.jsp";
+//				request.setAttribute("errorMessage", "Invalid user or password");
+//				System.out.println("ERROR");
+//			} else {
+//				page = "/home.jsp";
+//			}
+//
+//		}
+//
+//		getServletContext().getRequestDispatcher(page).forward(request, response);
+//
 	}
-	}
-
-
+}

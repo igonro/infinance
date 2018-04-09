@@ -7,12 +7,10 @@
 <title>Home</title>
 </head>
 <body>
-    <form action = "/infinance/Home?page=login" method = "post">
-        <input type="submit" name="login" value="login" />
-    </form>
-    </br>
-        <form action = "/infinance/Home?page=register"" method = "post">
-        <input type="submit" name="register" value="register" />
-    </form>
-</body>
+<a href ="/infinance/login">Login</a>
+</br>
+<a href ="/infinance/register">Register</a>
+</br>
+  </body>
 </html>
+

@@ -9,7 +9,7 @@
 <title>Login</title>
 </head>
 <body>
-<form action="/infinance/Home?page=dologin" method="post">
+<form action="/infinance/login" method="post">
 
  Usuario:
     <input type="text" name="user">
