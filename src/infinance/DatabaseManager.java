@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.Empresa;
 
 public class DatabaseManager {
 	  //Tabla usuario
@@ -33,6 +36,7 @@ public class DatabaseManager {
     
     public static final String TABLE_COMPANY="COMPANY";
     public static final String CN_ID_COMPANY = "ID";
+    public static final String CN_NAME_COMPANY = "name";
     public static final String CN_SYMBOL= "symbol";
     public static final String CN_LAST_SALE="lastSale";
     public static final String CN_MARKETCAP="marketCap";
@@ -40,6 +44,7 @@ public class DatabaseManager {
     public static final String CN_INDUSTRY="industry";
     public static final String CN_SUMMARY="summary";
     public static final String CN_MARKET="market";
+    public static final String CN_ADRTSO="ADRTSO";
     
     
     
@@ -153,6 +158,93 @@ public class DatabaseManager {
 			      return -1 ;
 			}
 			
+			
+		}
+
+		 static ArrayList<Empresa>  busquedaEmpresa(String startsWithsymbol) {
+			Statement stmt=openConnection();
+			String query = "Select * from "+TABLE_COMPANY+" where "+CN_SYMBOL+" LIKE "+"\""+ startsWithsymbol + "%\" ;";
+			System.out.println(query);
+			try {
+				ResultSet rs= stmt.executeQuery(query);
+				ArrayList<Empresa> empresas = new ArrayList<Empresa>();
+				while(rs.next()) {
+			
+					
+						
+					
+						String symbol=rs.getString(CN_SYMBOL);
+						String name=rs.getString(CN_NAME_COMPANY);
+						 int lastscale=rs.getInt(CN_LAST_SALE);
+						int marketcap=rs.getInt(CN_MARKET);
+						String address=rs.getString(CN_ADRTSO);
+						 String sector=rs.getString(CN_SECTOR);
+						 String industry=rs.getString(CN_INDUSTRY);
+						String summaryquote=rs.getString(CN_SUMMARY);
+						Empresa emp = new Empresa( symbol, name, lastscale, marketcap, address, sector,  industry,
+								 summaryquote);
+						empresas.add(emp);
+					
+				}
+			return empresas;
+				/*else {
+					lastError="La empresa con el simbolo "+startsWithsymbol+" no existe";
+					closeConnection(stmt) ;
+					return -1; 
+				}*/
+				
+			} catch (SQLException e) {
+				//e.printStackTrace();
+				  System.out.println("Message:  " + e.getMessage());                        
+			      System.out.println("SQLSTATE: " + e.getSQLState());            
+			      System.out.println("Código de error SQL: " + e.getErrorCode()); 
+			     // sqle=sqle.getNextException();     // Recuperar excepción de SQL siguiente  
+			      closeConnection(stmt) ;
+			      return null ;
+			}
+			
+		}
+		static ArrayList<Empresa>  busquedaTodasEmpresas() {
+			Statement stmt=openConnection();
+			String query = "Select * from "+TABLE_COMPANY+ ";";
+			System.out.println(query);
+			try {
+				ResultSet rs= stmt.executeQuery(query);
+				ArrayList<Empresa> empresas = new ArrayList<Empresa>();
+				while(rs.next()) {
+			
+					
+						
+					
+						String symbol=rs.getString(CN_SYMBOL);
+						String name=rs.getString(CN_NAME_COMPANY);
+						 int lastscale=rs.getInt(CN_LAST_SALE);
+						int marketcap=rs.getInt(CN_MARKET);
+						String address=rs.getString(CN_ADRTSO);
+						 String sector=rs.getString(CN_SECTOR);
+						 String industry=rs.getString(CN_INDUSTRY);
+						String summaryquote=rs.getString(CN_SUMMARY);
+						Empresa emp = new Empresa( symbol, name, lastscale, marketcap, address, sector,  industry,
+								 summaryquote);
+						empresas.add(emp);
+					
+				}
+			return empresas;
+				/*else {
+					lastError="La empresa con el simbolo "+startsWithsymbol+" no existe";
+					closeConnection(stmt) ;
+					return -1; 
+				}*/
+				
+			} catch (SQLException e) {
+				//e.printStackTrace();
+				  System.out.println("Message:  " + e.getMessage());                        
+			      System.out.println("SQLSTATE: " + e.getSQLState());            
+			      System.out.println("Código de error SQL: " + e.getErrorCode()); 
+			     // sqle=sqle.getNextException();     // Recuperar excepción de SQL siguiente  
+			      closeConnection(stmt) ;
+			      return null ;
+			}
 			
 		}
 	
