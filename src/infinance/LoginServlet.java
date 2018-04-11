@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 		int iduser = DatabaseManager.login(request.getParameter("user"), request.getParameter("password"));
 		if (iduser == -1) {
 			System.out.println("Usuario no registrado");
-			request.setAttribute("errorMessage", "Invalid user or password");
+			request.setAttribute("errorMessage", DatabaseManager.getLastError());
 
 			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 		} else {
