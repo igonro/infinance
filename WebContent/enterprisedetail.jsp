@@ -4,15 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home</title>
+<title>Insert title here</title>
 </head>
 <body>
-<a href ="/infinance/login">Login</a>
-</br>
-<a href ="/infinance/register">Register</a>
-</br>
-<a href ="/infinance/market">Market</a>
-</br>
-  </body>
-</html>
 
+</body>
+</html>

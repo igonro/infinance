@@ -1,7 +1,6 @@
 package infinance;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class EnterpriseDetailServlet
  */
-@WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/enterprisedetail")
+public class EnterpriseDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public EnterpriseDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +29,17 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 ServletContext sc = getServletContext();
-		 RequestDispatcher rd = sc.getRequestDispatcher("/register.jsp");
-		 rd.forward(request,response);
-	}
+		// TODO Auto-generated method stub
+		ServletContext sc = getServletContext();
+		RequestDispatcher rd = sc.getRequestDispatcher("/enterprisedetail.jsp");
+		rd.forward(request,response);	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Se pillarían los datos del usuario, se guardarán los datos en la bbdd y reenviará a la homeUser
-		  String randomString = UUID.randomUUID().toString();
-		int error = DatabaseManager.register("1", request.getParameter("user"), request.getParameter("password"),
-				request.getParameter("email"), request.getParameter("name"), request.getParameter("lastname"),
-				request.getParameter("phone"),randomString);
-		if (error == 0) {
-			response.sendRedirect("/infinance/home");
-		} else {
-			getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
-		}
-		
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

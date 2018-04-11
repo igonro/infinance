@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home</title>
+<title>Market</title>
 </head>
 <body>
-<a href ="/infinance/login">Login</a>
+NASDAQ
 </br>
-<a href ="/infinance/register">Register</a>
+<c:forEach var="Bean" items="${Bean}">
 </br>
-<a href ="/infinance/market">Market</a>
-</br>
-  </body>
+<a href ="/infinance/enterprisedetail?symbol=${Bean.symbol}">${Bean.symbol} </a> 
+</c:forEach>
+</body>
 </html>
-

@@ -21,7 +21,7 @@ public class DatabaseManager {
     public static final String CN_FIRST_NAME="firstName";
     public static final String CN_LAST_NAME="lastName";
     public static final String CN_PHONE="phone";
-    
+    public static final String CN_APIKey="APIKey";
     
 	  //Tabla acciones
     public static final String TABLE_SHARES="SHARES";
@@ -59,12 +59,12 @@ public class DatabaseManager {
 	private static String lastError="Sin errores";
 	
 	
-	static int  register(String type,String user,String password,String email, String  firstName, String lastName, String phone) {
+	static int  register(String type,String user,String password,String email, String  firstName, String lastName, String phone,String randomString) {
 		Statement stmt=openConnection();
 		String insert = "insert into "+TABLE_USER+" "
-				+ "("+CN_TYPE+","+CN_USER+","+CN_PASSWORD+","+CN_EMAIL+","+CN_FIRST_NAME+","+CN_LAST_NAME+","+CN_PHONE+") " + "values ("
+				+ "("+CN_TYPE+","+CN_USER+","+CN_PASSWORD+","+CN_EMAIL+","+CN_FIRST_NAME+","+CN_LAST_NAME+","+CN_PHONE+","+CN_APIKey+") " + "values ("
 						+  type + "," +"\""+ user + "\"," +"\""+ password + "\"," + "\""+ email + "\"," +  "\""+ firstName + "\"," + "\""+ lastName
-						+ "\"," + phone + ");";
+						+ "\"," + phone + ",\""+randomString+"\");";
 		System.out.println(insert);
 		try {
 			stmt.executeUpdate(insert);
@@ -161,7 +161,8 @@ public class DatabaseManager {
 			
 		}
 
-		private static ArrayList<Empresa>  busquedaEmpresa(String startsWithsymbol) {
+
+		 static ArrayList<Empresa>  busquedaEmpresa(String startsWithsymbol) {
 			Statement stmt=openConnection();
 			String query = "Select * from "+TABLE_COMPANY+" where "+CN_SYMBOL+" LIKE "+"\""+ startsWithsymbol + "%\" ;";
 			System.out.println(query);
@@ -204,7 +205,50 @@ public class DatabaseManager {
 			}
 			
 		}
-	
+		static ArrayList<Empresa>  busquedaTodasEmpresas() {
+			Statement stmt=openConnection();
+			String query = "Select * from "+TABLE_COMPANY+ ";";
+			System.out.println(query);
+			try {
+				ResultSet rs= stmt.executeQuery(query);
+				ArrayList<Empresa> empresas = new ArrayList<Empresa>();
+				while(rs.next()) {
+			
+					
+						
+					
+						String symbol=rs.getString(CN_SYMBOL);
+						String name=rs.getString(CN_NAME_COMPANY);
+						 int lastscale=rs.getInt(CN_LAST_SALE);
+						int marketcap=rs.getInt(CN_MARKET);
+						String address=rs.getString(CN_ADRTSO);
+						 String sector=rs.getString(CN_SECTOR);
+						 String industry=rs.getString(CN_INDUSTRY);
+						String summaryquote=rs.getString(CN_SUMMARY);
+						Empresa emp = new Empresa( symbol, name, lastscale, marketcap, address, sector,  industry,
+								 summaryquote);
+						empresas.add(emp);
+					
+				}
+			return empresas;
+				/*else {
+					lastError="La empresa con el simbolo "+startsWithsymbol+" no existe";
+					closeConnection(stmt) ;
+					return -1; 
+				}*/
+				
+			} catch (SQLException e) {
+				//e.printStackTrace();
+				  System.out.println("Message:  " + e.getMessage());                        
+			      System.out.println("SQLSTATE: " + e.getSQLState());            
+			      System.out.println("Código de error SQL: " + e.getErrorCode()); 
+			     // sqle=sqle.getNextException();     // Recuperar excepción de SQL siguiente  
+			      closeConnection(stmt) ;
+			      return null ;
+			}
+			
+		}
+	 
 	private static Statement openConnection() {
 
 		try {
