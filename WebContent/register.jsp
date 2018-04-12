@@ -60,7 +60,7 @@
       <!-- NAVBAR -->
     </header>
 
-    <!-- LOGIN FORM -->
+    <!-- REGISTER FORM -->
     <form class="form-register text-center" action="/infinance/register" method="post">
       <img class="mb-4" src="img/register-user.svg" alt="" width="128" height="128">
       <h1 class="h3 mb-3 font-weight-normal">Formulario de registro</h1>
@@ -85,7 +85,7 @@
     <c:if test="${not empty errorMessage}">
       <c:out value="${errorMessage}"/>
     </c:if>
-    <!-- LOGIN FORM -->
+    <!-- REGISTER FORM -->
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
