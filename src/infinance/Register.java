@@ -1,6 +1,7 @@
 package infinance;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -39,9 +40,10 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Se pillarían los datos del usuario, se guardarán los datos en la bbdd y reenviará a la homeUser
+		  String randomString = UUID.randomUUID().toString();
 		int error = DatabaseManager.register("1", request.getParameter("user"), request.getParameter("password"),
 				request.getParameter("email"), request.getParameter("name"), request.getParameter("lastname"),
-				request.getParameter("phone"));
+				request.getParameter("phone"),randomString);
 		if (error == 0) {
 			response.sendRedirect("/infinance/home");
 		} else {

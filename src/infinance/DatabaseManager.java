@@ -21,7 +21,7 @@ public class DatabaseManager {
     public static final String CN_FIRST_NAME="firstName";
     public static final String CN_LAST_NAME="lastName";
     public static final String CN_PHONE="phone";
-    
+    public static final String CN_APIKey="APIKey";
     
 	  //Tabla acciones
     public static final String TABLE_SHARES="SHARES";
@@ -59,12 +59,12 @@ public class DatabaseManager {
 	private static String lastError="Sin errores";
 	
 	
-	static int  register(String type,String user,String password,String email, String  firstName, String lastName, String phone) {
+	static int  register(String type,String user,String password,String email, String  firstName, String lastName, String phone,String randomString) {
 		Statement stmt=openConnection();
 		String insert = "insert into "+TABLE_USER+" "
-				+ "("+CN_TYPE+","+CN_USER+","+CN_PASSWORD+","+CN_EMAIL+","+CN_FIRST_NAME+","+CN_LAST_NAME+","+CN_PHONE+") " + "values ("
+				+ "("+CN_TYPE+","+CN_USER+","+CN_PASSWORD+","+CN_EMAIL+","+CN_FIRST_NAME+","+CN_LAST_NAME+","+CN_PHONE+","+CN_APIKey+") " + "values ("
 						+  type + "," +"\""+ user + "\"," +"\""+ password + "\"," + "\""+ email + "\"," +  "\""+ firstName + "\"," + "\""+ lastName
-						+ "\"," + phone + ");";
+						+ "\"," + phone + ",\""+randomString+"\");";
 		System.out.println(insert);
 		try {
 			stmt.executeUpdate(insert);
@@ -161,6 +161,7 @@ public class DatabaseManager {
 			
 		}
 
+
 		 static ArrayList<Empresa>  busquedaEmpresa(String startsWithsymbol) {
 			Statement stmt=openConnection();
 			String query = "Select * from "+TABLE_COMPANY+" where "+CN_SYMBOL+" LIKE "+"\""+ startsWithsymbol + "%\" ;";
@@ -247,7 +248,7 @@ public class DatabaseManager {
 			}
 			
 		}
-	
+	 
 	private static Statement openConnection() {
 
 		try {
