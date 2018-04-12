@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class HomeUser
  */
-@WebServlet("/home")
-public class HomeUser extends HttpServlet {
+@WebServlet("/portfolio")
+public class Portfolio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public HomeUser() {
+    public Portfolio() {
         super();
     }
 

@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class EnterpriseDetailServlet
  */
-@WebServlet("/enterprisedetail")
-public class EnterpriseDetailServlet extends HttpServlet {
+@WebServlet("/company")
+public class Company extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnterpriseDetailServlet() {
+    public Company() {
         super();
         // TODO Auto-generated constructor stub
     }
