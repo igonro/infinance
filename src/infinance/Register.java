@@ -47,8 +47,9 @@ public class Register extends HttpServlet {
 		if (error == 0) {
 			response.sendRedirect("/infinance/home");
 		} else {
-			getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
 			request.setAttribute("errorMessage", DatabaseManager.getLastError());
+System.out.println(DatabaseManager.getLastError());
+			getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
 
 		}
 		
