@@ -42,12 +42,14 @@ public class Register extends HttpServlet {
 		//Se pillarían los datos del usuario, se guardarán los datos en la bbdd y reenviará a la homeUser
 		  String randomString = UUID.randomUUID().toString();
 		int error = DatabaseManager.register("1", request.getParameter("user"), request.getParameter("password"),
-				request.getParameter("email"), request.getParameter("name"), request.getParameter("lastname"),
-				request.getParameter("phone"),randomString);
+				request.getParameter("email"), request.getParameter("name"), request.getParameter("lastName"),
+				request.getParameter("phoneNumber"),randomString);
 		if (error == 0) {
 			response.sendRedirect("/infinance/home");
 		} else {
 			getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
+			request.setAttribute("errorMessage", DatabaseManager.getLastError());
+
 		}
 		
 	}
