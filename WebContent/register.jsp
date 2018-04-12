@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <!DOCTYPE html>
 <html lang="en"><head>
@@ -74,17 +75,19 @@
       <label for="inputUser" class="sr-only">Usuario</label>
       <input id="inputUser" class="form-control" placeholder="Usuario" required="true" autofocus="" type="text" name="user">
       <label for="inputEmail" class="sr-only">Correo electrónico</label>
-      <input id="inputEmail" class="form-control" placeholder="Correo electrónico" required="true" autofocus="" type="text" name="email">
+      <input id="inputEmail" class="form-control" placeholder="Correo electrónico" required="true" autofocus="" type="email" name="email">
       <label for="inputPassword" class="sr-only">Contraseña</label>
       <input id="inputPassword" class="form-control" placeholder="Contraseña" required="true" type="password" name="password">
       <label for="inputCheckPassword" class="sr-only">Contraseña2</label>
       <input id="inputCheckPassword" class="form-control" placeholder="Repita su contraseña" required="true" type="password" name="checkPassword">
-      <button id="registerButton" class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
-      <p class="mt-5 mb-3 text-muted">© 2017-2018 Infinance Project</p>
-    </form>
-    <c:if test="${not empty errorMessage}">
+               <c:if test="${not empty errorMessage}">
       <c:out value="${errorMessage}"/>
     </c:if>
+      <button id="registerButton" class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
+
+      <p class="mt-5 mb-3 text-muted">© 2017-2018 Infinance Project</p>
+    </form>
+
     <!-- REGISTER FORM -->
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
