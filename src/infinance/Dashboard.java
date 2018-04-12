@@ -116,7 +116,7 @@ public class Dashboard extends HttpServlet {
 		doGet(request, response);
 	}
 	protected ArrayList<CompanyValue> callAPI(String tickerSymbol) {
-		String url = "https://www.quandl.com/api/v3/datasets/WIKI/"+tickerSymbol+".json?column_index=4&start_date=2014-01-01&end_date=2014-12-31&api_key="+QUANDL_KEY;
+		String url = "https://www.quandl.com/api/v3/datasets/WIKI/"+tickerSymbol+".json?column_index=4&start_date=2017-01-01&end_date=2017-12-31&api_key="+QUANDL_KEY;
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode rootNode = null;
 		try {

@@ -73,13 +73,15 @@
         <label>
           <input value="remember-me" type="checkbox"> Recordarme
         </label>
+
       </div>
+                  <c:if test="${not empty errorMessage}">
+      <c:out value="${errorMessage}"/>
+    </c:if>
       <button id="loginButton" class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
       <p class="mt-5 mb-3 text-muted">© 2017-2018 Infinance Project</p>
     </form>
-    <c:if test="${not empty errorMessage}">
-      <c:out value="${errorMessage}"/>
-    </c:if>
+
     <!-- LOGIN FORM -->
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
