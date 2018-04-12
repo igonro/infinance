@@ -5,7 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Infinance Portfolio Webpage">
+    <meta name="description" content="Infinance History Webpage">
     <meta name="author" content="Infinance Team">
 
 
@@ -13,7 +13,7 @@
     <title>Infinance</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/portfolio.css">
+    <link rel="stylesheet" href="css/history.css">
     <style id="style-1-cropbar-clipper">
 .en-markup-crop-options {
     top: 18px !important;
@@ -49,13 +49,13 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  <span data-feather="briefcase"></span> Mi cartera <span class="sr-only">(actual)</span>
+                <a class="nav-link" href="/infinance/portfolio">
+                  <span data-feather="briefcase"></span> Mi cartera
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/infinance/history">
-                  <span data-feather="file-text"></span> Historial
+                <a class="nav-link active" href="#">
+                  <span data-feather="file-text"></span> Historial <span class="sr-only">(actual)</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -67,29 +67,27 @@
           </div>
         </nav>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          <h2>Mi cartera</h2>
+          <h2>Historial de transacciones</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
+                  <th>ID de transacción</th>
                   <th>Ticker symbol</th>
                   <th>Número de acciones</th>
                   <th>Coste unitario</th>
-                  <th>Valor unitario</th>
                   <th>Coste total</th>
-                  <th>Valor total</th>
-                  <th>Beneficios</th>
+                  <th>Fecha</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><a href="#">1,001</a></td>
-                  <td>Lorem</td>
+                  <td>1,001</td>
+                  <td><a href="#">Lorem</a></td>
                   <td>ipsum</td>
                   <td>dolor</td>
                   <td>sit</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,002</td>
@@ -98,7 +96,6 @@
                   <td>adipiscing</td>
                   <td>elit</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,003</td>
@@ -107,7 +104,6 @@
                   <td>odio</td>
                   <td>dolor</td>
                   <td>sit</td>
-                  <td>Praesent</td>
                 </tr>
                 <tr>
                   <td>1,003</td>
@@ -116,7 +112,6 @@
                   <td>cursus</td>
                   <td>ante</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,004</td>
@@ -125,7 +120,6 @@
                   <td>Sed</td>
                   <td>nisi</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,005</td>
@@ -134,7 +128,6 @@
                   <td>sem</td>
                   <td>at</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,006</td>
@@ -143,7 +136,6 @@
                   <td>imperdiet</td>
                   <td>Duis</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,007</td>
@@ -152,7 +144,6 @@
                   <td>Praesent</td>
                   <td>mauris</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,008</td>
@@ -161,7 +152,6 @@
                   <td>tellus</td>
                   <td>sed</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,009</td>
@@ -170,7 +160,6 @@
                   <td>porta</td>
                   <td>Mauris</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,010</td>
@@ -179,7 +168,6 @@
                   <td>lacinia</td>
                   <td>arcu</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,011</td>
@@ -188,7 +176,6 @@
                   <td>Class</td>
                   <td>aptent</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,012</td>
@@ -197,7 +184,6 @@
                   <td>ad</td>
                   <td>litora</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,013</td>
@@ -206,7 +192,6 @@
                   <td>conubia</td>
                   <td>nostra</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,014</td>
@@ -215,7 +200,6 @@
                   <td>himenaeos</td>
                   <td>Curabitur</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
                 <tr>
                   <td>1,015</td>
@@ -224,7 +208,6 @@
                   <td>in</td>
                   <td>libero</td>
                   <td>dolor</td>
-                  <td>sit</td>
                 </tr>
               </tbody>
             </table>
