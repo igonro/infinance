@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Home
  */
-@WebServlet("/")
+@WebServlet("/home")
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       private static DatabaseManager db;
