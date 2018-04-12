@@ -32,27 +32,26 @@
     <header>
       <!-- NAVBAR -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#"><img src="img/infinance-web-icon.svg" width="30" height="30" class="d-inline-block align-top" alt=""> Infinance</a>
+        <a class="navbar-brand" href="/infinance/home"><img src="img/infinance-web-icon.svg" width="30" height="30" class="d-inline-block align-top" alt=""> Infinance</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/infinance/home">Inicio<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/infinance/home"><span data-feather="home"></span> Inicio<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acerca de</a>
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span data-feather="info"></span> Acerca de</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/infinance/about-project">Proyecto</a>
-                <a class="dropdown-item" href="/infinance/about-team">Equipo</a>
-                <a class="dropdown-item" href="/infinance/about-contact">Contacto</a>
+                <a class="dropdown-item" href="/infinance/about-team"><span data-feather="users"></span> Sobre nosotros</a>
+                <a class="dropdown-item" href="/infinance/about-contact"><span data-feather="mail"></span> Contacto</a>
               </div>
             </li>
           </ul>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="/infinance/login">Iniciar sesión</a>
+              <a class="nav-link" href="/infinance/login"><span data-feather="log-in"></span> Iniciar sesión</a>
             </li>
           </ul>
         </div>
@@ -92,5 +91,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+ 
+    <script>
+      feather.replace({width: '14', height: '14', viewBox: '0 0 24 24', fill: 'none'})
+    </script>
+      
   </body>
 </html>
