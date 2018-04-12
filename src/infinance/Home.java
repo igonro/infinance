@@ -36,6 +36,7 @@ public void init() {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 ServletContext sc = getServletContext();
 		 RequestDispatcher rd = sc.getRequestDispatcher("/home.jsp");
+		 System.out.println(request.getSession().getAttribute("user"));
 		 rd.forward(request,response);
 		}
 
