@@ -74,7 +74,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+            <img class="first-slide" src="img/home-diap1.jpg" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>Primera diapositiva.</h1>
