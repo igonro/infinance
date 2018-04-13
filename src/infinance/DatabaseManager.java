@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.Empresa;
+import model.HistoryUser;
 
 public class DatabaseManager {
 	  //Tabla usuario
@@ -31,6 +32,7 @@ public class DatabaseManager {
     public static final String CN_DATE_ACTION="dateAction";
     public static final String CN_VALUE="value";
     public static final String CN_NUM="num";
+    public static final String CN_TRANSACTION="transaction";
     
     //Tabla company
     
@@ -248,6 +250,47 @@ public class DatabaseManager {
 			}
 			
 		}
+	public static ArrayList<HistoryUser>  getHistory(int id_user) {
+		Statement stmt=openConnection();
+		//String query = "Select * from "+TABLE_SHARES+" WHERE "+ CN_ID_USER_SHARES+"="+id_user+";";
+		
+		String query ="SELECT "+TABLE_SHARES+"."+CN_DATE_ACTION+", "+TABLE_SHARES+"."+CN_ID_SHARES+", "+TABLE_SHARES+"."+CN_VALUE+","
+				+ TABLE_SHARES+"."+CN_NUM+","+TABLE_SHARES+"."+CN_TRANSACTION+","+TABLE_COMPANY+"."+CN_SYMBOL+"\n" + 
+				"FROM "+TABLE_SHARES+"\n" + 
+				"JOIN COMPANY ON "+TABLE_SHARES+"."+CN_ID_COMPANY_SHARES+"="+TABLE_COMPANY+"."+CN_ID_COMPANY+";";
+		
+		System.out.println(query);
+		try {
+			ResultSet rs= stmt.executeQuery(query);
+			ArrayList<HistoryUser> history = new ArrayList<HistoryUser>();
+			while(rs.next()) {
+				int id_transaction = rs.getInt(CN_ID_SHARES);
+				String symbol = rs.getString(CN_SYMBOL);
+				String  dateAction = rs.getString(CN_DATE_ACTION);
+				int num = rs.getInt(CN_NUM);
+				float value= rs.getFloat(CN_VALUE);
+				String transaction = rs.getString(CN_TRANSACTION);
+				
+				if(transaction==null) {
+					transaction="purchase";
+				}
+				history.add(new HistoryUser(symbol,dateAction, num, transaction, value,  id_transaction, value*num));
+				
+				
+			}
+			return history;
+		}
+		catch (SQLException e) {
+				//e.printStackTrace();
+				  System.out.println("Message:  " + e.getMessage());                        
+			      System.out.println("SQLSTATE: " + e.getSQLState());            
+			      System.out.println("Código de error SQL: " + e.getErrorCode()); 
+			      lastError="Error al obtener el usuario";
+			      closeConnection(stmt) ;
+			      return null ;
+			}
+		
+	}
 	 
 	private static Statement openConnection() {
 
@@ -270,11 +313,11 @@ public class DatabaseManager {
 	}
 	
 	private static Connection DBInteraction() throws SQLException {
-//		String url = "jdbc:mysql://127.0.0.1:3306/infinancedb";
-		String url = "jdbc:mariadb://127.0.0.1:3306/infinancedb";
+		String url = "jdbc:mysql://127.0.0.1:3306/infinancedb";
+	//	String url = "jdbc:mariadb://127.0.0.1:3306/infinancedb";
 		try {
-//			Class.forName("com.mysql.jdbc.Driver");
-			Class.forName("org.mariadb.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
+	//		Class.forName("org.mariadb.jdbc.Driver");
 		} catch (java.lang.ClassNotFoundException e) {
 			System.err.print("ClassNotFoundException: ");
 			System.err.println(e.getMessage());
