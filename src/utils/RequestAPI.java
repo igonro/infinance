@@ -6,11 +6,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import model.CompanyValue;
+import model.Dates;
 
 public class RequestAPI {
 
@@ -30,7 +30,7 @@ public class RequestAPI {
 			JsonNode dataNode = datasetNode.path("data");
 			closePrice = dataNode.get(0).get(1).asDouble();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Symbol sin valor");
 		}
 		return closePrice;
 	}
@@ -102,6 +102,23 @@ public class RequestAPI {
 		Collections.reverse(comp);
 		return comp;
 
+	}
+	public static Dates getOldestandNewestDate(String tickerSymbol) {
+		String url = "https://www.quandl.com/api/v3/datasets/WIKI/"+ tickerSymbol +"/metadata.json?api_key=" + QUANDL_KEY;
+		System.out.println(url);
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode rootNode = mapper.readTree(new URL(url));
+			JsonNode datasetNode = rootNode.path("dataset");
+			JsonNode dataNode = datasetNode.path("newest_available_date");
+			String end = dataNode.asText();
+			dataNode = datasetNode.path("oldest_available_date");
+			String start = dataNode.asText();
+			return new Dates(start, end);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

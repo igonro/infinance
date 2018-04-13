@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
 				request.getParameter("email"), request.getParameter("name"), request.getParameter("lastName"),
 				request.getParameter("phoneNumber"), getRandomString());
 		if (error == 0) {
-			response.sendRedirect("/infinance/home");
+			response.sendRedirect("/infinance/portfolio");
 		} else {
 			request.setAttribute("errorMessage", DatabaseManager.getLastError());
 			System.out.println(DatabaseManager.getLastError());

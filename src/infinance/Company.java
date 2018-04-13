@@ -66,7 +66,7 @@ public class Company extends HttpServlet {
 					rd.forward(request, response);
 				}
 			} else {
-				Dates dates = new Dates("2014-01-01", "2014-12-31");
+				Dates dates = RequestAPI.getOldestandNewestDate(symbol);
 				request.setAttribute("Dates", dates);
 				ArrayList<CompanyValue> company = RequestAPI.callAPIbyTicker(symbol);
 				request.setAttribute("Company", company);
@@ -75,9 +75,11 @@ public class Company extends HttpServlet {
 			}
 
 		} catch (java.io.IOException e) {
+			System.out.println("io");
 			RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
 			rd.forward(request, response);
 		} catch (java.lang.NullPointerException e) {
+			System.out.println("nullpointer");
 			RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
 			rd.forward(request, response);
 		}
