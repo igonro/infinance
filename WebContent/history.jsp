@@ -8,8 +8,43 @@
     <meta name="description" content="Infinance History Webpage">
     <meta name="author" content="Infinance Team">
 
-
+       <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script>
+            $(document).ready(function() {
+                $(function() {
+                    $("#search").autocomplete({
+                        source: function(request, response) {
+                            $.ajax({
+                                url: "CompanyCheck",
+                                type: "GET",
+                                data: {
+                                    term: request.term
+                                },
+                                dataType: "json",
+                                success: function(data) {
+                                    response($.map(data, function (value, key) {
+                                        console.log(value);
+                                        return {
+                                            label: value.symbol+' * '+value.name,
+                                            value: value.symbol
+                                        };
+                                    }));
+                                }
+                            });
+                        },
+                        select:function(e,ui) { 
+                            console.log(ui.item.value); 
+                            location.href = '/infinance/dashboard?symbol='+ui.item.value;
+                        }
+                    });
+                });
+            });
+        </script>
     <link rel="icon" href="favicon.png">
+ 
+    
     <title>Infinance</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -33,7 +68,7 @@
       <!-- NAVBAR -->
       <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/infinance/home"><img src="img/infinance-web-icon.svg" width="25" height="25" class="d-inline-block align-top" alt=""> Infinance</a>
-        <input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text">
+        <input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text" name="search" id ="search">
         <ul class="navbar-nav px-3">
           <li class="nav-item text-nowrap">
             <a class="nav-link" href="#"><span data-feather="log-out"></span> Cerrar sesión</a>
@@ -216,7 +251,6 @@
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 

@@ -1,7 +1,6 @@
 package infinance;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -10,18 +9,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
+import model.*;
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class Settings
  */
-@WebServlet("/register")
-public class Register extends HttpServlet {
+@WebServlet("/settings")
+public class Settings extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Register() {
+    public Settings() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,29 +30,26 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 ServletContext sc = getServletContext();
-		 RequestDispatcher rd = sc.getRequestDispatcher("/register.jsp");
-		 rd.forward(request,response);
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+
+	//	Usuario user = DatabaseManager.getUserInfo(Integer.parseInt(session.getAttribute("user").toString()));
+		Usuario user = DatabaseManager.getUserInfo(1);
+		ServletContext sc = getServletContext();
+		request.setAttribute("userinfo", user);
+		RequestDispatcher rd = sc.getRequestDispatcher("/editprofile.jsp");
+		rd.forward(request,response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Se pillarían los datos del usuario, se guardarán los datos en la bbdd y reenviará a la homeUser
-		  String randomString = UUID.randomUUID().toString();
-		int error = DatabaseManager.register("1", request.getParameter("user"), request.getParameter("password"),
+		// TODO Auto-generated method stub
+		DatabaseManager.updateUserInfo(1, request.getParameter("user"), 
 				request.getParameter("email"), request.getParameter("name"), request.getParameter("lastName"),
-				request.getParameter("phoneNumber"),randomString);
-		if (error == 0) {
-			response.sendRedirect("/infinance/portfolio");
-		} else {
-			request.setAttribute("errorMessage", DatabaseManager.getLastError());
-System.out.println(DatabaseManager.getLastError());
-			getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
-
-		}
-		
+				request.getParameter("phoneNumber"));
+		doGet(request, response);
 	}
 
 }

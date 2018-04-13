@@ -75,7 +75,7 @@ public void init() {
 //
 //		}
 //
-//		getServletContext().getRequestDispatcher(page).forward(request, response);
+//		getSe     rvletContext().getRequestDispatcher(page).forward(request, response);
 //
 	}
 }

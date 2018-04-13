@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
+import model.Usuario;
 import model.Empresa;
 
 public class DatabaseManager {
@@ -160,8 +160,64 @@ public class DatabaseManager {
 			
 			
 		}
-
-
+		 static Usuario getUserInfo(int id) {
+				Statement stmt=openConnection();
+				String query = "Select * from "+TABLE_USER+" where "+CN_ID_USER+"="+"\""+ id + "\";";
+				System.out.println(query);
+				try {
+					ResultSet rs= stmt.executeQuery(query);
+					if(rs.next()) {
+				
+										String userName = rs.getString(CN_USER);
+							String firstName = rs.getString(CN_FIRST_NAME);
+							String lastName = rs.getString(CN_LAST_NAME);
+							String phone = rs.getString(CN_PHONE);
+							String email = rs.getString(CN_EMAIL);
+							lastError="Sin errores";
+							closeConnection(stmt) ;
+							return new Usuario(userName,firstName,lastName,phone,email);
+						
+					}
+					else {
+						lastError="El id de usuario  "+id+" no es correcto";
+						closeConnection(stmt) ;
+						return null; 
+					}
+					
+				} catch (SQLException e) {
+					//e.printStackTrace();
+					  System.out.println("Message:  " + e.getMessage());                        
+				      System.out.println("SQLSTATE: " + e.getSQLState());            
+				      System.out.println("C�digo de error SQL: " + e.getErrorCode()); 
+				     // sqle=sqle.getNextException();     // Recuperar excepci�n de SQL siguiente  
+				      closeConnection(stmt) ;
+				      return null ;
+				}
+				
+			}
+		 static int updateUserInfo(int id,String user,String email, String  firstName, String lastName, String phone) {
+			 Statement stmt=openConnection();
+				String insert = "update "+TABLE_USER+" "
+						+ "SET "+CN_USER+"="+"\""+user+"\","+CN_EMAIL+"="+"\""+email+"\","+CN_FIRST_NAME+"="+"\""+firstName+"\","+CN_LAST_NAME+"="+"\""+lastName+"\","+CN_PHONE+"="+"\""+phone +"\""+ 
+							" WHERE "+CN_ID_USER+"="+id+";";
+				System.out.println(insert);
+				try {
+					stmt.executeUpdate(insert);
+					lastError="Sin errores";
+					closeConnection(stmt) ;
+					return 0;
+				} catch (SQLException e) {
+					//e.printStackTrace();
+					  System.out.println("Message:  " + e.getMessage());                        
+				      System.out.println("SQLSTATE: " + e.getSQLState());            
+				      System.out.println("C�digo de error SQL: " + e.getErrorCode()); 
+				     // sqle=sqle.getNextException();     // Recuperar excepci�n de SQL siguiente  
+				      convertErrorRegisterUser( e.getMessage());
+				      closeConnection(stmt) ;
+				      return -1 ;
+				}
+				
+			}
 		 static ArrayList<Empresa>  busquedaEmpresa(String startsWithsymbol) {
 			Statement stmt=openConnection();
 			String query = "Select * from "+TABLE_COMPANY+" where "+CN_SYMBOL+" LIKE "+"\""+ startsWithsymbol + "%\" ;";

@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
 		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", request.getParameter("user"));
-			response.sendRedirect("/infinance/home");
+			response.sendRedirect("/infinance/portfolio");
 		}
 
 	}
