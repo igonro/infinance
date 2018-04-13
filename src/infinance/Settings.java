@@ -34,7 +34,8 @@ public class Settings extends HttpServlet {
 		HttpSession session = request.getSession();
 
 	//	Usuario user = DatabaseManager.getUserInfo(Integer.parseInt(session.getAttribute("user").toString()));
-		Usuario user = DatabaseManager.getUserInfo(1);
+		int id_user= ((UserInfo)request.getSession().getAttribute("user")).getUserID();
+		Usuario user = DatabaseManager.getUserInfo(id_user);
 		ServletContext sc = getServletContext();
 		request.setAttribute("userinfo", user);
 		RequestDispatcher rd = sc.getRequestDispatcher("/editprofile.jsp");

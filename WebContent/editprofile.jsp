@@ -41,7 +41,7 @@
                         },
                         select:function(e,ui) { 
                             console.log(ui.item.value); 
-                            location.href = '/infinance/dashboard?symbol='+ui.item.value;
+                            location.href = '/infinance/company?symbol='+ui.item.value;
                         }
                     });
                 });

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.UserInfo;
+
 /**
  * Servlet implementation class CheckPassword
  */
@@ -38,8 +40,9 @@ public class ChangePassword extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DatabaseManager.changePassword(1, request.getParameter("password"), request.getParameter("newpassword"));
-		response.sendRedirect("/editprofile.jsp");
+		int id_user= ((UserInfo)request.getSession().getAttribute("user")).getUserID();
+		DatabaseManager.changePassword(id_user ,request.getParameter("password"), request.getParameter("newpassword"));
+		response.sendRedirect("/settings.jsp");
 	}
 
 }
