@@ -7,8 +7,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Infinance Portfolio Webpage">
     <meta name="author" content="Infinance Team">
-
-
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script>
+     // Put jQuery 1.10.2 into noConflict mode.
+     var $jq1 = jQuery.noConflict(true);
+     </script>
+     <script>
+     
+            $jq1(document).ready(function() {
+                $jq1(function() {
+                    $jq1("#search").autocomplete({
+                        source: function(request, response) {
+                            $jq1.ajax({
+                                url: "CompanyCheck",
+                                type: "GET",
+                                data: {
+                                    term: request.term
+                                },
+                                dataType: "json",
+                                success: function(data) {
+                                    response($.map(data, function (value, key) {
+                                        console.log(value);
+                                        return {
+                                            label: value.symbol+' * '+value.name,
+                                            value: value.symbol
+                                        };
+                                    }));
+                                }
+                            });
+                        },
+                        select:function(e,ui) { 
+                            console.log(ui.item.value); 
+                            location.href = '/infinance/dashboard?symbol='+ui.item.value;
+                        }
+                    });
+                });
+            });
+        </script>
     <link rel="icon" href="favicon.png">
     <title>Infinance</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">

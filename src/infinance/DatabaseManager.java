@@ -197,12 +197,48 @@ public class DatabaseManager {
 			}
 		 static int updateUserInfo(int id,String user,String email, String  firstName, String lastName, String phone) {
 			 Statement stmt=openConnection();
+			 
 				String insert = "update "+TABLE_USER+" "
 						+ "SET "+CN_USER+"="+"\""+user+"\","+CN_EMAIL+"="+"\""+email+"\","+CN_FIRST_NAME+"="+"\""+firstName+"\","+CN_LAST_NAME+"="+"\""+lastName+"\","+CN_PHONE+"="+"\""+phone +"\""+ 
 							" WHERE "+CN_ID_USER+"="+id+";";
 				System.out.println(insert);
 				try {
 					stmt.executeUpdate(insert);
+					lastError="Sin errores";
+					closeConnection(stmt) ;
+					return 0;
+				} catch (SQLException e) {
+					//e.printStackTrace();
+					  System.out.println("Message:  " + e.getMessage());                        
+				      System.out.println("SQLSTATE: " + e.getSQLState());            
+				      System.out.println("C�digo de error SQL: " + e.getErrorCode()); 
+				     // sqle=sqle.getNextException();     // Recuperar excepci�n de SQL siguiente  
+				      convertErrorRegisterUser( e.getMessage());
+				      closeConnection(stmt) ;
+				      return -1 ;
+				}
+				
+			}
+		 static int changePassword(int id, String oldPassword,String newPassword) {
+			 Statement stmt=openConnection();
+				String query = "Select * from "+TABLE_USER+" where "+CN_ID_USER+"="+"\""+ id + "\";";
+				System.out.println(query);
+				try {
+					ResultSet rs= stmt.executeQuery(query);
+					String bdPassword="";
+					if(rs.next()) {
+						 bdPassword = rs.getString(CN_PASSWORD);
+
+					}
+				if (!bdPassword.equals(oldPassword)) {
+					return -1;
+				}
+				
+				String update = "update "+TABLE_USER+" "
+						+ "SET "+CN_PASSWORD+"="+"\""+newPassword+"\""+ 
+							" WHERE "+CN_ID_USER+"="+id+";";
+				System.out.println(update);
+					stmt.executeUpdate(update);
 					lastError="Sin errores";
 					closeConnection(stmt) ;
 					return 0;
