@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.HistoryUser;
+import model.UserInfo;
 
 @WebServlet("/history")
 public class History extends HttpServlet {
@@ -20,13 +21,23 @@ public class History extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GET DEL HISTORY");
-		ServletContext sc = getServletContext();
-		int id_user= DatabaseManager.login("luis", ("123456"));
-		ArrayList<HistoryUser>  historyUser =   DatabaseManager.getHistory( id_user);
-		request.setAttribute("HistoryUser", historyUser);
-		RequestDispatcher rd = sc.getRequestDispatcher("/history.jsp");
-		rd.forward(request,response);
+	
+		
+		if (request.getSession().getAttribute("user") != null) {
+			System.out.println("GET DEL HISTORY");
+			ServletContext sc = getServletContext();
+			int id_user= ((UserInfo)request.getSession().getAttribute("user")).getUserID();
+			ArrayList<HistoryUser>  historyUser =   DatabaseManager.getHistory( id_user);
+			request.setAttribute("HistoryUser", historyUser);
+			RequestDispatcher rd = sc.getRequestDispatcher("/history.jsp");
+			rd.forward(request,response);
+			
+		} else {
+
+			response.sendRedirect("/infinance/login");
+		}
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

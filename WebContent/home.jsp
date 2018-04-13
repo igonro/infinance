@@ -73,38 +73,36 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="first-slide" src="img/home-diap1.jpg" alt="First slide">
+            <img class="first-slide" src="img/business.jpg" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left">
-                <h1>Primera diapositiva.</h1>
-                <p>Cras justo odio, dapibus ac facilisis in, egestas
-eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id
-dolor id nibh ultricies vehicula ut id elit.</p>
+                <h1>Control de acciones en tu bolsillo</h1>
+                <p>Infinance permite llevar una control de tus acciones con un simple click</p>
                 <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
-            <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+            <img class="second-slide" src="img/calculator.jpeg" alt="Second slide">
             <div class="container">
               <div class="carousel-caption">
-                <h1>Segunda diapositiva.</h1>
-                <p>Cras justo odio, dapibus ac facilisis in, egestas
-eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id
-dolor id nibh ultricies vehicula ut id elit.</p>
+                <h1>Desarrollada por expertos en el sector</h1>
+                <p>Desarrollada por un grupo de ingenieros expertos en del desarrollo de aplicaciones de finanzas</p>
                 <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
-            <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+            <img class="third-slide" src="img/coffee.jpg" alt="Third slide">
             <div class="container">
               <div class="carousel-caption text-right">
-                <h1>Tercera diapositiva.</h1>
-                <p>Cras justo odio, dapibus ac facilisis in, egestas
-eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id
-dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                <h1>Sencilla como la vida misma.</h1>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
               </div>
             </div>
           </div>
@@ -124,30 +122,21 @@ dolor id nibh ultricies vehicula ut id elit.</p>
         <div class="row">
 
           <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading 1</h2>
-            <p>Donec sed odio dui. Etiam porta sem malesuada magna
-mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent
-commodo cursus magna.</p>
+            <img class="rounded-circle" src="img/data.jpeg" alt="Generic placeholder image" width="140" height="140">
+            <h2>Confidencialidad</h2>
+            <p>No usamos tus datos para venderselos a terceros. Además son tratados de forma que la privacidad sea lo primero.</p>
           </div>
 
           <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading 2</h2>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor
-ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus
-sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor
-mauris condimentum nibh.</p>
+            <img class="rounded-circle" src="img/free.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>Gratis</h2>
+            <p>Sin pagar nada puedes acceder en tiempo real al valor de tus acciones. En unos meses lanzaremos una versión premiun con sistema de broker basado en técnicas Machine Learning. </p>
           </div>
 
           <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading 3</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis
- in, egestas eget quam. Vestibulum id ligula porta felis euismod semper.
- Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-nibh, ut fermentum massa justo sit amet risus.</p>
+            <img class="rounded-circle" src="img/easy.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>Fácil de usar</h2>
+            <p> Gestionar tus beneficios nunca antes había sido tan fácil</p>
           </div>
 
         </div>

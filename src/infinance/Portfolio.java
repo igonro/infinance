@@ -17,10 +17,18 @@ public class Portfolio extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GET DEL PORTFOLIO");
-		ServletContext sc = getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher("/portfolio.jsp");
-		rd.forward(request,response);
+		
+		if (request.getSession().getAttribute("user") != null) {
+			System.out.println("GET DEL PORTFOLIO");
+			ServletContext sc = getServletContext();
+			RequestDispatcher rd = sc.getRequestDispatcher("/portfolio.jsp");
+			rd.forward(request,response);
+			
+		} else {
+
+			response.sendRedirect("/infinance/login");
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
