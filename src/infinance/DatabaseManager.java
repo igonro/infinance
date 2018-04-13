@@ -154,7 +154,8 @@ public class DatabaseManager {
 
 	public static Empresa busquedaEmpresaPorSymbol(String symbol) {
 		Statement stmt = openConnection();
-		String query = "Select * from " + TABLE_COMPANY + " where " + CN_SYMBOL + " = " + "\"" + symbol + "%\" ;";
+		String query = "Select * from " + TABLE_COMPANY + " where " + CN_SYMBOL + " = " + "\"" + symbol + "\" ;";
+		System.out.println(query);
 		try {
 			ResultSet rs = stmt.executeQuery(query);
 			Empresa emp = null;
@@ -326,11 +327,11 @@ public class DatabaseManager {
 	}
 
 	private static Connection DBInteraction() throws SQLException {
-		String url = "jdbc:mysql://127.0.0.1:3306/infinancedb";
-		// String url = "jdbc:mariadb://127.0.0.1:3306/infinancedb";
+//		String url = "jdbc:mysql://127.0.0.1:3306/infinancedb";
+		String url = "jdbc:mariadb://127.0.0.1:3306/infinancedb";
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			// Class.forName("org.mariadb.jdbc.Driver");
+//			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.mariadb.jdbc.Driver");
 		} catch (java.lang.ClassNotFoundException e) {
 			System.err.print("ClassNotFoundException: ");
 			System.err.println(e.getMessage());

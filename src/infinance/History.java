@@ -22,7 +22,7 @@ public class History extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("GET DEL HISTORY");
 		ServletContext sc = getServletContext();
-		int id_user= DatabaseManager.login("pepepruebasere", ("password"));
+		int id_user= DatabaseManager.login("luis", ("123456"));
 		ArrayList<HistoryUser>  historyUser =   DatabaseManager.getHistory( id_user);
 		request.setAttribute("HistoryUser", historyUser);
 		RequestDispatcher rd = sc.getRequestDispatcher("/history.jsp");
