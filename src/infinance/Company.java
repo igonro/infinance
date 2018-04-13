@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.CompanyInfo;
+import model.Empresa;
+
 /**
  * Servlet implementation class EnterpriseDetailServlet
  */
@@ -31,7 +34,11 @@ public class Company extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ServletContext sc = getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher("/enterprisedetail.jsp");
+		String symbol = request.getParameter("symbol");
+		Empresa empresa = DatabaseManager.busquedaEmpresaPorSymbol(symbol);
+		CompanyInfo infoEmpresa = new CompanyInfo(empresa.getName(), empresa.getSymbol(), empresa.getMarketcap(), empresa.getSector(), empresa.getIndustry(), 0.0);
+		request.setAttribute("infoEmpresa", infoEmpresa);
+		RequestDispatcher rd = sc.getRequestDispatcher("/company.jsp");
 		rd.forward(request,response);	}
 
 	/**
