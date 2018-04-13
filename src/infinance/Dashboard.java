@@ -54,7 +54,7 @@ public class Dashboard extends HttpServlet {
 		try {
 
 			if (dateStart != null && dateEnd != null) {
-				if (cheackDates(dateStart, dateEnd)) {
+				if (checkDates(dateStart, dateEnd)) {
 					ArrayList<CompanyValue> company = RequestAPI.callAPIbyDate(symbol, dateStart, dateEnd);
 					request.setAttribute("Company", company);
 					Dates dates = new Dates(dateStart, dateEnd);
@@ -96,7 +96,7 @@ public class Dashboard extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private boolean cheackDates(String dateStart, String dateEnd) {
+	private boolean checkDates(String dateStart, String dateEnd) {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar caldateStart = Calendar.getInstance();
 		Calendar caldateEnd = Calendar.getInstance();

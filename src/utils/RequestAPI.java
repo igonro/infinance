@@ -71,7 +71,7 @@ public class RequestAPI {
 
 	public static ArrayList<CompanyValue> callAPIbyTicker(String tickerSymbol) {
 		String url = "https://www.quandl.com/api/v3/datasets/WIKI/" + tickerSymbol
-				+ ".json?column_index=4&start_date=2014-01-01&end_date=2014-12-31&api_key=" + RequestAPI.QUANDL_KEY;
+				+ ".json?column_index=4&api_key=" + RequestAPI.QUANDL_KEY;
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode rootNode = null;
 		try {
