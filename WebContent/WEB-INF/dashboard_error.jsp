@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
-
-
-
-
-
-
-
-
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -66,51 +56,10 @@
       </nav>
       <!-- NAVBAR -->
     </header>
-
+ <body>
     <main role="main">
       <!-- Graphs -->
-     <div id="curve_chart">
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-    	 
-        var data = google.visualization.arrayToDataTable([
-        ['Year', 'Sales'],
-        <c:forEach var="Company" items="${Company}">
-        
-          ['${Company.date}',  ${Company.value}],
-     
-          </c:forEach>
-        ]);
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-        chart.draw(data, options);
-      }
-
-    </script>
-    </div>
-   <hr>
-
- <div id="fechas">
- <form class="form-date text-center" action="/infinance/dashboard" method="get">
-  <h1 class="h3 mb-3 font-weight-normal">Performance  ${Empresa.symbol} </h1>
-   <label for="dateStart" class="sr-only">Inicio</label>
-	<input type="date" id="dateStart" name="dateStart" class="form-control" step="1" min="2013-01-01" max="2018-3-31" value="${Dates.dateStart}">
-	 <label for="dateEnd" class="sr-only">Fin</label>
-	<input type="date" id="dateEnd" name="dateEnd" class="form-control" step="1" min="2013-01-01" max="2018-3-31" value="${Dates.dateEnd}">
-	 <input type="hidden" name="symbol" value="${Empresa.symbol}">
-	 <button id="buscar" class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
-	 </form>
-
-   </div>
-   
-
+	<h1>No hay informacion sobre la consulta solicitada</h1>
       <hr>
       <footer class="container">
         <p class="float-right"><a href="#">Volver &uarr;</a></p>
@@ -125,3 +74,4 @@
 
     <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
   </body>
+</html>
