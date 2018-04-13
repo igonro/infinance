@@ -3,9 +3,9 @@ package model;
 public class UserInfo {
 
 	private String name;
-	private String userID;
+	private int userID;
 	
-	public UserInfo(String name, String userID){
+	public UserInfo(String name, int userID){
 		this.name = name;
 		this.userID = userID;
 	}
@@ -18,11 +18,11 @@ public class UserInfo {
 		this.name = name;
 	}
 
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 }

@@ -14,7 +14,7 @@ import model.CompanyValue;
 
 public class RequestAPI {
 
-	public static final String QUANDL_KEY = "wKvyxZ84BD5yzC71jt3f";
+	public static final String QUANDL_KEY = "6zsyn1k-S2oxc38FZfm9";
 
 	public static double getMostRecentCloseValue(String tickerSymbol, String date) {
 		// Creamos una URL y establecemos un l�mite de 1 para que nos muestre un s�lo

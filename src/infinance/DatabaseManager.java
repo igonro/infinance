@@ -271,7 +271,7 @@ public class DatabaseManager {
 				+ TABLE_SHARES + "." + CN_VALUE + "," + TABLE_SHARES + "." + CN_NUM + "," + TABLE_SHARES + "."
 				+ CN_TRANSACTION + "," + TABLE_COMPANY + "." + CN_SYMBOL + "\n" + "FROM " + TABLE_SHARES + "\n"
 				+ "JOIN COMPANY ON " + TABLE_SHARES + "." + CN_ID_COMPANY_SHARES + "=" + TABLE_COMPANY + "."
-				+ CN_ID_COMPANY + ";";
+				+ CN_ID_COMPANY + " where "+CN_ID_USER_SHARES+"="+id_user+";";
 
 		System.out.println(query);
 		try {
