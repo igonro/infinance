@@ -30,7 +30,7 @@ public class RequestAPI {
 			JsonNode dataNode = datasetNode.path("data");
 			closePrice = dataNode.get(0).get(1).asDouble();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Symbol sin valor");
 		}
 		return closePrice;
 	}

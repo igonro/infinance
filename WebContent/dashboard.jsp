@@ -96,6 +96,39 @@
       }
 
     </script>
+<<<<<<< HEAD
+    </div>
+   <hr>
+
+ <div id="fechas">
+ <form class="form-date text-center" action="/infinance/dashboard" method="get">
+  <h1 class="h3 mb-3 font-weight-normal">Performance  ${Empresa.symbol} </h1>
+   <label for="dateStart" class="sr-only">Inicio</label>
+	<input type="date" id="dateStart" name="dateStart" class="form-control" step="1" min="2013-01-01" max="2018-12-31" value="${Dates.dateStart}">
+	 <label for="dateEnd" class="sr-only">Fin</label>
+	<input type="date" id="dateEnd" name="dateEnd" class="form-control" step="1" min="2013-01-01" max="2018-01-31" value="${Dates.dateEnd}">
+	 <input type="hidden" name="symbol" value="${Empresa.symbol}">
+	 <button id="buscar" class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
+	 </form>
+
+   </div>
+   
+
+      <hr>
+      <footer class="container">
+        <p class="float-right"><a href="#">Volver &uarr;</a></p>
+        <p>© 2017-2018 Infinance Project</p>
+      </footer>
+      <!-- FOOTER -->
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
+  </body>
+=======
 	</div>
 	<hr>
 
@@ -146,3 +179,4 @@
 		<text x="0" y="25"
 			style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
 </body>
+>>>>>>> 84d04571a0e6f659329580455e397238b6fd305b
