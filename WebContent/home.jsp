@@ -40,23 +40,22 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Inicio<span class="sr-only">(actual)</span></a>
+              <a class="nav-link" href="#"><span data-feather="home"></span> Inicio<span class="sr-only">(actual)</span></a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acerca de</a>
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span data-feather="info"></span> Acerca de</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Proyecto</a>
-                <a class="dropdown-item" href="#">Equipo</a>
-                <a class="dropdown-item" href="#">Contacto</a>
+                <a class="dropdown-item" href="/infinance/about-team"><span data-feather="users"></span> Sobre nosotros</a>
+                <a class="dropdown-item" href="/infinance/about-contact"><span data-feather="mail"></span> Contacto</a>
               </div>
             </li>
           </ul>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="/infinance/login">Iniciar sesión</a>
+              <a class="nav-link" href="/infinance/login"><span data-feather="log-in"></span> Iniciar sesión</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/infinance/register">Registrarse</a>
+              <a class="nav-link" href="/infinance/register"><span data-feather="user-plus"></span> Registrarse</a>
             </li>
           </ul>
         </div>
@@ -74,7 +73,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+            <img class="first-slide" src="img/home-diap1.jpg" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>Primera diapositiva.</h1>
@@ -131,7 +130,6 @@ dolor id nibh ultricies vehicula ut id elit.</p>
 mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
 Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent
 commodo cursus magna.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
           </div>
 
           <div class="col-lg-4">
@@ -141,7 +139,6 @@ commodo cursus magna.</p>
 ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus
 sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor
 mauris condimentum nibh.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
           </div>
 
           <div class="col-lg-4">
@@ -151,7 +148,6 @@ mauris condimentum nibh.</p>
  in, egestas eget quam. Vestibulum id ligula porta felis euismod semper.
  Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
 nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
           </div>
 
         </div>
@@ -172,5 +168,11 @@ nibh, ut fermentum massa justo sit amet risus.</p>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
+  
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace({width: '14', height: '14', viewBox: '0 0 24 24', fill: 'none'})
+    </script>
+    
   </body>
 </html>

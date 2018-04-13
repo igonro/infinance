@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/portfolio")
-public class Portfolio extends HttpServlet {
+@WebServlet("/history")
+public class History extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public Portfolio() {
+    public History() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GET DEL PORTFOLIO");
+		System.out.println("GET DEL HISTORY");
 		ServletContext sc = getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher("/portfolio.jsp");
+		RequestDispatcher rd = sc.getRequestDispatcher("/history.jsp");
 		rd.forward(request,response);
 	}
 
