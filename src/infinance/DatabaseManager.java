@@ -6,9 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.Empresa;
 import model.HistoryUser;
+import model.PortfolioUser;
+import utils.RequestAPI;
 
 public class DatabaseManager {
 	// Tabla usuario
@@ -303,7 +306,88 @@ public class DatabaseManager {
 		}
 
 	}
+	public static ArrayList<PortfolioUser> getPortfolio(int id_user) {
+		Statement stmt = openConnection();
+		// String query = "Select * from "+TABLE_SHARES+" WHERE "+
+		// CN_ID_USER_SHARES+"="+id_user+";";
 
+		String query = "SELECT " + TABLE_SHARES + "." + CN_DATE_ACTION + ", " + TABLE_SHARES + "." + CN_ID_SHARES + ", "
+				+ TABLE_SHARES + "." + CN_VALUE + "," + TABLE_SHARES + "." + CN_NUM + "," + TABLE_SHARES + "."
+				+ CN_TRANSACTION + "," + TABLE_COMPANY + "." + CN_SYMBOL + "\n" + "FROM " + TABLE_SHARES + "\n"
+				+ "JOIN COMPANY ON " + TABLE_SHARES + "." + CN_ID_COMPANY_SHARES + "=" + TABLE_COMPANY + "."
+				+ CN_ID_COMPANY + " where "+CN_ID_USER_SHARES+"="+id_user+";";
+
+		System.out.println(query);
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			HashMap<String,PortfolioUser> compras = new HashMap<String,PortfolioUser>();
+			HashMap<String,PortfolioUser> ventas = new HashMap<String,PortfolioUser>();
+			while (rs.next()) {
+				int id_transaction = rs.getInt(CN_ID_SHARES);
+				String symbol = rs.getString(CN_SYMBOL);
+				String dateAction = rs.getString(CN_DATE_ACTION);
+				int num = rs.getInt(CN_NUM);
+				float value = rs.getFloat(CN_VALUE);
+				String transaction = rs.getString(CN_TRANSACTION);
+
+				if (transaction.equals("purchase")) {
+					if(compras.containsKey(symbol)) {
+						float costes=  compras.get(symbol).getCostes()+value*num;
+						num = compras.get(symbol).getNum()+num;
+						compras.put(symbol,new PortfolioUser(symbol,num, costes));
+					}
+					else {
+					
+						compras.put(symbol,new PortfolioUser(symbol,num, value*num));
+					}
+				}
+				else {
+					if(ventas.containsKey(symbol)) {
+						float dinero_ventas=  ventas.get(symbol).getCostes()+value*num;
+						num = ventas.get(symbol).getNum()+num;
+						ventas.put(symbol,new PortfolioUser(symbol,num, dinero_ventas));
+						
+					}
+					else {
+						ventas.put(symbol,new PortfolioUser(symbol,num, value*num));
+					}
+					
+				}
+				
+				
+
+			}
+			ArrayList<PortfolioUser> portfoliouser= new ArrayList<PortfolioUser>();
+			for (String symbol : compras.keySet()) {
+				double actualValue= RequestAPI.getMostRecentCloseValue(symbol, "2018-04-13");
+				System.out.println(actualValue);
+				int num = compras.get(symbol).getNum();
+				float  costes = compras.get(symbol).getCostes();
+				float dinero_ventas = 0;
+				if(ventas.containsKey(symbol)) {
+					num= num- ventas.get(symbol).getNum();
+					dinero_ventas=ventas.get(symbol).getCostes(); // Aqui costes son en realidad el dinero de ventas . Esto es porque no se puede hacer dos constructures iguales
+				}
+				float valor_actual= (float) ((float)num*actualValue);
+				float balance = valor_actual+dinero_ventas-costes;
+				PortfolioUser portfolio = new PortfolioUser(symbol, num, costes, dinero_ventas,  valor_actual, balance);
+				System.out.println(portfolio);
+				portfoliouser.add(portfolio);
+			   
+			}
+			closeConnection(stmt);
+			return portfoliouser;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			lastError = "Error al obtener el usuario";
+			closeConnection(stmt);
+			return null;
+		}
+
+	}
 	private static Statement openConnection() {
 
 		try {
