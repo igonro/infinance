@@ -1,151 +1,187 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%-- <jsp:useBean id="infoEmpresa" class="model.CompanyInfo" scope="request" ></jsp:useBean> --%>
-<html>
-<head>
-<%-- <title><jsp:getProperty property="symbol" name="infoEmpresa"></jsp:getProperty></title> --%>
-<title>Infinance</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
 
-<link rel="stylesheet" href="css/home.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<style id="style-1-cropbar-clipper">
+
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Infinance Company Webpage">
+    <meta name="author" content="Infinance Team">
+
+    <link rel="icon" href="favicon.png">
+    <title>Infinance</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+    <link rel="stylesheet" href="css/company.css">
+    <style id="style-1-cropbar-clipper">
 .en-markup-crop-options {
-	top: 18px !important;
-	left: 50% !important;
-	margin-left: -100px !important;
-	width: 200px !important;
-	border: 2px rgba(255, 255, 255, .38) solid !important;
-	border-radius: 4px !important;
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
 }
 
 .en-markup-crop-options div div:first-of-type {
-	margin-left: 0px !important;
+    margin-left: 0px !important;
 }
 </style>
-</head>
-<body>
-	<header> <!-- NAVBAR --> <nav
-		class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> <a
-		class="navbar-brand" href="#"><img
-		src="img/infinance-web-icon.svg" width="30" height="30"
-		class="d-inline-block align-top" alt=""> Infinance</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarCollapse" aria-controls="navbarCollapse"
-		aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarCollapse">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="#">Inicio<span
-					class="sr-only">(actual)</span></a></li>
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#"
-				id="navbarDropdownMenuLink" data-toggle="dropdown"
-				aria-haspopup="true" aria-expanded="false">Acerca de</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="#">Proyecto</a> <a
-						class="dropdown-item" href="#">Equipo</a> <a class="dropdown-item"
-						href="#">Contacto</a>
-				</div></li>
-		</ul>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
 
-	</div>
-	</nav> <!-- NAVBAR --> </header>
-	<main role="main"> <!-- Graphs -->
-	<div id="curve_chart">
-		<script type="text/javascript"
-			src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-    	 
-        var data = google.visualization.arrayToDataTable([
-        ['Year', 'Sales'],
-        <c:forEach var="Company" items="${Company}">
-        
-          ['${Company.date}',  ${Company.value}],
-     
-          </c:forEach>
+    function drawChart() {
+
+    	var data = google.visualization.arrayToDataTable([
+            ['Year', 'Sales'],
+            <c:forEach var="Company" items="${Company}">
+            
+              ['${Company.date}',  ${Company.value}],
+         
+              </c:forEach>
         ]);
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-        chart.draw(data, options);
-      }
 
+      var options = {
+        title: '',
+        chartArea: {'width': '90%', 'height': '90%'},
+        legend: { position: 'none' }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
+
+      chart.draw(data, options);
+
+    }
+    window.onresize = function(event) {
+      drawChart();
+    };
+  </script>
+</head>
+  <body>
+    <header id="header">
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/infinance/home"><img src="img/infinance-web-icon.svg" width="25" height="25" class="d-inline-block align-top" alt=""> Infinance</a>
+        <input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text">
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#"><span data-feather="log-out"></span> Cerrar sesión</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- NAVBAR -->
+    </header>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="briefcase"></span> Mi cartera
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span> Historial
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <span data-feather="settings"></span> Configuración
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h1">${infoEmpresa.symbol}</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button id="add-to-portfolio" class="btn btn-sm btn-outline-primary">Añadir a mi cartera</button>
+              </div>
+              <!-- <div class="dropdown">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="interval-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span data-feather="calendar"></span> Intervalo
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="interval-btn">
+                  <button class="dropdown-item btn btn-sm btn-outline-secondary" href="#">Último mes</button>
+                  <button class="dropdown-item btn btn-sm btn-outline-secondary" href="#">Último año</button>
+                  <button class="dropdown-item btn btn-sm btn-outline-secondary" href="#">Todo</button>
+                </div>
+              </div> -->
+              	<form class="form-date text-center" action="/infinance/company" method="get">
+	              <div class="btn-group mr-2">
+	                <input class="btn btn-sm btn-outline-secondary" type="date" id="dateStart" name="dateStart" step="1" value="${Dates.dateStart}">
+	              </div>
+	              <div class="btn-group mr-2">
+	                <input class="btn btn-sm btn-outline-secondary" type="date" id="dateEnd" name="dateEnd" step="1" value="${Dates.dateEnd}">
+	              </div>
+	              <input type="hidden" name="symbol" value="${infoEmpresa.symbol}">
+	              <div class="btn-group mr-2">
+	                <button id="refresh-interval" class="btn btn-sm btn-outline-primary" type="submit"><span data-feather="refresh-cw"></span> Actualizar intervalo</button>
+	              </div>
+	        	</form>
+            </div>
+          </div>
+          <div id="line-chart"></div>
+          <br><br><br>
+          <h2>Datos</h2>
+          <br>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Símbolo</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>${infoEmpresa.name}</td>
+                  <td>${infoEmpresa.symbol}</td>
+                  <td>${infoEmpresa.price}</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr>
+                  <th>Market Cap</th>
+                  <th>Sector</th>
+                  <th>Industria</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>${infoEmpresa.marketCap}</td>
+                  <td>${infoEmpresa.sector}</td>
+                  <td>${infoEmpresa.industry}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
+
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
     </script>
-	</div>
-	<hr>
 
-	<div id="fechas">
-		<form class="form-date text-center" action="/infinance/dashboard"
-			method="get">
-			<h1 class="h3 mb-3 font-weight-normal">Performance
-				${infoEmpresa.symbol}</h1>
-			<label for="dateStart" class="sr-only">Inicio</label> <input
-				type="date" id="dateStart" name="dateStart" class="form-control"
-				step="1" min="2013-01-01" max="2018-3-31" value="${Dates.dateStart}">
-			<label for="dateEnd" class="sr-only">Fin</label> <input type="date"
-				id="dateEnd" name="dateEnd" class="form-control" step="1"
-				min="2013-01-01" max="2018-3-31" value="${Dates.dateEnd}"> <input
-				type="hidden" name="symbol" value="${infoEmpresa.symbol}">
-			<button id="buscar" class="btn btn-lg btn-primary btn-block"
-				type="submit">Buscar</button>
-		</form>
-
-	</div>
-
-
-	<hr>
-	<div class="container">
-		<h2>${infoEmpresa.symbol}</h2>
-		<table class="table table-hover table-responsive">
-			<thead>
-				<tr>
-					<th>Symbol</th>
-					<th>Name</th>
-					<th>Sector</th>
-					<th>Industry</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="Bean" items="${Bean}">
-					<tr>
-						<td><a href="/infinance/dashboard?${Bean.symbol}">${Bean.symbol}
-						</a></td>
-						<td>${Bean.name}</td>
-						<td>${Bean.sector}</td>
-						<td>${Bean.industry}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-	<footer class="container">
-	<p class="float-right">
-		<a href="#">Volver &uarr;</a>
-	</p>
-	<p>© 2017-2018 Infinance Project</p>
-	</footer> <!-- FOOTER --> </main>
-
-</body>
-</html>
+</body></html>
