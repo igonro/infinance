@@ -1,4 +1,3 @@
-
 package infinance;
 
 import java.io.IOException;
@@ -61,28 +60,41 @@ public class Dashboard extends HttpServlet {
 		String dateEnd =request.getParameter("dateEnd");
 		
 		
-		if( cheackDates( dateStart,  dateEnd)) {
+		
 			Empresa empresa = new Empresa (symbol);
 			
 			request.setAttribute("Empresa", empresa);
 			try {
 	
 			
-			if(dateStart!=null&&dateEnd!=null) {
-				
-					ArrayList<CompanyValue> company = callAPI(symbol,dateStart,dateEnd);	
-					request.setAttribute("Company", company);
-					Dates dates = new Dates (dateStart,dateEnd);
-					request.setAttribute("Dates", dates);
-				}
+				if(dateStart!=null&&dateEnd!=null) {
+						if( cheackDates( dateStart,  dateEnd)) {
+							ArrayList<CompanyValue> company = callAPI(symbol,dateStart,dateEnd);	
+							request.setAttribute("Company", company);
+							Dates dates = new Dates (dateStart,dateEnd);
+							request.setAttribute("Dates", dates);
+							RequestDispatcher rd = sc.getRequestDispatcher("/dashboard.jsp");
+							rd.forward(request, response);
+						}
+						else {
+							
+							RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
+							rd.forward(request, response);
+						}
+					}
 				else {
-					ArrayList<CompanyValue> company = callAPI(symbol);	
-					request.setAttribute("Company", company);
+						Dates dates = new Dates ("2014-01-01","2014-12-31");
+						request.setAttribute("Dates", dates);
+						ArrayList<CompanyValue> company = callAPI(symbol);	
+						request.setAttribute("Company", company);
+						RequestDispatcher rd = sc.getRequestDispatcher("/dashboard.jsp");
+						rd.forward(request, response);
+					
+					}
 				
-				}
 			
-			RequestDispatcher rd = sc.getRequestDispatcher("/dashboard.jsp");
-			rd.forward(request, response);
+				
+		
 			}catch(java.io.IOException e) {
 				RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
 				rd.forward(request, response);
@@ -92,12 +104,7 @@ public class Dashboard extends HttpServlet {
 				rd.forward(request, response);
 			}
 			
-		}
-		else {
-			
-			RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
-			rd.forward(request, response);
-		}
+	
 		
 		
 	}

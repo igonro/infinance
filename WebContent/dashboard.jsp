@@ -101,9 +101,9 @@
  <form class="form-date text-center" action="/infinance/dashboard" method="get">
   <h1 class="h3 mb-3 font-weight-normal">Performance  ${Empresa.symbol} </h1>
    <label for="dateStart" class="sr-only">Inicio</label>
-	<input type="date" id="dateStart" name="dateStart" class="form-control" step="1" min="2013-01-01" max="2018-12-31" value="${Dates.dateStart}">
+	<input type="date" id="dateStart" name="dateStart" class="form-control" step="1" min="2013-01-01" max="2018-3-31" value="${Dates.dateStart}">
 	 <label for="dateEnd" class="sr-only">Fin</label>
-	<input type="date" id="dateEnd" name="dateEnd" class="form-control" step="1" min="2013-01-01" max="2018-12-31" value="${Dates.dateEnd}">
+	<input type="date" id="dateEnd" name="dateEnd" class="form-control" step="1" min="2013-01-01" max="2018-3-31" value="${Dates.dateEnd}">
 	 <input type="hidden" name="symbol" value="${Empresa.symbol}">
 	 <button id="buscar" class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
 	 </form>
