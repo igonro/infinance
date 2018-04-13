@@ -1,6 +1,7 @@
 package infinance;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -9,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.HistoryUser;
 
 @WebServlet("/history")
 public class History extends HttpServlet {
@@ -19,6 +22,9 @@ public class History extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("GET DEL HISTORY");
 		ServletContext sc = getServletContext();
+		int id_user= DatabaseManager.login("pepepruebasere", ("password"));
+		ArrayList<HistoryUser>  historyUser =   DatabaseManager.getHistory( id_user);
+		request.setAttribute("HistoryUser", historyUser);
 		RequestDispatcher rd = sc.getRequestDispatcher("/history.jsp");
 		rd.forward(request,response);
 	}
