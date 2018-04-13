@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.UserInfo;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -40,7 +42,7 @@ public class Login extends HttpServlet {
 			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("user", request.getParameter("user"));
+			session.setAttribute("user", new UserInfo((request.getParameter("user")), iduser));
 			response.sendRedirect("/infinance/portfolio");
 		}
 
