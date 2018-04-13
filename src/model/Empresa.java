@@ -25,6 +25,12 @@ public Empresa(String symbol, String name, int lastscale, int marketcap, String 
 	this.industry = industry;
 	this.summaryquote = summaryquote;
 }
+
+public Empresa(String symbol) {
+	super();
+	this.symbol = symbol;
+	
+}
 public String getSymbol() {
 	return symbol;
 }
