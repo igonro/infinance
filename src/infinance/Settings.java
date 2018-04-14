@@ -38,7 +38,7 @@ public class Settings extends HttpServlet {
 		Usuario user = DatabaseManager.getUserInfo(id_user);
 		ServletContext sc = getServletContext();
 		request.setAttribute("userinfo", user);
-		RequestDispatcher rd = sc.getRequestDispatcher("/editprofile.jsp");
+		RequestDispatcher rd = sc.getRequestDispatcher("/settings.jsp");
 		rd.forward(request,response);
 	}
 
