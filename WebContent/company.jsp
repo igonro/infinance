@@ -85,17 +85,17 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/infinance/portfolio">
                   <span data-feather="briefcase"></span> Mi cartera
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/infinance/history">
                   <span data-feather="file-text"></span> Historial
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/infinance/settings">
                   <span data-feather="settings"></span> Configuración
                 </a>
               </li>
