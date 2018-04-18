@@ -32,7 +32,8 @@ public class Settings extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-
+		System.out.println(request.getParameter("error"));
+		request.setAttribute("error", request.getParameter("error"));
 	//	Usuario user = DatabaseManager.getUserInfo(Integer.parseInt(session.getAttribute("user").toString()));
 		int id_user= ((UserInfo)request.getSession().getAttribute("user")).getUserID();
 		Usuario user = DatabaseManager.getUserInfo(id_user);
@@ -47,7 +48,8 @@ public class Settings extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DatabaseManager.updateUserInfo(1, request.getParameter("user"), 
+		 
+		  DatabaseManager.updateUserInfo(1, request.getParameter("user"), 
 				request.getParameter("email"), request.getParameter("name"), request.getParameter("lastName"),
 				request.getParameter("phoneNumber"));
 		doGet(request, response);
