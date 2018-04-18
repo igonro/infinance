@@ -47,8 +47,7 @@
             			<li class="nav-item dropdown">
               				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span data-feather="info"></span> Acerca de</a>
               				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				                <a class="dropdown-item" href="/infinance/about-team"><span data-feather="users"></span> Sobre nosotros</a>
-				                <a class="dropdown-item" href="/infinance/about-contact"><span data-feather="mail"></span> Contacto</a>
+				                <a class="dropdown-item" href="/infinance/about"><span data-feather="users"></span> Sobre nosotros</a>
               				</div>
             			</li>
           			</ul>

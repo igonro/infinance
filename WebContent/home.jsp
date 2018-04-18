@@ -27,7 +27,7 @@
 			.en-markup-crop-options div div:first-of-type {
 			    margin-left: 0px !important;
 			}
-		</style>
+		</style>		
 		<!-- STYLE -->
 	</head>
 	<body>
@@ -46,8 +46,7 @@
             			<li class="nav-item dropdown">
               				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span data-feather="info"></span> Acerca de</a>
               				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                				<a class="dropdown-item" href="/infinance/about-team"><span data-feather="users"></span> Sobre nosotros</a>
-                				<a class="dropdown-item" href="/infinance/about-contact"><span data-feather="mail"></span> Contacto</a>
+                				<a class="dropdown-item" href="/infinance/about"><span data-feather="users"></span> Sobre nosotros</a>
               				</div>
             			</li>
           			</ul>
@@ -140,16 +139,16 @@
         		<p>© 2017-2018 Infinance Project</p>
       		</footer>
       		<!-- FOOTER -->
+	      	<!-- JS SCRIPTS -->
+			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+			<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
+			<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+			<script>
+				feather.replace({width: '14', height: '14', viewBox: '0 0 24 24', fill: 'none'})
+			</script>
+			<!-- JS SCRIPTS -->
     	</main>
-    	<!-- JS SCRIPTS -->
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
-		<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-		<script>
-			feather.replace({width: '14', height: '14', viewBox: '0 0 24 24', fill: 'none'})
-		</script>
-		<!-- JS SCRIPTS -->
 	</body>
 </html>

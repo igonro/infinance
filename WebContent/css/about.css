@@ -1,0 +1,58 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  color: #5a5a5a;
+}
+
+
+.h1 {
+	text-align: center;
+	margin-top: 40px;
+	margin-bottom: 70px;
+}
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+#main-content {
+	margin: auto;
+	max-width: 300px;
+	max-width: 900px;
+}
+
+/* Center align the text within the three columns below the carousel */
+.marketing > .row {
+	margin-bottom: 40px;
+}
+.marketing > .row:last-child {
+	margin-bottom: 0;
+}
+.marketing .col {
+	margin-bottom: 30px;
+	text-align: center;
+}
+.marketing h3 {
+	font-weight: 400;
+}
+.marketing .col .team-img {
+	margin-bottom: 25px;
+}
+.marketing .col p {
+	padding-right: 80px;
+	padding-left: 80px;
+}
+
+
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+@media (max-width: 770px) {
+    .marketing .row {
+      margin-bottom: 0;
+      }
+}
