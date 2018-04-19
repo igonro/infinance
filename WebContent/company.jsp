@@ -202,7 +202,7 @@
 	        			<label for="symbolDialogBuy" class="control-label">Empresa</label>
 	     				<input id="symbolDialogBuy" class="form-control" placeholder="" required="true" type="text" name="symbol" readonly>
 	  					<label for="numSharesBuy" class="control-label">Número de acciones</label>
-	     				<input id="numSharesBuy" class="form-control" placeholder="Número de acciones" required="true" type="text" name="numShares">
+	     				<input id="numSharesBuy" class="form-control" placeholder="Número de acciones" required="true" type="text" name="numSharesBuy">
 	                   </br>
 	                   <button id="buy" class="btn btn-lg btn-primary btn-block" type="submit" >Comprar</button>
 	           	</form>
