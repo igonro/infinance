@@ -113,10 +113,10 @@ public class DatabaseManager {
 
 	}
 
-	private static int comprarAcciones(int id_user, String symbol, int numero) {
+	public static int transactionShares(int id_user, String symbol, int numero,float value,String type) {
 		Statement stmt = openConnection();
 		int id_company;
-		float value;
+		
 
 		try {
 			String query = "Select " + CN_ID_COMPANY + "," + CN_LAST_SALE + " from " + TABLE_COMPANY + " where "
@@ -126,7 +126,7 @@ public class DatabaseManager {
 
 			if (rs.next()) {
 				id_company = rs.getInt(CN_ID_COMPANY);
-				value = rs.getFloat(CN_LAST_SALE);
+				//value = rs.getFloat(CN_LAST_SALE);
 			} else {
 				lastError = "No existe la empresa con el simbolo " + symbol;
 				closeConnection(stmt);
@@ -134,8 +134,8 @@ public class DatabaseManager {
 			}
 
 			String insert = "insert into " + TABLE_SHARES + " " + "(" + CN_ID_COMPANY_SHARES + "," + CN_ID_USER_SHARES
-					+ "," + CN_NUM + "," + CN_VALUE + ") " + "values (" + id_company + "," + id_user + "," + numero
-					+ "," + value + ");";
+					+ "," + CN_NUM + "," + CN_VALUE + ","+CN_TRANSACTION+") " + "values (" + id_company + "," + id_user + "," + numero
+					+ "," + value + ",\"" + type + "\");";
 			System.out.println(insert);
 			stmt.executeUpdate(insert);
 			lastError = "Sin errores";
@@ -360,7 +360,7 @@ public class DatabaseManager {
 			}
 			ArrayList<PortfolioUser> portfoliouser= new ArrayList<PortfolioUser>();
 			for (String symbol : compras.keySet()) {
-				double actualValue= RequestAPI.getMostRecentCloseValue(symbol, "2018-04-13");
+				double actualValue= RequestAPI.getMostRecentCloseValue(symbol);
 				System.out.println(actualValue);
 				int num = compras.get(symbol).getNum();
 				float  costes = compras.get(symbol).getCostes();
@@ -369,7 +369,7 @@ public class DatabaseManager {
 					num= num- ventas.get(symbol).getNum();
 					dinero_ventas=ventas.get(symbol).getCostes(); // Aqui costes son en realidad el dinero de ventas . Esto es porque no se puede hacer dos constructures iguales
 				}
-				float valor_actual= (float) ((float)num*actualValue);
+				float valor_actual= (float) (num*actualValue);
 				float balance = valor_actual+dinero_ventas-costes;
 				PortfolioUser portfolio = new PortfolioUser(symbol, num, costes, dinero_ventas,  valor_actual, balance);
 				System.out.println(portfolio);
