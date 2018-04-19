@@ -62,7 +62,7 @@ public class Company extends HttpServlet {
 					RequestDispatcher rd = sc.getRequestDispatcher("/company.jsp");
 					rd.forward(request, response);
 				} else {
-					RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
+					RequestDispatcher rd = sc.getRequestDispatcher("/company-data-error.jsp");
 					rd.forward(request, response);
 				}
 			} else {
@@ -76,11 +76,11 @@ public class Company extends HttpServlet {
 
 		} catch (java.io.IOException e) {
 			System.out.println("io");
-			RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
+			RequestDispatcher rd = sc.getRequestDispatcher("/company-data-error.jsp");
 			rd.forward(request, response);
 		} catch (java.lang.NullPointerException e) {
 			System.out.println("nullpointer");
-			RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
+			RequestDispatcher rd = sc.getRequestDispatcher("/company-data-error.jsp");
 			rd.forward(request, response);
 		}
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:RequestPortfolio" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:RequestPortfolio" xmlns:intf="urn:RequestPortfolio" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+
+   <wsdl:message name="getPortfolioHistoryResponse">
+
+      <wsdl:part name="getPortfolioHistoryReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPortfolioHistoryRequest">
+
+      <wsdl:part name="in0" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="RequestPortfolio">
+
+      <wsdl:operation name="getPortfolioHistory" parameterOrder="in0">
+
+         <wsdl:input message="impl:getPortfolioHistoryRequest" name="getPortfolioHistoryRequest"/>
+
+         <wsdl:output message="impl:getPortfolioHistoryResponse" name="getPortfolioHistoryResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="RequestPortfolioSoapBinding" type="impl:RequestPortfolio">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getPortfolioHistory">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPortfolioHistoryRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:RequestPortfolio" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPortfolioHistoryResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:RequestPortfolio" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="RequestPortfolioService">
+
+      <wsdl:port binding="impl:RequestPortfolioSoapBinding" name="RequestPortfolio">
+
+         <wsdlsoap:address location="http://localhost:8080/axis/services/RequestPortfolio"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
