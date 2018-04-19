@@ -3,6 +3,7 @@ package model;
 public class UserInfo {
 
 	private String name;
+	private String APIKey;
 	private int userID;
 	
 	public UserInfo(String name, int userID){
@@ -25,4 +26,13 @@ public class UserInfo {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
+
+	public String getAPIKey() {
+		return APIKey;
+	}
+
+	public void setAPIKey(String aPIKey) {
+		APIKey = aPIKey;
+	}
+	
 }

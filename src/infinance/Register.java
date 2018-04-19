@@ -11,6 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.UserInfo;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -50,6 +53,9 @@ public class Register extends HttpServlet {
 				request.getParameter("email"), request.getParameter("name"), request.getParameter("lastName"),
 				request.getParameter("phoneNumber"), getRandomString());
 		if (error == 0) {
+			int iduser = DatabaseManager.login(request.getParameter("user"), request.getParameter("password"));
+			HttpSession session = request.getSession();
+			session.setAttribute("user", new UserInfo((request.getParameter("user")), iduser));
 			response.sendRedirect("/infinance/portfolio");
 		} else {
 			request.setAttribute("errorMessage", DatabaseManager.getLastError());

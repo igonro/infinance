@@ -103,7 +103,7 @@
           			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             			<h1 class="h1">NASDAQ</h1>
             			<div class="btn-toolbar mb-2 mb-md-0">
-              				<form class="form-date text-center" action="/infinance/company" method="get">
+              				<form class="form-date text-center" action="/infinance/market" method="get">
 	              				<div class="btn-group mr-2">
 	                				<input class="btn btn-sm btn-outline-secondary" type="date" id="dateStart" name="dateStart" step="1" value="${Dates.dateStart}">
 	              				</div>

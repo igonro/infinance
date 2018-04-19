@@ -67,7 +67,7 @@
         		<input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text">
         		<ul class="navbar-nav px-3">
           			<li class="nav-item text-nowrap">
-            			<a class="nav-link" href="#"><span data-feather="log-out"></span> Cerrar sesión</a>
+            			<a class="nav-link" href="/infinance/logout"><span data-feather="log-out"></span> Cerrar sesiï¿½n</a>
           			</li>
         		</ul>
       		</nav>
@@ -92,7 +92,7 @@
                 				<a class="nav-link" href="/infinance/export"><span data-feather="download"></span> Exportar datos</a>
                 			</li>
               				<li class="nav-item">
-                				<a class="nav-link" href="/infinance/settings"><span data-feather="settings"></span> Configuración</a>
+                				<a class="nav-link" href="/infinance/settings"><span data-feather="settings"></span> Configuraciï¿½n</a>
                 			</li>
                 		</ul>
                 	</div>
@@ -104,7 +104,7 @@
             			<h1 class="h1">${infoEmpresa.symbol}</h1>
             			<div class="btn-toolbar mb-2 mb-md-0">
               				<div class="btn-group mr-2">
-                				<button id="add-to-portfolio" class="btn btn-sm btn-outline-primary">Añadir a mi cartera</button>
+                				<button id="add-to-portfolio" class="btn btn-sm btn-outline-primary">Aï¿½adir a mi cartera</button>
               				</div>
               				<form class="form-date text-center" action="/infinance/company" method="get">
 	              				<div class="btn-group mr-2">
@@ -133,7 +133,7 @@
               				<thead>
                 				<tr>
                   					<th data-toggle="tooltip" title="Nombre de la empresa.">Nombre</th>
-                  					<th data-toggle="tooltip" title="Código alfanumérico que identifica las acciones de la empresa.">Símbolo</th>
+                  					<th data-toggle="tooltip" title="Cï¿½digo alfanumï¿½rico que identifica las acciones de la empresa.">Sï¿½mbolo</th>
                   					<th data-toggle="tooltip" title="Valor de la empresa.">Valor</th>
                 				</tr>
               				</thead>
@@ -146,7 +146,7 @@
               				</tbody>
               				<thead>
 				                <tr>
-                  					<th data-toggle="tooltip" title="Valor global de todas las acciones que la empresa cotiza en bolsa.">Capitalización de mercado</th>
+                  					<th data-toggle="tooltip" title="Valor global de todas las acciones que la empresa cotiza en bolsa.">Capitalizaciï¿½n de mercado</th>
                   					<th data-toggle="tooltip" title="Sector de la empresa.">Sector</th>
                   					<th data-toggle="tooltip" title="Industria de la empresa.">Industria</th>
                 				</tr>

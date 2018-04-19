@@ -51,6 +51,7 @@
                                 success: function(data) {
                                     response($.map(data, function (value, key) {
                                         console.log(value);
+                                        console.log(key);
                                         return {
                                             label: value.symbol+' * '+value.name,
                                             value: value.symbol
@@ -77,7 +78,7 @@
         		<input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text"  name="search" id ="search">
         		<ul class="navbar-nav px-3">
           			<li class="nav-item text-nowrap">
-            			<a class="nav-link" href="#"><span data-feather="log-out"></span> Cerrar sesión</a>
+            			<a class="nav-link" href="/infinance/logout"><span data-feather="log-out"></span> Cerrar sesión</a>
           			</li>
         		</ul>
       		</nav>
