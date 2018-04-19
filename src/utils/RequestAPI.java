@@ -16,7 +16,7 @@ public class RequestAPI {
 
 	public static final String QUANDL_KEY = "6zsyn1k-S2oxc38FZfm9";
 
-	public static double getMostRecentCloseValue(String tickerSymbol, String date) {
+	public static double getMostRecentCloseValue(String tickerSymbol) {
 		// Creamos una URL y establecemos un l�mite de 1 para que nos muestre un s�lo
 		// valor, el m�s reciente. As� el programa tarda menos en procesar los datos (si
 		// no se establece un l�mite la API devolver�a cientos o miles de datos).

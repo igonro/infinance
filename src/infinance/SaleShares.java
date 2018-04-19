@@ -1,31 +1,26 @@
 package infinance;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import model.UserInfo;
+import utils.RequestAPI;
 
 /**
- * Servlet implementation class CheckPassword
+ * Servlet implementation class SaleShares
  */
-@WebServlet("/changepassword")
-public class ChangePassword extends HttpServlet {
+@WebServlet("/saleshares")
+public class SaleShares extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangePassword() {
+    public SaleShares() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,20 +31,26 @@ public class ChangePassword extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int id_user= ((UserInfo)request.getSession().getAttribute("user")).getUserID();
-		int error = DatabaseManager.changePassword(id_user ,request.getParameter("password"), request.getParameter("newpassword"));
-		/*response.sendRedirect("/infinance/settings?error="+error);*/
-
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-        response.getWriter().write(gson.toJson(error));		
-        }
+		String symbol = request.getParameter("symbol");
+		String numeroString = request.getParameter("numSharesSale");
+		int numero = Integer.parseInt(numeroString);
+		
+		double value=RequestAPI.getMostRecentCloseValue(symbol);
+		
+		if(DatabaseManager.transactionShares( id_user, symbol,numero,(float) value,"sale")>=0) {
+			response.sendRedirect("/infinance/portfolio");
+		}
+		else {
+			response.sendRedirect("/infinance/portfolio");
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	doGet(request,response);
+		doGet(request, response);
 	}
 
 }
