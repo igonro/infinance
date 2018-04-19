@@ -35,7 +35,6 @@ public class Portfolio extends HttpServlet {
 			rd.forward(request,response);
 			
 		} else {
-
 			response.sendRedirect("/infinance/login");
 		}
 		

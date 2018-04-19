@@ -34,14 +34,14 @@
 		<header>
 			<!-- NAVBAR -->
       		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        		<a class="navbar-brand" href="#"><img src="img/infinance-web-icon.svg" width="30" height="30" class="d-inline-block align-top" alt=""> Infinance</a>
+        		<a class="navbar-brand" href="/infinance/home"><img src="img/infinance-web-icon.svg" width="30" height="30" class="d-inline-block align-top" alt=""> Infinance</a>
         		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           			<span class="navbar-toggler-icon"></span>
         		</button>
         		<div class="collapse navbar-collapse" id="navbarCollapse">
           			<ul class="navbar-nav mr-auto">
             			<li class="nav-item active">
-              				<a class="nav-link" href="#"><span data-feather="home"></span> Inicio<span class="sr-only">(actual)</span></a>
+              				<a class="nav-link" href="/infinance/home"><span data-feather="home"></span> Inicio<span class="sr-only">(actual)</span></a>
             			</li>
             			<li class="nav-item dropdown">
               				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span data-feather="info"></span> Acerca de</a>
