@@ -8,7 +8,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <meta name="description" content="Infinance Company Webpage">
+	    <meta name="description" content="Infinance Market Webpage">
 	    <meta name="author" content="Infinance Team">
 		<!-- METADATA -->
 		<!-- STYLE -->
@@ -56,7 +56,41 @@
   		</script>
   		<!-- G-CHART SCRIPT -->
   		<!-- SEARCH BAR SCRIPT -->
-  			<!-- TO-DO -->
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script>var $jq1 = jQuery.noConflict(true);</script>
+        <script>
+        	$jq1(document).ready(function() {
+                $jq1(function() {
+                	$jq1("#search").autocomplete({
+                        source: function(request, response) {
+                            $jq1.ajax({
+                                url: "CompanyCheck",
+                                type: "GET",
+                                data: {
+                                    term: request.term
+                                },
+                                dataType: "json",
+                                success: function(data) {
+                                    response($.map(data, function (value, key) {
+                                        console.log(value);
+                                        return {
+                                            label: value.symbol+' * '+value.name,
+                                            value: value.symbol
+                                        };
+                                    }));
+                                }
+                            });
+                        },
+                        select:function(e,ui) { 
+                            console.log(ui.item.value); 
+                            location.href = '/infinance/company?symbol='+ui.item.value;
+                        }
+                    });
+                });
+            });
+        </script>
   		<!-- SEARCH BAR SCRIPT -->
 	</head>
 	<body>
@@ -67,7 +101,7 @@
         		<input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text">
         		<ul class="navbar-nav px-3">
           			<li class="nav-item text-nowrap">
-            			<a class="nav-link" href="#"><span data-feather="log-out"></span> Cerrar sesión</a>
+            			<a class="nav-link" href="/infinance/logout"><span data-feather="log-out"></span> Cerrar sesión</a>
           			</li>
         		</ul>
       		</nav>
@@ -103,7 +137,7 @@
           			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             			<h1 class="h1">NASDAQ</h1>
             			<div class="btn-toolbar mb-2 mb-md-0">
-              				<form class="form-date text-center" action="/infinance/company" method="get">
+              				<form class="form-date text-center" action="/infinance/market" method="get">
 	              				<div class="btn-group mr-2">
 	                				<input class="btn btn-sm btn-outline-secondary" type="date" id="dateStart" name="dateStart" step="1" value="${Dates.dateStart}">
 	              				</div>
