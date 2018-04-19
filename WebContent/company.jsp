@@ -67,7 +67,7 @@
         		<input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text">
         		<ul class="navbar-nav px-3">
           			<li class="nav-item text-nowrap">
-            			<a class="nav-link" href="/infinance/logout"><span data-feather="log-out"></span> Cerrar sesi�n</a>
+            			<a class="nav-link" href="/infinance/logout"><span data-feather="log-out"></span> Cerrar sesión</a>
           			</li>
         		</ul>
       		</nav>
@@ -92,7 +92,7 @@
                 				<a class="nav-link" href="/infinance/export"><span data-feather="download"></span> Exportar datos</a>
                 			</li>
               				<li class="nav-item">
-                				<a class="nav-link" href="/infinance/settings"><span data-feather="settings"></span> Configuraci�n</a>
+                				<a class="nav-link" href="/infinance/settings"><span data-feather="settings"></span> Configuración</a>
                 			</li>
                 		</ul>
                 	</div>
@@ -104,7 +104,7 @@
             			<h1 class="h1">${infoEmpresa.symbol}</h1>
             			<div class="btn-toolbar mb-2 mb-md-0">
               				<div class="btn-group mr-2">
-                				<button id="add-to-portfolio" class="btn btn-sm btn-outline-primary">A�adir a mi cartera</button>
+                				<button id="add-to-portfolio" class="btn-add btn-sm btn-outline-primary">Añadir a mi cartera</button>
               				</div>
               				<form class="form-date text-center" action="/infinance/company" method="get">
 	              				<div class="btn-group mr-2">
@@ -113,7 +113,7 @@
 	              				<div class="btn-group mr-2">
 	                				<input class="btn btn-sm btn-outline-secondary" type="date" id="dateEnd" name="dateEnd" step="1" value="${Dates.dateEnd}">
 	              				</div>
-	              				<input type="hidden" name="symbol" value="${infoEmpresa.symbol}">
+	              				<input type="hidden"  id= "symbol" name="symbol" value="${infoEmpresa.symbol}">
 	              				<div class="btn-group mr-2">
 	                				<button id="refresh-interval" class="btn btn-sm btn-outline-primary" type="submit"><span data-feather="refresh-cw"></span> Actualizar intervalo</button>
 	              				</div>
@@ -133,7 +133,7 @@
               				<thead>
                 				<tr>
                   					<th data-toggle="tooltip" title="Nombre de la empresa.">Nombre</th>
-                  					<th data-toggle="tooltip" title="C�digo alfanum�rico que identifica las acciones de la empresa.">S�mbolo</th>
+                  					<th data-toggle="tooltip" title="Código alfanumérico que identifica las acciones de la empresa.">Símbolo</th>
                   					<th data-toggle="tooltip" title="Valor de la empresa.">Valor</th>
                 				</tr>
               				</thead>
@@ -146,7 +146,7 @@
               				</tbody>
               				<thead>
 				                <tr>
-                  					<th data-toggle="tooltip" title="Valor global de todas las acciones que la empresa cotiza en bolsa.">Capitalizaci�n de mercado</th>
+                  					<th data-toggle="tooltip" title="Valor global de todas las acciones que la empresa cotiza en bolsa.">Capitalización de mercado</th>
                   					<th data-toggle="tooltip" title="Sector de la empresa.">Sector</th>
                   					<th data-toggle="tooltip" title="Industria de la empresa.">Industria</th>
                 				</tr>
@@ -174,5 +174,40 @@
       		feather.replace()
     	</script>
     	<!-- JS SCRIPTS -->
+    	   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    	<script>var $jq2 = jQuery.noConflict(true);</script>
+         <script>
+            $jq2(function() {
+            	$jq2("#buy").dialog({
+    				autoOpen: false,
+    				modal: true,
+    				resizable: false,
+    				dialogClass: "dlg-no-close"
+    			});
+            });
+            $jq2(document).ready(function() {
+            	$jq2('.btn-add').on("click", function() {
+            		 var symbol = $jq2('#symbol').val();
+            		 $jq2("#symbolDialogBuy").val(symbol);
+            		$jq2("#buy").dialog("open");
+            		
+    			});
+            });
+		</script>
+		<div id="buy" title="Comprar Acciones">
+			<div class="container">
+	        		<form action="/infinance/buyshares" method="get">
+	        			<label for="symbolDialogBuy" class="control-label">Empresa</label>
+	     				<input id="symbolDialogBuy" class="form-control" placeholder="" required="true" type="text" name="symbol" readonly>
+	  					<label for="numSharesBuy" class="control-label">Número de acciones</label>
+	     				<input id="numSharesBuy" class="form-control" placeholder="Número de acciones" required="true" type="text" name="numShares">
+	                   </br>
+	                   <button id="buy" class="btn btn-lg btn-primary btn-block" type="submit" >Comprar</button>
+	           	</form>
+			</div>
+		</div>
+		
     </body>
 </html>

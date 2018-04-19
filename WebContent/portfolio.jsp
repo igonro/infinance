@@ -113,7 +113,7 @@
           			<h2>Mi cartera</h2>
           			<!-- TABLE -->
           			<div class="table-responsive">
-            			<table class="table table-striped table-sm">
+            			<table id="portfoliotable" class="table table-striped table-sm">
               				<thead>
                 				<tr>
                 					<th data-toggle="tooltip" title="Código alfanumérico que identifica las acciones de la empresa.">Símbolo</th>
@@ -135,8 +135,8 @@
 										<td>${PortfolioUser.ventas}</td>
 										<td>${PortfolioUser.valor_actual}</td>
 										<td>${PortfolioUser.balance}</td>
-										<td><button id="add-${PortfolioUser.symbol}" class="btn btn-sm btn-outline-success"><span data-feather="plus-square"></span> Añadir</button></td>
-										<td><button id="sell-${PortfolioUser.symbol}" class="btn btn-sm btn-outline-danger"><span data-feather="minus-square"></span> Vender</button></td>
+										<td><button id="${PortfolioUser.symbol}" class="btn-add btn-sm btn-outline-success"><span data-feather="plus-square"></span> Añadir</button></td>
+										<td><button id="${PortfolioUser.symbol}" class="btn-sale btn-sm btn-outline-danger"><span data-feather="minus-square"></span> Vender</button></td>
                 					</tr>
                  				</c:forEach>
               				</tbody>
@@ -155,6 +155,93 @@
 	    <script>
 			feather.replace()
 	    </script>
-		<!-- JS SCRIPTS -->
+	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    	<script>var $jq2 = jQuery.noConflict(true);</script>
+         <script>
+            $jq2(function() {
+            	$jq2("#buy").dialog({
+    				autoOpen: false,
+    				modal: true,
+    				resizable: false,
+    				dialogClass: "dlg-no-close"
+    			});
+            });
+            $jq2(document).ready(function() {
+            	$jq2('.btn-add').on("click", function() {
+            		 var symbol = $(this).attr('id');
+            		 $jq2("#symbolDialogBuy").val(symbol);
+            		$jq2("#buy").dialog("open");
+            		
+    			});
+            });
+		</script>
+		  <script>
+            $jq2(function() {
+            	$jq2("#sale").dialog({
+    				autoOpen: false,
+    				modal: true,
+    				resizable: false,
+    				dialogClass: "dlg-no-close"
+    			});
+            });
+            $jq2(document).ready(function() {
+            	$jq2('.btn-sale').on("click", function() {
+            		 var symbol = $(this).attr('id');
+            		 var numShares=0;
+            		 var MyRows = $jq2('#portfoliotable').find('tbody').find('tr');
+            		 for (var i = 0; i < MyRows.length; i++) {
+	            		 var numSharesTable = $(MyRows[i]).find('td:eq(1)').html();
+	            		 var symbolTable = $(MyRows[i]).find('td:eq(0)').html();
+            		 	 if(symbolTable==symbol){
+            		 		numShares=numSharesTable;
+            		 	 }
+            		 }
+            		 $jq2("#symbolDialogSale").val(symbol);
+            		 $jq2("#numShares").val(numShares);
+            		 $jq2("#sale").dialog("open");
+            		
+    			});
+            });
+		</script>
+		<div id="buy" title="Comprar Acciones">
+			<div class="container">
+	        		<form action="/infinance/buyshares" method="get">
+	        			<label for="symbolDialogBuy" class="control-label">Empresa</label>
+	     				<input id="symbolDialogBuy" class="form-control" placeholder="" required="true" type="text" name="symbol" readonly>
+	  					<label for="numSharesBuy" class="control-label">Número de acciones</label>
+	     				<input id="numSharesBuy" class="form-control" placeholder="Número de acciones" required="true" type="text" name="numSharesBuy">
+	                   </br>
+	                   <button id="ChangePassword" class="btn btn-lg btn-primary btn-block" type="submit" >Comprar</button>
+	           	</form>
+			</div>
+		</div>
+			<div id="sale" title="Vender Acciones">
+			<div class="container">
+	        		<form action="/infinance/saleshares" method="get">
+	        			<label for="symbolDialogSale" class="control-label">Empresa</label>
+	     				<input id="symbolDialogSale" class="form-control" placeholder="" required="true" type="text" name="symbol" readonly>
+	     				<label for="numShares" class="control-label">Número de acciones en posesión</label>
+	     				<input id="numShares" class="form-control" placeholder="Número de acciones" required="true" type="text" name="numShares"  readonly>
+	  					<label for="numSharesSale" class="control-label">Número de acciones</label>
+	     				<input id="numSharesSale" class="form-control" placeholder="Número de acciones a vender" required="true" type="text" name="numSharesSale">
+	                   </br>
+	                   <button id="ChangePassword" class="btn btn-lg btn-primary btn-block" type="submit" onclick="return Validate()" >Vender</button>
+	           	</form>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function Validate() {
+				accionesPosesion =  parseInt(document.getElementById("numShares").value);
+				accionesVender =  parseInt(document.getElementById("numSharesSale").value);
+				if (accionesVender > accionesPosesion) {
+					alert("No se pueden vender las acciones");
+					return false;
+				}
+				return true;
+			}
+		</script>
+		
 	</body>
 </html>
