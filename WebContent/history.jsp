@@ -68,7 +68,41 @@
         </script>
         <!-- G-CHART SCRIPT -->
         <!-- SEARCH BAR SCRIPT -->
-      		<!-- TO-DO -->
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script>var $jq1 = jQuery.noConflict(true);</script>
+        <script>
+        	$jq1(document).ready(function() {
+                $jq1(function() {
+                	$jq1("#search").autocomplete({
+                        source: function(request, response) {
+                            $jq1.ajax({
+                                url: "CompanyCheck",
+                                type: "GET",
+                                data: {
+                                    term: request.term
+                                },
+                                dataType: "json",
+                                success: function(data) {
+                                    response($.map(data, function (value, key) {
+                                        console.log(value);
+                                        return {
+                                            label: value.symbol+' * '+value.name,
+                                            value: value.symbol
+                                        };
+                                    }));
+                                }
+                            });
+                        },
+                        select:function(e,ui) { 
+                            console.log(ui.item.value); 
+                            location.href = '/infinance/company?symbol='+ui.item.value;
+                        }
+                    });
+                });
+            });
+        </script>
         <!-- SEARCH BAR SCRIPT -->
 	</head>
 	<body>

@@ -64,7 +64,7 @@
     	</header>
     	<main role="main">
       		<!-- CAROUSEL -->
-      		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+      		<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
         		<ol class="carousel-indicators">
           			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           			<li data-target="#myCarousel" data-slide-to="1" class=""></li>
@@ -72,31 +72,36 @@
         		</ol>
         		<div class="carousel-inner">
           			<div class="carousel-item active">
-            			<img class="first-slide" src="img/business.jpg" alt="First slide">
+            			<img class="first-slide img-fluid" src="img/notebook.jpg" alt="First slide">
             			<div class="container">
-              				<div class="carousel-caption text-left">
-                				<h1>Control de acciones en tu bolsillo</h1>
-                				<p>Infinance permite llevar una control de tus acciones con un simple click</p>
-                				<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+              				<div class="carousel-caption">
+                				<h1 class="display-4 font-weight-bold">Keep it simple</h1><br>
+                				<p>¿Quién ha dicho que llevar un seguimiento de tus inversiones tenga que ser algo complejo?</p>
+                				<p>En Infinance queremos ayudarte a controlar tus inversiones de una forma sencilla, mostrándote sólo lo que necesitas.</p><br>
+                				<p><a class="btn btn-lg btn-primary" href="/infinance/register" role="button">Regístrate ahora</a></p>
               				</div>
             			</div>
           			</div>
           			<div class="carousel-item">
-						<img class="second-slide" src="img/calculator.jpeg" alt="Second slide">
+						<img class="second-slide img-fluid" src="img/experts-infinance.jpg" alt="Second slide">
 						<div class="container">
 					    	<div class="carousel-caption">
-					      		<h1>Desarrollada por expertos en el sector</h1>
-					      		<p>Desarrollada por un grupo de ingenieros expertos en del desarrollo de aplicaciones de finanzas</p>
-					      		<p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+					      		<h1 class="display-4 font-weight-bold">Creada por expertos</h1>
+					      		<p>Infinance ha sido desarrollado por un grupo de ingenieros expertos en el desarrollo de aplicaciones de finanzas.</p>
+					      		<p>Es por ello que ha sido diseñado para ayudar tanto a usuarios avanzados como a principiantes en el mundo de las inversiones.</p><br>
+					      		<p><a class="btn btn-lg btn-primary" href="/infinance/about" role="button">Conócenos</a></p>
 					    	</div>
 					  	</div>
 					</div>
           			<div class="carousel-item">
-            			<img class="third-slide" src="img/coffee.jpg" alt="Third slide">
+            			<img class="third-slide" src="img/coins.jpg" alt="Third slide">
             			<div class="container">
-              				<div class="carousel-caption text-right">
-                				<h1>Sencilla como la vida misma.</h1>
-                				<br><br><br><br><br><br>
+              				<div class="carousel-caption">
+                				<h1 class="display-4 font-weight-bold">100% gratuito</h1>
+                				<p>¿Cansado de servicios de pago que prometen aumentar tus beneficios mientras se quedan con parte de ellos?</p>
+                				<p>Prueba Infinance. Es una aplicación web completamente gratuita, así todos tus beneficios se quedarán en tu bolsillo.</p><br>
+                				<p><a class="btn btn-lg btn-primary" href="/infinance/register" role="button">Regístrate ahora</a></p>
+                				<br>
                 			</div>
                 		</div>
                 	</div>
@@ -114,20 +119,25 @@
       		<!-- FEATURES -->
       		<div class="container marketing">
         		<div class="row">
-          			<div class="col-lg-4">
-            			<img class="rounded-circle" src="img/data.jpeg" alt="Generic placeholder image" width="140" height="140">
-            			<h2>Confidencialidad</h2>
-            			<p>No usamos tus datos para venderselos a terceros. Además son tratados de forma que la privacidad sea lo primero.</p>
+          			<div class="col-lg-3">
+            			<div class="rounded-circle"><img src="img/business-chart.jpg"></div><br>
+            			<h4>Gráficos actualizados</h2>
+            			<p>Consulta visualmente el valor de las acciones en sencillos gráficos.</p>
           			</div>
-					<div class="col-lg-4">
-            			<img class="rounded-circle" src="img/free.jpg" alt="Generic placeholder image" width="140" height="140">
-            			<h2>Gratis</h2>
-            			<p>Sin pagar nada puedes acceder en tiempo real al valor de tus acciones. En unos meses lanzaremos una versión premiun con sistema de broker basado en técnicas Machine Learning. </p>
+					<div class="col-lg-3">
+            			<div class="rounded-circle"><img src="img/control.jpg"></div><br>
+            			<h4>Controla tus inversiones</h2>
+            			<p>Utiliza la pestaña "Mi cartera" para añadir y vender tus acciones, y hazte con el control de tus beneficios.</p>
           			</div>
-          			<div class="col-lg-4">
-            			<img class="rounded-circle" src="img/easy.jpg" alt="Generic placeholder image" width="140" height="140">
-            			<h2>Fácil de usar</h2>
-            			<p> Gestionar tus beneficios nunca antes había sido tan fácil</p>
+          			<div class="col-lg-3">
+            			<div class="rounded-circle"><img src="img/history.jpg"></div><br>
+            			<h4>Consulta tu historial</h2>
+            			<p>Puedes ver tus últimas transacciones rápidamente para analizar tus operaciones.</p>
+          			</div>
+          			<div class="col-lg-3">
+            			<div class="rounded-circle"><img src="img/export-data.jpg"></div><br>
+            			<h4>Exporta tus datos</h2>
+            			<p>Te ofrecemos la posibilidad de exportar tus datos utilizando nuestro servicio SOAP.</p>
           			</div>
         		</div>
       		</div>

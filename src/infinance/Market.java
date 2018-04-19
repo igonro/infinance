@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 public class Market extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String NASDAQ_SYMBOL = "NDAQ";
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -59,7 +58,7 @@ public class Market extends HttpServlet {
 						RequestDispatcher rd = sc.getRequestDispatcher("/market.jsp");
 						rd.forward(request, response);
 					} else {
-						RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
+						RequestDispatcher rd = sc.getRequestDispatcher("/market-data-error.jsp");
 						rd.forward(request, response);
 					}
 				} else {
@@ -71,18 +70,19 @@ public class Market extends HttpServlet {
 					rd.forward(request, response);
 				}
 
+
 			} catch (java.io.IOException e) {
 				System.out.println("io");
-				RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
+				RequestDispatcher rd = sc.getRequestDispatcher("/market-data-error.jsp");
 				rd.forward(request, response);
 			} catch (java.lang.NullPointerException e) {
 				System.out.println("nullpointer");
-				RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
+				RequestDispatcher rd = sc.getRequestDispatcher("/market-data-error.jsp");
 				rd.forward(request, response);
 			}
+
 		} else {
 			response.sendRedirect("/infinance/login");
-		}
 	}
 
 	/**
