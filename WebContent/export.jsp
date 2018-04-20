@@ -73,7 +73,7 @@
       		<!-- NAVBAR -->
       		<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0">
         		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/infinance/home"><img src="img/infinance-web-icon.svg" width="25" height="25" class="d-inline-block align-top" alt=""> Infinance</a>
-        		<input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text">
+        		<input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text" name="search" id ="search">
         		<ul class="navbar-nav px-3">
           			<li class="nav-item text-nowrap">
             			<a class="nav-link" href="/infinance/logout"><span data-feather="log-out"></span> Cerrar sesión</a>
@@ -110,8 +110,8 @@
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 					<h1 class="h1 display-4">Exporta tus datos</h1>
 					<p class="p">¿Quieres exportar tus datos? En Infinance hemos creado un servicio SOAP (<i>Simple Object Access Protocol</i>) que te permite obtener un fichero XML con tu historial de transacciones.</p>
-					<p class="p">El servicio requiere como parámetro de entrada la API-KEY del usuario y devolverá un XML. Los detalles de uso del servicio están descritos en el siguiente fichero <a href="RequestPortfolio.wsdl">WSDL</a>.</p>
-					<br><h3 class="p">Tu API-KEY:</h3>
+					<p class="p">El servicio requiere como parámetro de entrada la API Key del usuario y devolverá un XML. Los detalles de uso del servicio están descritos en el siguiente fichero <a href="RequestPortfolio.wsdl">WSDL</a>.</p>
+					<br><h3 class="p">API Key: <b>${user.APIKey}</b></h3>
 					<p class="text-center" style="margin-top: 50px;">Para visualizar el fichero que devolverá el servicio SOAP, pulse el siguiente botón:</p>
 					<div class="text-center"><button class="btn btn-lg btn-outline-primary" id="export-button">Exportar datos</button></div>
         		</main>
@@ -127,5 +127,32 @@
 			feather.replace()
 		</script>
 		<!-- JS SCRIPTS -->
-	</body>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script>
+		var $jq1 = jQuery.noConflict(true);
+	</script>
+	<script>
+		$jq1(document).ready(function() {
+			$jq1(function() {
+				$jq1("#export-button").on('click', function() {
+					console.log('holaa');
+					$jq1.ajax({
+						url : "export",
+						type : "POST",
+						dataType : "text",
+						success : function(data) {
+							var wnd = window.open("about:blank");
+ 							wnd.document.open();
+ 							wnd.document.write("<xmp>"+data+"</xmp>");
+ 							wnd.document.close();
+						}
+					});
+				});
+			});
+		});
+	</script>
+</body>
 </html>

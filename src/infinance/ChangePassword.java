@@ -34,7 +34,6 @@ public class ChangePassword extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int id_user= ((UserInfo)request.getSession().getAttribute("user")).getUserID();
 		int error = DatabaseManager.changePassword(id_user ,request.getParameter("password"), request.getParameter("newpassword"));
 		/*response.sendRedirect("/infinance/settings?error="+error);*/

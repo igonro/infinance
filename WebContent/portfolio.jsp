@@ -51,6 +51,7 @@
                                 success: function(data) {
                                     response($.map(data, function (value, key) {
                                         console.log(value);
+                                        console.log(key);
                                         return {
                                             label: value.symbol+' * '+value.name,
                                             value: value.symbol

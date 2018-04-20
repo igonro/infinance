@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.jdom2.Document;
+import org.jdom2.Element;
 import model.Usuario;
 import model.Empresa;
 import model.HistoryUser;
@@ -173,6 +175,7 @@ public class DatabaseManager {
 				String summaryquote = rs.getString(CN_SUMMARY);
 				emp = new Empresa(symb, name, lastscale, marketcap, address, sector, industry, summaryquote);
 			}
+			closeConnection(stmt);
 			return emp;
 			/*
 			 * else { lastError="La empresa con el simbolo "+startsWithsymbol+" no existe";
@@ -211,6 +214,7 @@ public class DatabaseManager {
 				empresas.add(emp);
 
 			}
+			closeConnection(stmt);
 			return empresas;
 			/*
 			 * else { lastError="La empresa con el simbolo "+startsWithsymbol+" no existe";
@@ -249,6 +253,7 @@ public class DatabaseManager {
 				empresas.add(emp);
 
 			}
+			closeConnection(stmt);
 			return empresas;
 			/*
 			 * else { lastError="La empresa con el simbolo "+startsWithsymbol+" no existe";
@@ -275,7 +280,7 @@ public class DatabaseManager {
 				+ TABLE_SHARES + "." + CN_VALUE + "," + TABLE_SHARES + "." + CN_NUM + "," + TABLE_SHARES + "."
 				+ CN_TRANSACTION + "," + TABLE_COMPANY + "." + CN_SYMBOL + "\n" + "FROM " + TABLE_SHARES + "\n"
 				+ "JOIN COMPANY ON " + TABLE_SHARES + "." + CN_ID_COMPANY_SHARES + "=" + TABLE_COMPANY + "."
-				+ CN_ID_COMPANY + " where "+CN_ID_USER_SHARES+"="+id_user+";";
+				+ CN_ID_COMPANY + " where " + CN_ID_USER_SHARES + "=" + id_user + ";";
 
 		System.out.println(query);
 		try {
@@ -295,6 +300,7 @@ public class DatabaseManager {
 				history.add(new HistoryUser(symbol, dateAction, num, transaction, value, id_transaction, value * num));
 
 			}
+			closeConnection(stmt);
 			return history;
 		} catch (SQLException e) {
 			// e.printStackTrace();
@@ -307,6 +313,31 @@ public class DatabaseManager {
 		}
 
 	}
+
+	public static String getAPIKey(int idUser) {
+		Statement stmt = openConnection();
+		String query = "Select " + CN_APIKey + " from " + TABLE_USER + " where " + CN_ID_USER + "=" + "\"" + idUser
+				+ "\";";
+		System.out.println(query);
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				String key = rs.getString(CN_APIKey);
+				closeConnection(stmt);
+				return key;
+			} else {
+				closeConnection(stmt);
+				return null;
+			}
+
+		} catch (SQLException ex) {
+			System.err.print("SQLException: ");
+			System.err.println(ex.getMessage());
+			closeConnection(stmt);
+			return null;
+		}
+	}
+
 	public static ArrayList<PortfolioUser> getPortfolio(int id_user) {
 		Statement stmt = openConnection();
 		// String query = "Select * from "+TABLE_SHARES+" WHERE "+
@@ -316,13 +347,13 @@ public class DatabaseManager {
 				+ TABLE_SHARES + "." + CN_VALUE + "," + TABLE_SHARES + "." + CN_NUM + "," + TABLE_SHARES + "."
 				+ CN_TRANSACTION + "," + TABLE_COMPANY + "." + CN_SYMBOL + "\n" + "FROM " + TABLE_SHARES + "\n"
 				+ "JOIN COMPANY ON " + TABLE_SHARES + "." + CN_ID_COMPANY_SHARES + "=" + TABLE_COMPANY + "."
-				+ CN_ID_COMPANY + " where "+CN_ID_USER_SHARES+"="+id_user+";";
+				+ CN_ID_COMPANY + " where " + CN_ID_USER_SHARES + "=" + id_user + ";";
 
 		System.out.println(query);
 		try {
 			ResultSet rs = stmt.executeQuery(query);
-			HashMap<String,PortfolioUser> compras = new HashMap<String,PortfolioUser>();
-			HashMap<String,PortfolioUser> ventas = new HashMap<String,PortfolioUser>();
+			HashMap<String, PortfolioUser> compras = new HashMap<String, PortfolioUser>();
+			HashMap<String, PortfolioUser> ventas = new HashMap<String, PortfolioUser>();
 			while (rs.next()) {
 				int id_transaction = rs.getInt(CN_ID_SHARES);
 				String symbol = rs.getString(CN_SYMBOL);
@@ -332,49 +363,46 @@ public class DatabaseManager {
 				String transaction = rs.getString(CN_TRANSACTION);
 
 				if (transaction.equals("purchase")) {
-					if(compras.containsKey(symbol)) {
-						float costes=  compras.get(symbol).getCostes()+value*num;
-						num = compras.get(symbol).getNum()+num;
-						compras.put(symbol,new PortfolioUser(symbol,num, costes));
+					if (compras.containsKey(symbol)) {
+						float costes = compras.get(symbol).getCostes() + value * num;
+						num = compras.get(symbol).getNum() + num;
+						compras.put(symbol, new PortfolioUser(symbol, num, costes));
+					} else {
+
+						compras.put(symbol, new PortfolioUser(symbol, num, value * num));
 					}
-					else {
-					
-						compras.put(symbol,new PortfolioUser(symbol,num, value*num));
+				} else {
+					if (ventas.containsKey(symbol)) {
+						float dinero_ventas = ventas.get(symbol).getCostes() + value * num;
+						num = ventas.get(symbol).getNum() + num;
+						ventas.put(symbol, new PortfolioUser(symbol, num, dinero_ventas));
+
+					} else {
+						ventas.put(symbol, new PortfolioUser(symbol, num, value * num));
 					}
+
 				}
-				else {
-					if(ventas.containsKey(symbol)) {
-						float dinero_ventas=  ventas.get(symbol).getCostes()+value*num;
-						num = ventas.get(symbol).getNum()+num;
-						ventas.put(symbol,new PortfolioUser(symbol,num, dinero_ventas));
-						
-					}
-					else {
-						ventas.put(symbol,new PortfolioUser(symbol,num, value*num));
-					}
-					
-				}
-				
-				
 
 			}
-			ArrayList<PortfolioUser> portfoliouser= new ArrayList<PortfolioUser>();
+			ArrayList<PortfolioUser> portfoliouser = new ArrayList<PortfolioUser>();
 			for (String symbol : compras.keySet()) {
 				double actualValue= RequestAPI.getMostRecentCloseValue(symbol);
 				System.out.println(actualValue);
 				int num = compras.get(symbol).getNum();
-				float  costes = compras.get(symbol).getCostes();
+				float costes = compras.get(symbol).getCostes();
 				float dinero_ventas = 0;
-				if(ventas.containsKey(symbol)) {
-					num= num- ventas.get(symbol).getNum();
-					dinero_ventas=ventas.get(symbol).getCostes(); // Aqui costes son en realidad el dinero de ventas . Esto es porque no se puede hacer dos constructures iguales
+				if (ventas.containsKey(symbol)) {
+					num = num - ventas.get(symbol).getNum();
+					dinero_ventas = ventas.get(symbol).getCostes(); // Aqui costes son en realidad el dinero de ventas .
+																	// Esto es porque no se puede hacer dos
+																	// constructures iguales
 				}
 				float valor_actual= (float) (num*actualValue);
 				float balance = valor_actual+dinero_ventas-costes;
 				PortfolioUser portfolio = new PortfolioUser(symbol, num, costes, dinero_ventas,  valor_actual, balance);
 				System.out.println(portfolio);
 				portfoliouser.add(portfolio);
-			   
+
 			}
 			closeConnection(stmt);
 			return portfoliouser;
@@ -389,108 +417,170 @@ public class DatabaseManager {
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	static Usuario getUserInfo(int id) {
-				Statement stmt=openConnection();
-				String query = "Select * from "+TABLE_USER+" where "+CN_ID_USER+"="+"\""+ id + "\";";
-				System.out.println(query);
-				try {
-					ResultSet rs= stmt.executeQuery(query);
-					if(rs.next()) {
-				
-										String userName = rs.getString(CN_USER);
-							String firstName = rs.getString(CN_FIRST_NAME);
-							String lastName = rs.getString(CN_LAST_NAME);
-							String phone = rs.getString(CN_PHONE);
-							String email = rs.getString(CN_EMAIL);
-							lastError="Sin errores";
-							closeConnection(stmt) ;
-							return new Usuario(userName,firstName,lastName,phone,email);
-						
-					}
-					else {
-						lastError="El id de usuario  "+id+" no es correcto";
-						closeConnection(stmt) ;
-						return null; 
-					}
-					
-				} catch (SQLException e) {
-					//e.printStackTrace();
-					  System.out.println("Message:  " + e.getMessage());                        
-				      System.out.println("SQLSTATE: " + e.getSQLState());            
-				      System.out.println("C�digo de error SQL: " + e.getErrorCode()); 
-				     // sqle=sqle.getNextException();     // Recuperar excepci�n de SQL siguiente  
-				      closeConnection(stmt) ;
-				      return null ;
-				}
-				
-			}
-		 static int updateUserInfo(int id,String user,String email, String  firstName, String lastName, String phone) {
-			 Statement stmt=openConnection();
-			 
-				String insert = "update "+TABLE_USER+" "
-						+ "SET "+CN_USER+"="+"\""+user+"\","+CN_EMAIL+"="+"\""+email+"\","+CN_FIRST_NAME+"="+"\""+firstName+"\","+CN_LAST_NAME+"="+"\""+lastName+"\","+CN_PHONE+"="+"\""+phone +"\""+ 
-							" WHERE "+CN_ID_USER+"="+id+";";
-				System.out.println(insert);
-				try {
-					stmt.executeUpdate(insert);
-					lastError="Sin errores";
-					closeConnection(stmt) ;
-					return 0;
-				} catch (SQLException e) {
-					//e.printStackTrace();
-					  System.out.println("Message:  " + e.getMessage());                        
-				      System.out.println("SQLSTATE: " + e.getSQLState());            
-				      System.out.println("C�digo de error SQL: " + e.getErrorCode()); 
-				     // sqle=sqle.getNextException();     // Recuperar excepci�n de SQL siguiente  
-				      convertErrorRegisterUser( e.getMessage());
-				      closeConnection(stmt) ;
-				      return -1 ;
-				}
-				
-			}
-		 static int changePassword(int id, String oldPassword,String newPassword) {
-			 Statement stmt=openConnection();
-				String query = "Select * from "+TABLE_USER+" where "+CN_ID_USER+"="+"\""+ id + "\";";
-				System.out.println(query);
-				try {
-					ResultSet rs= stmt.executeQuery(query);
-					String bdPassword="";
-					if(rs.next()) {
-						 bdPassword = rs.getString(CN_PASSWORD);
 
-					}
-				if (!bdPassword.equals(oldPassword)) {
-					return -1;
-				}
-				
-				String update = "update "+TABLE_USER+" "
-						+ "SET "+CN_PASSWORD+"="+"\""+newPassword+"\""+ 
-							" WHERE "+CN_ID_USER+"="+id+";";
-				System.out.println(update);
-					stmt.executeUpdate(update);
-					lastError="Sin errores";
-					closeConnection(stmt) ;
-					return 0;
-				} catch (SQLException e) {
-					//e.printStackTrace();
-					  System.out.println("Message:  " + e.getMessage());                        
-				      System.out.println("SQLSTATE: " + e.getSQLState());            
-				      System.out.println("C�digo de error SQL: " + e.getErrorCode()); 
-				     // sqle=sqle.getNextException();     // Recuperar excepci�n de SQL siguiente  
-				      convertErrorRegisterUser( e.getMessage());
-				      closeConnection(stmt) ;
-				      return -1 ;
-				}
-				
+	static Usuario getUserInfo(int id) {
+		Statement stmt = openConnection();
+		String query = "Select * from " + TABLE_USER + " where " + CN_ID_USER + "=" + "\"" + id + "\";";
+		System.out.println(query);
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+
+				String userName = rs.getString(CN_USER);
+				String firstName = rs.getString(CN_FIRST_NAME);
+				String lastName = rs.getString(CN_LAST_NAME);
+				String phone = rs.getString(CN_PHONE);
+				String email = rs.getString(CN_EMAIL);
+				lastError = "Sin errores";
+				closeConnection(stmt);
+				return new Usuario(userName, firstName, lastName, phone, email);
+
+			} else {
+				lastError = "El id de usuario  " + id + " no es correcto";
+				closeConnection(stmt);
+				return null;
 			}
-			
-			
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			closeConnection(stmt);
+			return null;
+		}
+
+	}
+
+	static int updateUserInfo(int id, String user, String email, String firstName, String lastName, String phone) {
+		Statement stmt = openConnection();
+
+		String insert = "update " + TABLE_USER + " " + "SET " + CN_USER + "=" + "\"" + user + "\"," + CN_EMAIL + "="
+				+ "\"" + email + "\"," + CN_FIRST_NAME + "=" + "\"" + firstName + "\"," + CN_LAST_NAME + "=" + "\""
+				+ lastName + "\"," + CN_PHONE + "=" + "\"" + phone + "\"" + " WHERE " + CN_ID_USER + "=" + id + ";";
+		System.out.println(insert);
+		try {
+			stmt.executeUpdate(insert);
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return 0;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			convertErrorRegisterUser(e.getMessage());
+			closeConnection(stmt);
+			return -1;
+		}
+
+	}
+
+	static int changePassword(int id, String oldPassword, String newPassword) {
+		Statement stmt = openConnection();
+		String query = "Select * from " + TABLE_USER + " where " + CN_ID_USER + "=" + "\"" + id + "\";";
+		System.out.println(query);
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			String bdPassword = "";
+			if (rs.next()) {
+				bdPassword = rs.getString(CN_PASSWORD);
+
+			}
+			if (!bdPassword.equals(oldPassword)) {
+				closeConnection(stmt);
+				return -1;
+			}
+
+			String update = "update " + TABLE_USER + " " + "SET " + CN_PASSWORD + "=" + "\"" + newPassword + "\""
+					+ " WHERE " + CN_ID_USER + "=" + id + ";";
+			System.out.println(update);
+			stmt.executeUpdate(update);
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return 0;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			convertErrorRegisterUser(e.getMessage());
+			closeConnection(stmt);
+			return -1;
+		}
+
+	}
+
+	public static Document getPortfolioHistory(String key) {
+
+		Statement stmt = openConnection();
+		String query = "select COMPANY.name, COMPANY.symbol, IDcomp.dateAction, IDcomp.value, IDcomp.num, IDcomp.transaction from COMPANY join (select SHARES.id_company, SHARES.dateAction, SHARES.num, SHARES.value, SHARES.transaction from SHARES JOIN (select ID FROM USER where APIKey='"
+				+ key + "') as IDus on id_user = IDus.ID) as IDcomp on COMPANY.ID=IDcomp.id_company";
+		System.out.println(query);
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				rs.beforeFirst();
+				ArrayList<String> companyNames = new ArrayList<String>();
+				ArrayList<String> symbols = new ArrayList<String>();
+				ArrayList<String> dates = new ArrayList<String>();
+				ArrayList<Float> values = new ArrayList<Float>();
+				ArrayList<Integer> num = new ArrayList<Integer>();
+				ArrayList<String> types = new ArrayList<String>();
+				while (rs.next()) {
+					companyNames.add(rs.getString("name"));
+					symbols.add(rs.getString("symbol"));
+					dates.add(rs.getString("dateAction"));
+					values.add(rs.getFloat("value"));
+					num.add(rs.getInt("num"));
+					types.add(rs.getString("transaction"));
+				}
+
+				Element root = new Element("portfolio");
+
+				Document document = new Document(root);
+
+				for (int i = 0; i < companyNames.size(); i++) {
+					Element transaction = new Element("transaction");
+					Element companyName = new Element("companyName");
+					companyName.setText(companyNames.get(i));
+					transaction.addContent(companyName);
+					Element companySymbol = new Element("symbol");
+					companySymbol.setText(symbols.get(i));
+					transaction.addContent(companySymbol);
+					Element date = new Element("date");
+					date.setText(dates.get(i));
+					transaction.addContent(date);
+					Element value = new Element("value");
+					value.setText(values.get(i).toString());
+					transaction.addContent(value);
+					Element amount = new Element("amount");
+					amount.setText(num.get(i).toString());
+					transaction.addContent(amount);
+					Element type = new Element("type");
+					type.setText(types.get(i));
+					transaction.addContent(type);
+					document.getRootElement().addContent(transaction);
+				}
+				closeConnection(stmt);
+				return document;
+
+			} else {
+				closeConnection(stmt);
+				return null;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			closeConnection(stmt);
+			return null;
+		}
+
+	}
+
 	private static Statement openConnection() {
 
 		try {
