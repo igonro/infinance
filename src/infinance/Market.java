@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Market extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String NASDAQ_SYMBOL = "NDAQ";
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -70,7 +71,6 @@ public class Market extends HttpServlet {
 					rd.forward(request, response);
 				}
 
-
 			} catch (java.io.IOException e) {
 				System.out.println("io");
 				RequestDispatcher rd = sc.getRequestDispatcher("/market-data-error.jsp");
@@ -83,6 +83,7 @@ public class Market extends HttpServlet {
 
 		} else {
 			response.sendRedirect("/infinance/login");
+		}
 	}
 
 	/**

@@ -72,19 +72,18 @@ public class Company extends HttpServlet {
 					RequestDispatcher rd = sc.getRequestDispatcher("/company.jsp");
 					rd.forward(request, response);
 				}
-
-
-} catch (java.io.IOException e) {
-			System.out.println("io");
-			RequestDispatcher rd = sc.getRequestDispatcher("/company-data-error.jsp");
-			rd.forward(request, response);
-		} catch (java.lang.NullPointerException e) {
-			System.out.println("nullpointer");
-			RequestDispatcher rd = sc.getRequestDispatcher("/company-data-error.jsp");
-			rd.forward(request, response);
-		}
+			} catch (java.io.IOException e) {
+				System.out.println("io");
+				RequestDispatcher rd = sc.getRequestDispatcher("/company-data-error.jsp");
+				rd.forward(request, response);
+			} catch (java.lang.NullPointerException e) {
+				System.out.println("nullpointer");
+				RequestDispatcher rd = sc.getRequestDispatcher("/company-data-error.jsp");
+				rd.forward(request, response);
+			}
 		} else {
 			response.sendRedirect("/infinance/login");
+		}
 	}
 
 	/**
