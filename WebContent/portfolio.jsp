@@ -105,6 +105,8 @@
               				<li class="nav-item">
                 				<a class="nav-link" href="/infinance/settings"><span data-feather="settings"></span> Configuración</a>
                 			</li>
+                			<c:if test = "${type >1}">
+      
  								<li class="nav-item">
    								 <a class="nav-link disabled font-weight-bold" >Administrador</a>
  								 </li>                		
@@ -114,6 +116,7 @@
                 			<li class="nav-item">
                 				<a class="nav-link" href="/infinance/editcompany"><span data-feather="globe"></span> Empresas</a>
                 			</li>
+                			</c:if>
                 		</ul>
                 	</div>
                 </nav>

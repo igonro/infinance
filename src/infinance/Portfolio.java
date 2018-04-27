@@ -29,9 +29,10 @@ public class Portfolio extends HttpServlet {
 		
 			UserInfo userInfo= (UserInfo)request.getSession().getAttribute("user");
 			int id_user= userInfo.getUserID();
+			int type = userInfo.getType();
 			ArrayList<PortfolioUser>  portfolioUser =   DatabaseManager.getPortfolio( id_user);
 			request.setAttribute("PortfolioUser", portfolioUser);
-			request.setAttribute("Userinfo", userInfo);
+			request.setAttribute("type", type);
 			RequestDispatcher rd = sc.getRequestDispatcher("/portfolio.jsp");
 			rd.forward(request,response);
 			
