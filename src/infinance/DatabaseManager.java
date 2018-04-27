@@ -13,6 +13,7 @@ import model.Usuario;
 import model.Empresa;
 import model.HistoryUser;
 import model.PortfolioUser;
+import model.UserInfo;
 import utils.RequestAPI;
 
 public class DatabaseManager {
@@ -52,6 +53,8 @@ public class DatabaseManager {
 	public static final String CN_SUMMARY = "summary";
 	public static final String CN_MARKET = "market";
 	public static final String CN_ADRTSO = "ADRTSO";
+	public static final String CN_IPOYEAR = "IPOyear";
+
 
 	private static final String dblogin = "adminInfinance";
 	private static final String dbpasswd = "proyectoDAT";
@@ -83,7 +86,7 @@ public class DatabaseManager {
 		}
 	}
 
-	public static int login(String user, String password) {
+	public static UserInfo login(String user, String password) {
 		Statement stmt = openConnection();
 		String query = "Select * from " + TABLE_USER + " where " + CN_USER + "=" + "\"" + user + "\" and " + CN_PASSWORD
 				+ " = " + "\"" + password + "\";";
@@ -93,14 +96,17 @@ public class DatabaseManager {
 			if (rs.next()) {
 
 				int id_user = rs.getInt(CN_ID_USER);
+				int type = rs.getInt(CN_TYPE);
+				String nameUser = rs.getString(CN_USER);
 				lastError = "Sin errores";
 				closeConnection(stmt);
-				return id_user;
+				return (new UserInfo(nameUser,id_user, type));
+				
 
 			} else {
-				lastError = "El usuario " + user + " y/o la contase�a no son correctos";
+				lastError = "El usuario " + user + " y/o la contasena no son correctos";
 				closeConnection(stmt);
-				return -1;
+				return (new UserInfo("errorUsuario",-1));
 			}
 
 		} catch (SQLException e) {
@@ -110,7 +116,7 @@ public class DatabaseManager {
 			System.out.println("C�digo de error SQL: " + e.getErrorCode());
 			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
 			closeConnection(stmt);
-			return -1;
+			return (new UserInfo("errorUsuario",-1));
 		}
 
 	}
@@ -169,11 +175,13 @@ public class DatabaseManager {
 				String name = rs.getString(CN_NAME_COMPANY);
 				int lastscale = rs.getInt(CN_LAST_SALE);
 				int marketcap = rs.getInt(CN_MARKET);
-				String address = rs.getString(CN_ADRTSO);
+				int address = rs.getInt(CN_ADRTSO);
 				String sector = rs.getString(CN_SECTOR);
 				String industry = rs.getString(CN_INDUSTRY);
 				String summaryquote = rs.getString(CN_SUMMARY);
-				emp = new Empresa(symb, name, lastscale, marketcap, address, sector, industry, summaryquote);
+				int ipo = rs.getInt(CN_IPOYEAR);
+
+				emp = new Empresa(symb, name, lastscale, marketcap, address, sector, industry, summaryquote,ipo);
 			}
 			closeConnection(stmt);
 			return emp;
@@ -206,11 +214,13 @@ public class DatabaseManager {
 				String name = rs.getString(CN_NAME_COMPANY);
 				int lastscale = rs.getInt(CN_LAST_SALE);
 				int marketcap = rs.getInt(CN_MARKET);
-				String address = rs.getString(CN_ADRTSO);
+				int address = rs.getInt(CN_ADRTSO);
 				String sector = rs.getString(CN_SECTOR);
 				String industry = rs.getString(CN_INDUSTRY);
 				String summaryquote = rs.getString(CN_SUMMARY);
-				Empresa emp = new Empresa(symbol, name, lastscale, marketcap, address, sector, industry, summaryquote);
+				int ipo = rs.getInt(CN_IPOYEAR);
+
+				Empresa emp = new Empresa(symbol, name, lastscale, marketcap, address, sector, industry, summaryquote,ipo);
 				empresas.add(emp);
 
 			}
@@ -245,11 +255,13 @@ public class DatabaseManager {
 				String name = rs.getString(CN_NAME_COMPANY);
 				int lastscale = rs.getInt(CN_LAST_SALE);
 				int marketcap = rs.getInt(CN_MARKET);
-				String address = rs.getString(CN_ADRTSO);
+				int address = rs.getInt(CN_ADRTSO);
 				String sector = rs.getString(CN_SECTOR);
 				String industry = rs.getString(CN_INDUSTRY);
 				String summaryquote = rs.getString(CN_SUMMARY);
-				Empresa emp = new Empresa(symbol, name, lastscale, marketcap, address, sector, industry, summaryquote);
+				int ipo = rs.getInt(CN_IPOYEAR);
+
+				Empresa emp = new Empresa(symbol, name, lastscale, marketcap, address, sector, industry, summaryquote,ipo);
 				empresas.add(emp);
 
 			}
@@ -513,7 +525,159 @@ public class DatabaseManager {
 		}
 
 	}
+	public static int deleteUser(int id_user) {
+		Statement stmt = openConnection();
 
+		String delete = "Delete from "+TABLE_USER+" where "+CN_ID_USER+"="+id_user+";";
+		System.out.println(delete);
+		try {
+			stmt.executeUpdate(delete);
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return 0;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			lastError="No se pudo elimniar el usuario";
+			closeConnection(stmt);
+			return -1;
+		}
+		
+	}
+
+	public static int updateUser(int id_user) {
+		Statement stmt = openConnection();
+
+		String delete = "UPDATE "+TABLE_USER+" SET "+CN_TYPE+"="+2+" WHERE "+CN_ID_USER+"="+id_user+";";
+		System.out.println(delete);
+		try {
+			stmt.executeUpdate(delete);
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return 0;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			lastError="No se pudo elimniar el usuario";
+			closeConnection(stmt);
+			return -1;
+		}
+		
+	}
+	
+	public static ArrayList<Usuario> getNormalUsers() {
+		Statement stmt = openConnection();
+		String query = "SELECT * FROM  "+TABLE_USER+"  WHERE "+CN_TYPE+"="+1+";";
+		System.out.println(query);
+		try {
+			ResultSet rs=stmt.executeQuery(query);
+			lastError = "Sin errores";
+			ArrayList<Usuario>usuarios =new ArrayList<Usuario>();
+			while (rs.next()) {
+				
+				String userName = rs.getString(CN_USER);
+				String firstName = rs.getString(CN_FIRST_NAME);
+				String lastName = rs.getString(CN_LAST_NAME);
+				String phone = rs.getString(CN_PHONE);
+				String email = rs.getString(CN_EMAIL);
+				String id_user = rs.getString(CN_ID_USER);
+				Usuario user= new Usuario(userName,firstName,lastName,phone,email,id_user);
+				usuarios.add(user);
+			
+				
+			}
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return usuarios;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			lastError="No se encontraron usuarios";
+			closeConnection(stmt);
+			return null;
+		}
+		
+	}
+	
+	public static int updateCompany(String symbol,String companyName,int marketCap, int adrtso,int ipoyear,String sector, String industry) {
+		Statement stmt = openConnection();
+		String update = "UPDATE "+TABLE_COMPANY+" SET "+CN_NAME_COMPANY+"="+"\"" + companyName + "\", "+CN_MARKETCAP+"="+marketCap+","+CN_ADRTSO+"="+adrtso+","+CN_IPOYEAR+"="+ipoyear+","
+				+ ""+CN_SECTOR+"="+"\"" + sector + "\","+CN_INDUSTRY+"="+"\"" + industry + "\" where "+CN_SYMBOL+"="+"\""+symbol+"\";";  
+		System.out.println(update);
+		try {
+			stmt.executeUpdate(update);
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return 0;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			lastError="No se pudo actulizar la empresa ";
+			closeConnection(stmt);
+			return -1;
+		}
+	}
+	
+	public static int deleteCompany(String symbol) {
+		Statement stmt = openConnection();
+
+		String delete = "Delete from "+TABLE_COMPANY+" where "+CN_SYMBOL+"="+"\"" + symbol + "\";";
+		System.out.println(delete);
+		try {
+			stmt.executeUpdate(delete);
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return 0;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			lastError="No se pudo elimniar el usuario";
+			closeConnection(stmt);
+			return -1;
+		}
+		
+	}
+	
+	public static int createCompany(String symbol,String name,int lastSale,int marketCap, int ADRTSO, int IPOyear,String sector, String industry,String summary) {
+		Statement stmt = openConnection();
+
+		String insert = "insert into "+TABLE_COMPANY+" "
+				+ "(symbol,name,lastSale,marketCap,ADRTSO,IPOyear,sector,industry,summary) " + "values (\"" + symbol
+				+ "\",\"" + name + "\"," + lastSale + "," + marketCap + "," + ADRTSO + "," + IPOyear + ",\"" + sector
+				+ "\",\"" + industry + "\",\"" + summary + "\");";
+		System.out.println(insert);
+		try {
+			stmt.executeUpdate(insert);
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return 0;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			lastError="No se pudo crear la empresa";
+			closeConnection(stmt);
+			return -1;
+		}
+		
+	}
 	public static Document getPortfolioHistory(String key) {
 
 		Statement stmt = openConnection();

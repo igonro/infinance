@@ -6,26 +6,22 @@ private String symbol;
 private String name;
 private int lastscale;
 private int marketcap;
-private String address;
+private int address;
 private String sector;
 private String industry;
 private String summaryquote;
+private int ipoyear;
 
 
 
-public Empresa(String symbol, String name, int lastscale, int marketcap, String address, String sector, String industry,
-		String summaryquote) {
-	super();
-	this.symbol = symbol;
-	this.name = name;
-	this.lastscale = lastscale;
-	this.marketcap = marketcap;
-	this.address = address;
-	this.sector = sector;
-	this.industry = industry;
-	this.summaryquote = summaryquote;
+
+
+public int getIpoyear() {
+	return ipoyear;
 }
-
+public void setIpoyear(int ipoyear) {
+	this.ipoyear = ipoyear;
+}
 public Empresa(String symbol) {
 	super();
 	this.symbol = symbol;
@@ -55,10 +51,10 @@ public int getMarketcap() {
 public void setMarketcap(int marketcap) {
 	this.marketcap = marketcap;
 }
-public String getAddress() {
+public int getAddress() {
 	return address;
 }
-public void setAddress(String address) {
+public void setAddress(int address) {
 	this.address = address;
 }
 public String getSector() {
@@ -79,11 +75,25 @@ public String getSummaryquote() {
 public void setSummaryquote(String summaryquote) {
 	this.summaryquote = summaryquote;
 }
+public Empresa(String symbol, String name, int lastscale, int marketcap, int address, String sector, String industry,
+		String summaryquote, int ipoyear) {
+	super();
+	this.symbol = symbol;
+	this.name = name;
+	this.lastscale = lastscale;
+	this.marketcap = marketcap;
+	this.address = address;
+	this.sector = sector;
+	this.industry = industry;
+	this.summaryquote = summaryquote;
+	this.ipoyear = ipoyear;
+}
 @Override
 public String toString() {
-	return "Empresa [symbol=" + symbol + ", name=" + name + ", lastscale=" + lastscale + ", marketcap=" + marketcap
+	return "symbol=" + symbol + ", name=" + name + ", lastscale=" + lastscale + ", marketcap=" + marketcap
 			+ ", address=" + address + ", sector=" + sector + ", industry=" + industry + ", summaryquote="
-			+ summaryquote + "]";
+			+ summaryquote + ", ipoyear=" + ipoyear;
 }
+
 
 }

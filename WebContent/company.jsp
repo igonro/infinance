@@ -138,7 +138,7 @@
             			<h1 class="h1">${infoEmpresa.symbol}</h1>
             			<div class="btn-toolbar mb-2 mb-md-0">
               				<div class="btn-group mr-2">
-                				<button id="add-to-portfolio" class="btn-add btn-sm btn-outline-primary">Añadir a mi cartera</button>
+                				<button id="add-to-portfolio" class="btn-add btn-sm btn-outline-success">Añadir a mi cartera</button>
               				</div>
               				<form class="form-date text-center" action="/infinance/company" method="get">
 	              				<div class="btn-group mr-2">
