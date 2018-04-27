@@ -608,6 +608,55 @@ public class DatabaseManager {
 			return -1;
 		}
 	}
+	
+	public static int deleteCompany(int id_company) {
+		Statement stmt = openConnection();
+
+		String delete = "Delete from "+TABLE_COMPANY+" where "+CN_ID_COMPANY+"="+id_company+";";
+		System.out.println(delete);
+		try {
+			stmt.executeUpdate(delete);
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return 0;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			lastError="No se pudo elimniar el usuario";
+			closeConnection(stmt);
+			return -1;
+		}
+		
+	}
+	
+	public static int createCompany(String symbol,String name,int lastSale,int marketCap, int ADRTSO, int IPOyear,String sector, String industry,String summary) {
+		Statement stmt = openConnection();
+
+		String insert = "insert into "+TABLE_COMPANY+" "
+				+ "(symbol,name,lastSale,marketCap,ADRTSO,IPOyear,sector,industry,summary) " + "values (\"" + symbol
+				+ "\",\"" + name + "\"," + lastSale + "," + marketCap + "," + ADRTSO + "," + IPOyear + ",\"" + sector
+				+ "\",\"" + industry + "\",\"" + summary + "\");";
+		System.out.println(insert);
+		try {
+			stmt.executeUpdate(insert);
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return 0;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			lastError="No se pudo crear la empresa";
+			closeConnection(stmt);
+			return -1;
+		}
+		
+	}
 	public static Document getPortfolioHistory(String key) {
 
 		Statement stmt = openConnection();
