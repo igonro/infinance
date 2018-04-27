@@ -105,6 +105,15 @@
               				<li class="nav-item">
                 				<a class="nav-link" href="/infinance/settings"><span data-feather="settings"></span> Configuración</a>
                 			</li>
+ 								<li class="nav-item">
+   								 <a class="nav-link disabled font-weight-bold" >Administrador</a>
+ 								 </li>                		
+  								 <li class="nav-item">
+                				<a class="nav-link" href="/infinance/gestoruser"><span data-feather="users"></span> Usuarios</a>
+                			</li>
+                			<li class="nav-item">
+                				<a class="nav-link" href="/infinance/editcompany"><span data-feather="globe"></span> Empresas</a>
+                			</li>
                 		</ul>
                 	</div>
                 </nav>

@@ -30,31 +30,6 @@
 			}
 		</style>
 		<!-- STYLE -->
-		<!-- G-CHART SCRIPT -->
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript">
-    		google.charts.load('current', {'packages':['corechart']});
-    		google.charts.setOnLoadCallback(drawChart);
-    		function drawChart() {
-    			var data = google.visualization.arrayToDataTable([
-            		['Year', 'Sales'],
-            		<c:forEach var="Company" items="${Company}">
-              			['${Company.date}',  ${Company.value}],
-              		</c:forEach>
-        		]);
-      			var options = {
-        			title: '',
-        			chartArea: {'width': '90%', 'height': '90%'},
-        			legend: { position: 'none' }
-      			};
-      			var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
-      			chart.draw(data, options);
-    		}
-    		window.onresize = function(event) {
-      			drawChart();
-    		};
-  		</script>
-  		<!-- G-CHART SCRIPT -->
   		<!-- SEARCH BAR SCRIPT -->
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -110,14 +85,14 @@
     	<div class="container-fluid">
       		<div class="row">
         		<!-- SIDEBAR -->
-        		<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
           			<div class="sidebar-sticky">
             			<ul class="nav flex-column">
               				<li class="nav-item">
                 				<a class="nav-link" href="/infinance/portfolio"><span data-feather="briefcase"></span> Mi cartera</a>
                 			</li>
                 			<li class="nav-item">
-                				<a class="nav-link active" href="#"><span data-feather="dollar-sign"></span> Bolsa<span class="sr-only">(actual)</span></a>
+                				<a class="nav-link" href="/infinance/market"><span data-feather="dollar-sign"></span> Bolsa</a>
                 			</li>
               				<li class="nav-item">
                 				<a class="nav-link" href="/infinance/history"><span data-feather="file-text"></span> Historial</a>
@@ -128,54 +103,47 @@
               				<li class="nav-item">
                 				<a class="nav-link" href="/infinance/settings"><span data-feather="settings"></span> Configuración</a>
                 			</li>
+ 								<li class="nav-item">
+   								 <a class="nav-link disabled font-weight-bold" >Administrador</a>
+ 								 </li>                		
+  								 <li class="nav-item">  								 
+                				<a class="nav-link" href="/infinance/gestoruser"><span data-feather="users"></span> Usuarios</a>
+                			</li>
+             				<li class="nav-item">
+                				<a class="nav-link active" href="#"><span data-feather="globe"></span> Empresas<span class="sr-only">(actual)</span></a>
+                			</li>
                 		</ul>
                 	</div>
                 </nav>
                 <!-- SIDEBAR -->
         		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-          			<!-- CHART HEADER -->
-          			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            			<h1 class="h1">NASDAQ</h1>
-            			<div class="btn-toolbar mb-2 mb-md-0">
-              				<form class="form-date text-center" action="/infinance/market" method="get">
-	              				<div class="btn-group mr-2">
-	                				<input class="btn btn-sm btn-outline-secondary" type="date" id="dateStart" name="dateStart" step="1" value="${Dates.dateStart}">
-	              				</div>
-	              				<div class="btn-group mr-2">
-	                				<input class="btn btn-sm btn-outline-secondary" type="date" id="dateEnd" name="dateEnd" step="1" value="${Dates.dateEnd}">
-	              				</div>
-	              				<input type="hidden" name="symbol" value=".IXIC">
-	              				<div class="btn-group mr-2">
-	                				<button id="refresh-interval" class="btn btn-sm btn-outline-primary" type="submit"><span data-feather="refresh-cw"></span> Actualizar intervalo</button>
-	              				</div>
-	        				</form>
-            			</div>
-          			</div>
-          			<!-- CHART HEADER -->
-          			<!-- CHART -->
-	          		<div id="line-chart"></div>
-	          		<!-- CHART -->
-	          		<br><br><br>
+ 	          		<br>
+  	          		<br>
+ 
 	          		<h2>Empresas</h2>
 	          		<br>
 	          		<!-- TABLE -->
 	          		<div class="table-responsive">
-		          		<table class="table table-hover table-responsive">
+		          		<table class="table table-hover table-responsive table-editable">
 							<thead>
 								<tr>
 									<th data-toggle="tooltip" title="Código alfanumérico que identifica las acciones de la empresa.">Símbolo</th>
 									<th data-toggle="tooltip" title="Nombre de la empresa.">Nombre</th>
 									<th data-toggle="tooltip" title="Sector de la empresa.">Sector</th>
 									<th data-toggle="tooltip" title="Industria de la empresa.">Industria</th>
+									<th ></th>
+									<th ></th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="Empresas" items="${Empresas}">
 									<tr>
-										<td><a href="/infinance/company?symbol=${Empresas.symbol}">${Empresas.symbol}</a></td>
+										<td>${Empresas.symbol}</td>
 										<td>${Empresas.name}</td>
 										<td>${Empresas.sector}</td>
 										<td>${Empresas.industry}</td>
+										<td><button id="${Empresas.symbol}" class="btn-add btn-sm btn-outline-success"> Editar</button></td>
+										<td><button id="${Empresas.symbol}" class="btn-sale btn-sm btn-outline-danger"> Eliminar</button></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -196,4 +164,3 @@
 		</script>
 		<!-- JS SCRIPTS -->
 	</body>
-</html>
