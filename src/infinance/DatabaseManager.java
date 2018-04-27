@@ -565,15 +565,30 @@ public class DatabaseManager {
 		
 	}
 	
-	public static int getNormalUsers() {
+	public static ArrayList<Usuario> getNormalUsers() {
 		Statement stmt = openConnection();
-		String query = "SELECT FROM  "+TABLE_USER+"  WHERE "+CN_TYPE+"="+1+";";
+		String query = "SELECT * FROM  "+TABLE_USER+"  WHERE "+CN_TYPE+"="+1+";";
 		System.out.println(query);
 		try {
-			stmt.executeQuery(query);
+			ResultSet rs=stmt.executeQuery(query);
+			lastError = "Sin errores";
+			ArrayList<Usuario>usuarios =new ArrayList<Usuario>();
+			while (rs.next()) {
+				
+				String userName = rs.getString(CN_USER);
+				String firstName = rs.getString(CN_FIRST_NAME);
+				String lastName = rs.getString(CN_LAST_NAME);
+				String phone = rs.getString(CN_PHONE);
+				String email = rs.getString(CN_EMAIL);
+				String id_user = rs.getString(CN_ID_USER);
+				Usuario user= new Usuario(userName,firstName,lastName,phone,email,id_user);
+				usuarios.add(user);
+			
+				
+			}
 			lastError = "Sin errores";
 			closeConnection(stmt);
-			return 0;
+			return usuarios;
 		} catch (SQLException e) {
 			// e.printStackTrace();
 			System.out.println("Message:  " + e.getMessage());
@@ -582,7 +597,7 @@ public class DatabaseManager {
 			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
 			lastError="No se encontraron usuarios";
 			closeConnection(stmt);
-			return -1;
+			return null;
 		}
 		
 	}
@@ -609,10 +624,10 @@ public class DatabaseManager {
 		}
 	}
 	
-	public static int deleteCompany(int id_company) {
+	public static int deleteCompany(String symbol) {
 		Statement stmt = openConnection();
 
-		String delete = "Delete from "+TABLE_COMPANY+" where "+CN_ID_COMPANY+"="+id_company+";";
+		String delete = "Delete from "+TABLE_COMPANY+" where "+CN_SYMBOL+"="+symbol+";";
 		System.out.println(delete);
 		try {
 			stmt.executeUpdate(delete);

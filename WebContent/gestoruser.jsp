@@ -122,9 +122,10 @@
           			<h2>Usuarios</h2>
           			<!-- TABLE -->
           			<div class="table-responsive">
-            			<table id="portfoliotable" class="table table-striped table-sm">
+            			<table id="userstable" class="table table-striped table-sm">
               				<thead>
                 				<tr>
+                					<th >ID user</th>
                 					<th >Username</th>
 									<th >Correo </th>
 									<th >Telefono</th>
@@ -133,14 +134,14 @@
                 				</tr>
               				</thead>
               				<tbody>
-              					<c:forEach var="PortfolioUser" items="${PortfolioUser}">
+              					<c:forEach var="Usuarios" items="${Usuarios}">
         		  					<tr>
-										
-										<td>${PortfolioUser.symbol}</td>
-										<td>${PortfolioUser.num}</td>
-										<td>${PortfolioUser.costes}</td>
-										<td><button id="${PortfolioUser.symbol}" class="btn-add btn-sm btn-outline-success"><span data-feather="plus-square"></span> Dar permisos</button></td>
-										<td><button id="${PortfolioUser.symbol}" class="btn-sale btn-sm btn-outline-danger"><span data-feather="minus-square"></span> Borrar</button></td>
+        		  						<td>${Usuarios.id}</td>
+										<td>${Usuarios.userName}</td>
+										<td>${Usuarios.email}</td>
+										<td>${Usuarios.phone}</td>
+										<td><button id="${Usuarios.id}" class="btn-permisos btn-sm btn-outline-success"><span data-feather="plus-square"></span> Dar permisos</button></td>
+										<td><button id="${Usuarios.id}" class="btn-borrar btn-sm btn-outline-danger"><span data-feather="minus-square"></span> Borrar</button></td>
                 					</tr>
                  				</c:forEach>
               				</tbody>
@@ -163,9 +164,9 @@
   		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     	<script>var $jq2 = jQuery.noConflict(true);</script>
-         <script>
+      <script>
             $jq2(function() {
-            	$jq2("#buy").dialog({
+            	$jq2("#darpermisos").dialog({
     				autoOpen: false,
     				modal: true,
     				resizable: false,
@@ -173,17 +174,27 @@
     			});
             });
             $jq2(document).ready(function() {
-            	$jq2('.btn-add').on("click", function() {
-            		 var symbol = $(this).attr('id');
-            		 $jq2("#symbolDialogBuy").val(symbol);
-            		$jq2("#buy").dialog("open");
+            	$jq2('.btn-permisos').on("click", function() {
+            		 var id_user = $(this).attr('id');
+            		 var MyRows = $jq2('#userstable').find('tbody').find('tr');
+            		 for (var i = 0; i < MyRows.length; i++) {
+	            		 var user_name_table = $(MyRows[i]).find('td:eq(1)').html();
+	            		 var id_user_table = $(MyRows[i]).find('td:eq(0)').html();
+            		 	 if(id_user_table==id_user){
+            		 		var user_name=user_name_table;
+            		 		break;
+            		 	 }
+            		 }
+            		 $jq2("#userID").val(id_user);
+            		 $jq2("#userName").val(user_name);
+            		 $jq2("#darpermisos").dialog("open");
             		
     			});
             });
 		</script>
 		  <script>
             $jq2(function() {
-            	$jq2("#sale").dialog({
+            	$jq2("#borrar").dialog({
     				autoOpen: false,
     				modal: true,
     				resizable: false,
@@ -191,47 +202,45 @@
     			});
             });
             $jq2(document).ready(function() {
-            	$jq2('.btn-sale').on("click", function() {
-            		 var symbol = $(this).attr('id');
-            		 var numShares=0;
-            		 var MyRows = $jq2('#portfoliotable').find('tbody').find('tr');
+            	$jq2('.btn-borrar').on("click", function() {
+            		 var id_user = $(this).attr('id');
+            		 var MyRows = $jq2('#userstable').find('tbody').find('tr');
             		 for (var i = 0; i < MyRows.length; i++) {
-	            		 var numSharesTable = $(MyRows[i]).find('td:eq(1)').html();
-	            		 var symbolTable = $(MyRows[i]).find('td:eq(0)').html();
-            		 	 if(symbolTable==symbol){
-            		 		numShares=numSharesTable;
+	            		 var user_name_table = $(MyRows[i]).find('td:eq(1)').html();
+	            		 var id_user_table = $(MyRows[i]).find('td:eq(0)').html();
+            		 	 if(id_user_table==id_user){
+            		 		var user_name=user_name_table;
+            		 		break;
             		 	 }
             		 }
-            		 $jq2("#symbolDialogSale").val(symbol);
-            		 $jq2("#numShares").val(numShares);
-            		 $jq2("#sale").dialog("open");
+            		 $jq2("#userIDBorrar").val(id_user);
+            		 $jq2("#userNameBorrar").val(user_name);
+            		 $jq2("#borrar").dialog("open");
             		
     			});
             });
 		</script>
-		<div id="buy" title="Comprar Acciones">
+		<div id="darpermisos" title="Dar permisos">
 			<div class="container">
-	        		<form action="/infinance/buyshares" method="get">
-	        			<label for="symbolDialogBuy" class="control-label">Empresa</label>
-	     				<input id="symbolDialogBuy" class="form-control" placeholder="" required="true" type="text" name="symbol" readonly>
-	  					<label for="numSharesBuy" class="control-label">Número de acciones</label>
-	     				<input id="numSharesBuy" class="form-control" placeholder="Número de acciones" required="true" type="text" name="numSharesBuy">
+	        <form action="/infinance/darpermisos" method="get">
+	        			<label for="userID" class="control-label">Usuario ID</label>
+	     				<input id="userID" class="form-control" placeholder="" required="true" type="text" name="userID" readonly>
+	        			<label for="userName" class="control-label">Usuario</label>
+	     				<input id="userName" class="form-control" placeholder="" required="true" type="text" name="userName" readonly>
 	                   </br>
-	                   <button id="ChangePassword" class="btn btn-lg btn-primary btn-block" type="submit" >Comprar</button>
+	                   <button id="darpermisosButton" class="btn btn-lg btn-primary btn-block" type="submit" " >Dar permisos</button>
 	           	</form>
 			</div>
 		</div>
-			<div id="sale" title="Vender Acciones">
+			<div id="borrar" title="Confirmar usuario a borrar">
 			<div class="container">
-	        		<form action="/infinance/saleshares" method="get">
-	        			<label for="symbolDialogSale" class="control-label">Empresa</label>
-	     				<input id="symbolDialogSale" class="form-control" placeholder="" required="true" type="text" name="symbol" readonly>
-	     				<label for="numShares" class="control-label">Número de acciones en posesión</label>
-	     				<input id="numShares" class="form-control" placeholder="Número de acciones" required="true" type="text" name="numShares"  readonly>
-	  					<label for="numSharesSale" class="control-label">Número de acciones</label>
-	     				<input id="numSharesSale" class="form-control" placeholder="Número de acciones a vender" required="true" type="text" name="numSharesSale">
+	        		<form action="/infinance/borraruser" method="get">
+	        			<label for="userIDBorrar" class="control-label">Usuario ID</label>
+	     				<input id="userIDBorrar" class="form-control" placeholder="" required="true" type="text" name="userID" readonly>
+	        			<label for="userNameBorrar" class="control-label">Usuario</label>
+	     				<input id="userNameBorrar" class="form-control" placeholder="" required="true" type="text" name="userName" readonly>
 	                   </br>
-	                   <button id="ChangePassword" class="btn btn-lg btn-primary btn-block" type="submit" onclick="return Validate()" >Vender</button>
+	                   <button id="darpermisosButton" class="btn btn-lg btn-primary btn-block" type="submit" " >Borrar</button>
 	           	</form>
 			</div>
 		</div>

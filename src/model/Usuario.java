@@ -7,6 +7,19 @@ private String firstName;
 private String lastName;
 private String phone;
 private String email;
+private String id; 
+
+
+public Usuario(String userName, String firstName, String lastName, String phone, String email, String id) {
+	super();
+	this.userName = userName;
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.phone = phone;
+	this.email = email;
+	this.id = id;
+}
+
 
 public Usuario(String userName, String firstName, String lastName, String phone, String email) {
 	super();
@@ -17,6 +30,13 @@ public Usuario(String userName, String firstName, String lastName, String phone,
 	this.email = email;
 }
 
+
+public String getId() {
+	return id;
+}
+public void setId(String id) {
+	this.id = id;
+}
 public String getUserName() {
 	return userName;
 }

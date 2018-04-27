@@ -1,30 +1,25 @@
 package infinance;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.PortfolioUser;
-import model.Usuario;
+import utils.RequestAPI;
 
 /**
- * Servlet implementation class GestorUser
+ * Servlet implementation class DarPermisos
  */
-@WebServlet("/gestoruser")
-public class GestorUser extends HttpServlet {
+@WebServlet("/darpermisos")
+public class DarPermisos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GestorUser() {
+    public DarPermisos() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,13 +29,20 @@ public class GestorUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ServletContext sc = getServletContext();
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String usertIDString = request.getParameter("userID");
+
+		int id_user = Integer.parseInt(usertIDString);
 		
-		ArrayList<Usuario>  usuarios =   DatabaseManager.getNormalUsers();
-		request.setAttribute("Usuarios", usuarios);
-		RequestDispatcher rd = sc.getRequestDispatcher("/gestoruser.jsp");
-		rd.forward(request,response);	
+		
+		
+		if(DatabaseManager.updateUser(id_user)<0) {
+			response.sendRedirect("/infinance/gestoruser");
 		}
+		else {
+			response.sendRedirect("/infinance/gestoruser");
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
