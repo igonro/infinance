@@ -45,7 +45,29 @@ public class EditCompany extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if (request.getParameter("type").equals("add")) {
+		int ipoyear = Integer.parseInt(request.getParameter("ipoyear"));
+		int marketcap = Integer.parseInt(request.getParameter("marketCap"));
+		int adrtso = Integer.parseInt(request.getParameter("adrtso"));
+		int lastsale = Integer.parseInt(request.getParameter("lastsale"));
+
+		DatabaseManager.createCompany(request.getParameter("symbol"), request.getParameter("name"), lastsale,marketcap, adrtso, ipoyear, request.getParameter("sector"), request.getParameter("industry"), request.getParameter("summary"));
 		doGet(request, response);
+		} else {
+			if (request.getParameter("type").equals("delete")) {
+				DatabaseManager.deleteCompany(request.getParameter("symbol"));
+				doGet(request, response);
+		}
+			else {
+				if (request.getParameter("type").equals("edit")) {
+					int ipoyear = Integer.parseInt(request.getParameter("ipoyearedit"));
+					int marketcap = Integer.parseInt(request.getParameter("marketcapedit"));
+					int adrtso = Integer.parseInt(request.getParameter("addressedit"));				
+					DatabaseManager.updateCompany(request.getParameter("symboledit"), request.getParameter("nameedit"), marketcap, adrtso, ipoyear, request.getParameter("sectoredit"), request.getParameter("industryedit"));
+					doGet(request, response);
+			}
+			}
+	}
+	}
 	}
 
-}

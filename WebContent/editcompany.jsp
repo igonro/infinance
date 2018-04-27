@@ -117,14 +117,20 @@
                 </nav>
                 <!-- SIDEBAR -->
         		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+ 	          		
  	          		<br>
   	          		<br>
- 
-	          		<h2>Empresas</h2>
+ 					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
+	            		<h1 class="h1">Empresas</h1>
+	            		<div class="btn-toolbar mb-2 mb-md-0">
+		          		 	<button class="btn-add btn-sm btn-outline-success" id ="addcompany" > Añadir</button>
+		          		</div>
+		          	</div>
+	          		
 	          		<br>
 	          		<!-- TABLE -->
 	          		<div class="table-responsive">
-		          		<table class="table table-hover table-responsive table-editable">
+		          		<table id="companytable" class="table table-hover table-responsive table-editable">
 							<thead>
 								<tr>
 									<th data-toggle="tooltip" title="Código alfanumérico que identifica las acciones de la empresa.">Símbolo</th>
@@ -142,8 +148,20 @@
 										<td>${Empresas.name}</td>
 										<td>${Empresas.sector}</td>
 										<td>${Empresas.industry}</td>
-										<td><button id="${Empresas.symbol}" class="btn-add btn-sm btn-outline-success"> Editar</button></td>
-										<td><button id="${Empresas.symbol}" class="btn-sale btn-sm btn-outline-danger"> Eliminar</button></td>
+										<td>
+										<button  class="btn-edit btn-sm btn-outline-success" value = "${Empresas}"> Editar</button>   										
+		
+				
+										</td>										
+										<td>
+										<form action = "/infinance/editcompany" method = "post">
+										<input id="symbol" class="form-control"   type="hidden" name="symbol" value = "${Empresas.symbol}">    
+										<input id="type" class="form-control"   type="hidden" name="type" value = "delete"> 
+										<button id="deletecompany" class="btn-sale btn-sm btn-outline-danger" type="submit"> Eliminar</button>
+										</form>
+										
+										</td>
+
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -153,6 +171,109 @@
         		</main>
       		</div>
     	</div>
+    		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  					<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+         			<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    				
+    				
+    				<script>var $jq2 = jQuery.noConflict(true);</script>
+            		<script>
+			            $jq2(function() {
+			            	$jq2("#addcompanydialog").dialog({
+			    				autoOpen: false,
+			    				modal: true,
+			    				resizable: false,			
+			    				dialogClass: "dlg-no-close"
+			    			});
+			            });
+			            $jq2(document).ready(function() {
+			            	$jq2('#addcompany').on("click", function() {
+			            		$jq2("#addcompanydialog").dialog("open");
+			    			});
+			            });
+					</script>
+													<script>
+							            $jq2(function() {
+							            	$jq2("#editcompanydialog").dialog({
+							    				autoOpen: false,
+							    				modal: true,
+							    				resizable: false,			
+							    				dialogClass: "dlg-no-close"
+							    			});
+							            });
+					
+							            $jq2(document).ready(function() {
+							            	$jq2('.btn-edit').on("click", function() {
+							            		 var empresa = $(this).attr('value');
+							            		 var myarray = empresa.split(',');
+							            		 for(var i = 0; i < myarray.length; i++)
+							            		 {
+							            			var it = myarray[i];
+								            		var keyvalue = myarray[i].split('=');
+								            		 $jq2('#'+keyvalue[0].trim()+'edit').val(keyvalue[1].trim());
+							
+							            		 }
+
+							            		 $jq2("#editcompanydialog").dialog("open");
+
+						
+							            });
+							            });
+
+											</script>
+
+     	<div id="addcompanydialog" title="Añadir Empresa">
+			<div class="container">
+         		<form id="addpopupform" action="/infinance/editcompany" method="post">
+         			<label for="symbol" class="control-label">Símbolo</label>
+      				<input id="symbol" class="form-control" placeholder="Símbolo" required="true" type="text" name="symbol">
+   					<label for="name" class="control-label">Nombre</label>
+      				<input id="name" class="form-control" placeholder="Nombre" required="true" type="text" name="name">
+      				<label for="marketCap" class="control-label">Valor de mercado</label>
+      				<input id="marketCap" class="form-control" placeholder="Valor de mercado" required="true" type="text" name="marketCap">    
+                    	<label for="adrtso" class="control-label">Adrtso</label>
+      				<input id="adrtso" class="form-control" placeholder="adrtso" required="true" type="text" name="adrtso">
+   					<label for="ipoyear" class="control-label">Ipoyear</label>
+      				<input id="ipoyear" class="form-control" placeholder="ipoyear" required="true" type="text" name="ipoyear">
+      				<label for="sector" class="control-label">Sector</label>
+      				<input id="sector" class="form-control" placeholder="Sector" required="true" type="text" name="sector">  
+      				<label for="industry" class="control-label">Industry</label>
+      				<input id="industry" class="form-control" placeholder="Industry" required="true" type="text" name="industry">    
+      				<label for="summary" class="control-label">Summary</label>
+      				<input id="summary" class="form-control" placeholder="Summary" required="true" type="text" name="summary">    
+      				<label for="lastsale" class="control-label">Last sale</label>
+      				<input id="lastsale" class="form-control" placeholder="lastsale" required="true" type="text" name="lastsale">    
+                    <input id="type" class="form-control"   type="hidden" name="type" value = "add">    
+                    </br>
+                    <button id = "addbutton" class="btn btn-lg btn-primary btn-block" type="submit">Añadir</button>
+            	</form>
+			</div>
+		</div>
+		
+
+    	<div id="editcompanydialog" title="Editar Empresa">
+			<div class="container">
+         		<form id="addpopupform" action="/infinance/editcompany" method="post">
+         			<label for="symboledit" class="control-label">Símbolo</label>
+      				<input id="symboledit" class="form-control" placeholder="Símbolo" required="true" type="text" name="symboledit">
+   					<label for="nameedit" class="control-label">Nombre</label>
+      				<input id="nameedit" class="form-control" placeholder="Nombre" required="true" type="text" name="nameedit">
+      				<label for="marketcapedit" class="control-label">Valor de mercado</label>
+      				<input id="marketcapedit" class="form-control" placeholder="Valor de mercado" required="true" type="text" name="marketcapedit">    
+                    	<label for="addressedit" class="control-label">Adrtso</label>
+      				<input id="addressedit" class="form-control" placeholder="adrtso" required="true" type="text" name="addressedit">
+   					<label for="ipoyearedit" class="control-label">Ipoyear</label>
+      				<input id="ipoyearedit" class="form-control" placeholder="ipoyear" required="true" type="text" name="ipoyearedit">
+      				<label for="sectoredit" class="control-label">Sector</label>
+      				<input id="sectoredit" class="form-control" placeholder="Sector" required="true" type="text" name="sectoredit">  
+      				<label for="industryedit" class="control-label">Industry</label>
+      				<input id="industryedit" class="form-control" placeholder="Industry" required="true" type="text" name="industryedit">    
+                    <input id="type" class="form-control"   type="hidden" name="type" value = "edit">    
+                    </br>
+                    <button id = "editbutton" class="btn btn-lg btn-primary btn-block" type="submit">Editar</button>
+            	</form>
+			</div>
+		</div>
 		<!-- JS SCRIPTS -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

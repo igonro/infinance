@@ -175,11 +175,13 @@ public class DatabaseManager {
 				String name = rs.getString(CN_NAME_COMPANY);
 				int lastscale = rs.getInt(CN_LAST_SALE);
 				int marketcap = rs.getInt(CN_MARKET);
-				String address = rs.getString(CN_ADRTSO);
+				int address = rs.getInt(CN_ADRTSO);
 				String sector = rs.getString(CN_SECTOR);
 				String industry = rs.getString(CN_INDUSTRY);
 				String summaryquote = rs.getString(CN_SUMMARY);
-				emp = new Empresa(symb, name, lastscale, marketcap, address, sector, industry, summaryquote);
+				int ipo = rs.getInt(CN_IPOYEAR);
+
+				emp = new Empresa(symb, name, lastscale, marketcap, address, sector, industry, summaryquote,ipo);
 			}
 			closeConnection(stmt);
 			return emp;
@@ -212,11 +214,13 @@ public class DatabaseManager {
 				String name = rs.getString(CN_NAME_COMPANY);
 				int lastscale = rs.getInt(CN_LAST_SALE);
 				int marketcap = rs.getInt(CN_MARKET);
-				String address = rs.getString(CN_ADRTSO);
+				int address = rs.getInt(CN_ADRTSO);
 				String sector = rs.getString(CN_SECTOR);
 				String industry = rs.getString(CN_INDUSTRY);
 				String summaryquote = rs.getString(CN_SUMMARY);
-				Empresa emp = new Empresa(symbol, name, lastscale, marketcap, address, sector, industry, summaryquote);
+				int ipo = rs.getInt(CN_IPOYEAR);
+
+				Empresa emp = new Empresa(symbol, name, lastscale, marketcap, address, sector, industry, summaryquote,ipo);
 				empresas.add(emp);
 
 			}
@@ -251,11 +255,13 @@ public class DatabaseManager {
 				String name = rs.getString(CN_NAME_COMPANY);
 				int lastscale = rs.getInt(CN_LAST_SALE);
 				int marketcap = rs.getInt(CN_MARKET);
-				String address = rs.getString(CN_ADRTSO);
+				int address = rs.getInt(CN_ADRTSO);
 				String sector = rs.getString(CN_SECTOR);
 				String industry = rs.getString(CN_INDUSTRY);
 				String summaryquote = rs.getString(CN_SUMMARY);
-				Empresa emp = new Empresa(symbol, name, lastscale, marketcap, address, sector, industry, summaryquote);
+				int ipo = rs.getInt(CN_IPOYEAR);
+
+				Empresa emp = new Empresa(symbol, name, lastscale, marketcap, address, sector, industry, summaryquote,ipo);
 				empresas.add(emp);
 
 			}
@@ -602,10 +608,10 @@ public class DatabaseManager {
 		
 	}
 	
-	public static int updateCompany(int id_company,String companyName,int marketCap, int adrtso,int ipoyear,String sector, String industry) {
+	public static int updateCompany(String symbol,String companyName,int marketCap, int adrtso,int ipoyear,String sector, String industry) {
 		Statement stmt = openConnection();
 		String update = "UPDATE "+TABLE_COMPANY+" SET "+CN_NAME_COMPANY+"="+"\"" + companyName + "\", "+CN_MARKETCAP+"="+marketCap+","+CN_ADRTSO+"="+adrtso+","+CN_IPOYEAR+"="+ipoyear+","
-				+ ""+CN_SECTOR+"="+"\"" + sector + "\","+CN_INDUSTRY+"="+"\"" + industry + "\" where "+CN_ID_COMPANY+"="+id_company+";";  
+				+ ""+CN_SECTOR+"="+"\"" + sector + "\","+CN_INDUSTRY+"="+"\"" + industry + "\" where "+CN_SYMBOL+"="+"\""+symbol+"\";";  
 		System.out.println(update);
 		try {
 			stmt.executeUpdate(update);
@@ -627,7 +633,7 @@ public class DatabaseManager {
 	public static int deleteCompany(String symbol) {
 		Statement stmt = openConnection();
 
-		String delete = "Delete from "+TABLE_COMPANY+" where "+CN_SYMBOL+"="+symbol+";";
+		String delete = "Delete from "+TABLE_COMPANY+" where "+CN_SYMBOL+"="+"\"" + symbol + "\";";
 		System.out.println(delete);
 		try {
 			stmt.executeUpdate(delete);
