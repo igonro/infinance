@@ -92,7 +92,7 @@ body {
 }
 
 .ui-menu-item a.ui-state-focus {
-	border: 1px solid #999999;
-	color: #212121;
-	background: #dadada;
+	border: 1px solid #999999 !important;
+	color: #212121 !important;
+	background: #dadada !important;
 }
