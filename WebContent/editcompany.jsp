@@ -15,7 +15,7 @@
 	    <link rel="icon" href="favicon.png">
 	    <title>Infinance</title>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
-	    <link rel="stylesheet" href="css/market.css">
+	    <link rel="stylesheet" href="css/editcompany.css">
 	    <style id="style-1-cropbar-clipper">
 			.en-markup-crop-options {
 			    top: 18px !important;
@@ -222,7 +222,7 @@
 
 											</script>
 
-     	<div id="addcompanydialog" title="Añadir Empresa">
+     	<div id="addcompanydialog" class = "dialog" title="Añadir Empresa">
 			<div class="container">
          		<form id="addpopupform" action="/infinance/editcompany" method="post">
          			<label for="symbol" class="control-label">Símbolo</label>
@@ -251,7 +251,7 @@
 		</div>
 		
 
-    	<div id="editcompanydialog" title="Editar Empresa">
+    	<div id="editcompanydialog"   class = "dialog" title="Editar Empresa">
 			<div class="container">
          		<form id="addpopupform" action="/infinance/editcompany" method="post">
          			<label for="symboledit" class="control-label">Símbolo</label>
@@ -274,6 +274,7 @@
             	</form>
 			</div>
 		</div>
+		
 		<!-- JS SCRIPTS -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
