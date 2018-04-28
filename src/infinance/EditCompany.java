@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Empresa;
+import model.UserInfo;
 
 /**
  * Servlet implementation class EditCompany
@@ -33,11 +34,24 @@ public class EditCompany extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if (request.getSession().getAttribute("user") != null) {
+			UserInfo userInfo= (UserInfo)request.getSession().getAttribute("user");
+			int type = userInfo.getType();
+			if (type>1) {
 		ServletContext sc = getServletContext();
 		ArrayList<Empresa> Empresas = DatabaseManager.busquedaTodasEmpresas();
 		request.setAttribute("Empresas", Empresas);
+
 		RequestDispatcher rd = sc.getRequestDispatcher("/editcompany.jsp");
 		rd.forward(request,response);	
+			}
+			else {
+				response.sendRedirect("/infinance/portfolio");
+			}
+		}
+		else {
+			response.sendRedirect("/infinance/login");
+		}
 		}
 
 	/**

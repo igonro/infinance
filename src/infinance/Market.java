@@ -42,6 +42,9 @@ public class Market extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("user") != null) {
+			UserInfo userInfo= (UserInfo)request.getSession().getAttribute("user");
+			int type = userInfo.getType();
+			request.setAttribute("type", type);
 			ServletContext sc = getServletContext();
 			String symbol = NASDAQ_SYMBOL;
 			ArrayList<Empresa> Empresas = DatabaseManager.busquedaTodasEmpresas();

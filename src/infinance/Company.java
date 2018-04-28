@@ -19,6 +19,7 @@ import model.CompanyInfo;
 import model.CompanyValue;
 import model.Dates;
 import model.Empresa;
+import model.UserInfo;
 import utils.RequestAPI;
 
 /**
@@ -43,6 +44,9 @@ public class Company extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getSession().getAttribute("user") != null) {
+			UserInfo userInfo= (UserInfo)request.getSession().getAttribute("user");
+			int type = userInfo.getType();
+			request.setAttribute("type", type);
 			ServletContext sc = getServletContext();
 			String symbol = request.getParameter("symbol");
 			Empresa empresa = DatabaseManager.busquedaEmpresaPorSymbol(symbol);

@@ -42,6 +42,8 @@ public class Export extends HttpServlet {
 		ServletContext sc = getServletContext();
 		if (request.getSession().getAttribute("user") != null) {
 			UserInfo userInf = ((UserInfo) request.getSession().getAttribute("user"));
+			int type = userInf.getType();
+			request.setAttribute("type", type);
 			userInf.setAPIKey(DatabaseManager.getAPIKey(userInf.getUserID()));
 			RequestDispatcher rd = sc.getRequestDispatcher("/export.jsp");
 			rd.forward(request, response);

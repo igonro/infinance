@@ -36,6 +36,10 @@ public class Settings extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		if (request.getSession().getAttribute("user") != null) {
+			UserInfo userInfo= (UserInfo)request.getSession().getAttribute("user");
+			int type = userInfo.getType();
+			request.setAttribute("type", type);
+
 			HttpSession session = request.getSession();
 			System.out.println(request.getParameter("error"));
 			request.setAttribute("error", request.getParameter("error"));
