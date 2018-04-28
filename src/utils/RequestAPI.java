@@ -15,20 +15,22 @@ import model.Dates;
 public class RequestAPI {
 
 	public static final String QUANDL_KEY = "6zsyn1k-S2oxc38FZfm9";
+	public static final String ALPHA_KEY = "78KJJ86U7AMFDY4T";
 
 	public static double getMostRecentCloseValue(String tickerSymbol) {
 		// Creamos una URL y establecemos un l�mite de 1 para que nos muestre un s�lo
 		// valor, el m�s reciente. As� el programa tarda menos en procesar los datos (si
 		// no se establece un l�mite la API devolver�a cientos o miles de datos).
-		String url = "https://www.quandl.com/api/v3/datasets/WIKI/" + tickerSymbol
-				+ ".json?column_index=4&limit=1&api_key=" + QUANDL_KEY;
+		String url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+tickerSymbol+"&interval=1min&outputsize=compact&apikey="+ALPHA_KEY;
 		double closePrice = 0.0;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode rootNode = mapper.readTree(new URL(url));
-			JsonNode datasetNode = rootNode.path("dataset");
-			JsonNode dataNode = datasetNode.path("data");
-			closePrice = dataNode.get(0).get(1).asDouble();
+			JsonNode timeseriestNode = rootNode.path("Time Series (1min)");
+			Iterator<JsonNode> it = timeseriestNode.getElements();
+			JsonNode lastNode = it.next();
+			JsonNode closeNode = lastNode.path("4. close");
+			closePrice = closeNode.asDouble();
 		} catch (IOException e) {
 			System.out.println("Symbol sin valor");
 		}

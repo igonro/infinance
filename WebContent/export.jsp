@@ -124,7 +124,7 @@
 					<p class="p">¿Quieres exportar tus datos? En Infinance hemos creado un servicio SOAP (<i>Simple Object Access Protocol</i>) que te permite obtener un fichero XML con tu historial de transacciones.</p>
 					<p class="p">El servicio requiere como parámetro de entrada la API Key del usuario y devolverá un XML. Los detalles de uso del servicio están descritos en el siguiente fichero <a href="RequestPortfolio.wsdl">WSDL</a>.</p>
 					<br><h3 class="p">API Key: <b>${user.APIKey}</b></h3>
-					<p class="text-center" style="margin-top: 50px;">Para visualizar el fichero que devolverá el servicio SOAP, pulse el siguiente botón:</p>
+					<p class="p text-center" style="margin-top: 50px;">Para visualizar el fichero que devolverá el servicio SOAP, pulse el siguiente botón:</p>
 					<div class="text-center"><button class="btn btn-lg btn-outline-primary" id="export-button">Exportar datos</button></div>
         		</main>
       		</div>
@@ -139,13 +139,6 @@
 			feather.replace()
 		</script>
 		<!-- JS SCRIPTS -->
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet"
-		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script>
-		var $jq1 = jQuery.noConflict(true);
-	</script>
 	<script>
 		$jq1(document).ready(function() {
 			$jq1(function() {

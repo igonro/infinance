@@ -98,7 +98,7 @@
       	<!-- NAVBAR -->
       		<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0">
         		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/infinance/home"><img src="img/infinance-web-icon.svg" width="25" height="25" class="d-inline-block align-top" alt=""> Infinance</a>
-        		<input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text">
+        		<input class="form-control form-control-dark w-100" placeholder="Buscar" aria-label="Buscar" type="text" name="search" id="search">
         		<ul class="navbar-nav px-3">
           			<li class="nav-item text-nowrap">
             			<a class="nav-link" href="/infinance/logout"><span data-feather="log-out"></span> Cerrar sesión</a>
@@ -138,7 +138,7 @@
             			<h1 class="h1">${infoEmpresa.symbol}</h1>
             			<div class="btn-toolbar mb-2 mb-md-0">
               				<div class="btn-group mr-2">
-                				<button id="add-to-portfolio" class="btn btn-sm btn-outline-primary">Añadir a mi cartera</button>
+                				<button id="add-to-portfolio" class="btn btn-sm btn-outline-success">Añadir a mi cartera</button>
               				</div>
               				<form class="form-date text-center" action="/infinance/company" method="get">
 	              				<div class="btn-group mr-2">
