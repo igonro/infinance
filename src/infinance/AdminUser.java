@@ -15,16 +15,16 @@ import model.PortfolioUser;
 import model.Usuario;
 
 /**
- * Servlet implementation class GestorUser
+ * Servlet implementation class AdminUser
  */
-@WebServlet("/gestoruser")
-public class GestorUser extends HttpServlet {
+@WebServlet("/admin-user")
+public class AdminUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GestorUser() {
+    public AdminUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,7 @@ public class GestorUser extends HttpServlet {
 		
 		ArrayList<Usuario>  usuarios =   DatabaseManager.getNormalUsers();
 		request.setAttribute("Usuarios", usuarios);
-		RequestDispatcher rd = sc.getRequestDispatcher("/gestoruser.jsp");
+		RequestDispatcher rd = sc.getRequestDispatcher("/admin-user.jsp");
 		rd.forward(request,response);	
 		}
 

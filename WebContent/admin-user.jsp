@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Infinance Export Webpage">
+<meta name="description" content="Infinance AdminUser Webpage">
 <meta name="author" content="Infinance Team">
 <!-- METADATA -->
 <!-- STYLE -->
@@ -19,7 +20,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="css/export.css">
+<link rel="stylesheet" href="css/admin-user.css">
 <style id="style-1-cropbar-clipper">
 .en-markup-crop-options {
 	top: 18px !important;
@@ -71,6 +72,8 @@
 																							key) {
 																						console
 																								.log(value);
+																						console
+																								.log(key);
 																						return {
 																							label : value.symbol
 																									+ ' * '
@@ -139,10 +142,9 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" href="#">
+							<a class="nav-link" href="/infinance/export">
 								<span data-feather="download"></span>
 								Exportar datos
-								<span class="sr-only">(actual)</span>
 							</a>
 						</li>
 						<li class="nav-item">
@@ -152,54 +154,74 @@
 							</a>
 						</li>
 					</ul>
-					<c:if test="${type >1}">
-						<h6
-							class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-							<span>Administrador</span>
-						</h6>
-						<ul class="nav flex-column mb-2">
-							<li class="nav-item">
-								<a class="nav-link" href="/infinance/admin-user">
-									<span data-feather="users"></span>
-									Usuarios
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/infinance/admin-company">
-									<span data-feather="globe"></span>
-									Empresas
-								</a>
-							</li>
-						</ul>
-					</c:if>
+					<h6
+						class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+						<span>Administrador</span>
+					</h6>
+					<ul class="nav flex-column mb-2">
+						<li class="nav-item">
+							<a class="nav-link active" href="#">
+								<span data-feather="users"></span>
+								Usuarios
+								<span class="sr-only">(actual)</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/infinance/admin-company">
+								<span data-feather="globe"></span>
+								Empresas
+							</a>
+						</li>
+					</ul>
 				</div>
 			</nav>
 			<!-- SIDEBAR -->
-			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-			<h1 class="h1 display-4">Exporta tus datos</h1>
-			<p class="p">
-				¿Quieres exportar tus datos? En Infinance hemos creado un servicio
-				SOAP (<i>Simple Object Access Protocol</i>) que te permite obtener
-				un fichero XML con tu historial de transacciones.
-			</p>
-			<p class="p">
-				El servicio requiere como parámetro de entrada la API Key del
-				usuario y devolverá un XML. Los detalles de uso del servicio están
-				descritos en el siguiente fichero
-				<a href="RequestPortfolio.wsdl">WSDL.</a>
-			</p>
-			<br>
-			<h3 class="p">
-				API Key: <b>${user.APIKey}</b>
-			</h3>
-			<p class="p text-center" style="margin-top: 50px;">Para
-				visualizar el fichero que devolverá el servicio SOAP, pulse el
-				siguiente botón:</p>
-			<div class="text-center">
-				<button class="btn btn-lg btn-outline-primary" id="export-button">Exportar
-					datos</button>
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+			<div
+				class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+				<h1 class="h1">Usuarios</h1>
 			</div>
-			</main>
+			<!-- TABLE -->
+			<div class="table-responsive">
+				<table id="userstable" class="table table-striped table-sm">
+					<thead>
+						<tr>
+							<th>ID de usuario</th>
+							<th>Usuario</th>
+							<th>Correo</th>
+							<th>Teléfono</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="Usuarios" items="${Usuarios}">
+							<tr>
+								<td>${Usuarios.id}</td>
+								<td>${Usuarios.userName}</td>
+								<td>${Usuarios.email}</td>
+								<td>${Usuarios.phone}</td>
+								<td>
+									<button id="${Usuarios.id}"
+										class="btn-permisos btn-sm btn-outline-success">
+										<span data-feather="plus-square"></span>
+										Dar permisos
+									</button>
+								</td>
+								<td>
+									<button id="${Usuarios.id}"
+										class="btn-borrar btn-sm btn-outline-danger">
+										<span data-feather="minus-square"></span>
+										Borrar
+									</button>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<!-- TABLE --> </main>
 		</div>
 	</div>
 	<!-- JS SCRIPTS -->
@@ -225,26 +247,99 @@
 	<script>
 		feather.replace()
 	</script>
-	<!-- JS SCRIPTS -->
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script>
-		$jq1(document).ready(function() {
-			$jq1(function() {
-				$jq1("#export-button").on('click', function() {
-					console.log('holaa');
-					$jq1.ajax({
-						url : "export",
-						type : "POST",
-						dataType : "text",
-						success : function(data) {
-							var wnd = window.open("about:blank");
-							wnd.document.open();
-							wnd.document.write("<xmp>" + data + "</xmp>");
-							wnd.document.close();
-						}
-					});
-				});
+		var $jq2 = jQuery.noConflict(true);
+	</script>
+	<script>
+		$jq2(function() {
+			$jq2("#darpermisos").dialog({
+				autoOpen : false,
+				modal : true,
+				resizable : false,
+				dialogClass : "dlg-no-close"
+			});
+		});
+		$jq2(document).ready(function() {
+			$jq2('.btn-permisos').on("click", function() {
+				var id_user = $(this).attr('id');
+				var MyRows = $jq2('#userstable').find('tbody').find('tr');
+				for (var i = 0; i < MyRows.length; i++) {
+					var user_name_table = $(MyRows[i]).find('td:eq(1)').html();
+					var id_user_table = $(MyRows[i]).find('td:eq(0)').html();
+					if (id_user_table == id_user) {
+						var user_name = user_name_table;
+						break;
+					}
+				}
+				$jq2("#userID").val(id_user);
+				$jq2("#userName").val(user_name);
+				$jq2("#darpermisos").dialog("open");
+
 			});
 		});
 	</script>
+	<script>
+		$jq2(function() {
+			$jq2("#borrar").dialog({
+				autoOpen : false,
+				modal : true,
+				resizable : false,
+				dialogClass : "dlg-no-close"
+			});
+		});
+		$jq2(document).ready(function() {
+			$jq2('.btn-borrar').on("click", function() {
+				var id_user = $(this).attr('id');
+				var MyRows = $jq2('#userstable').find('tbody').find('tr');
+				for (var i = 0; i < MyRows.length; i++) {
+					var user_name_table = $(MyRows[i]).find('td:eq(1)').html();
+					var id_user_table = $(MyRows[i]).find('td:eq(0)').html();
+					if (id_user_table == id_user) {
+						var user_name = user_name_table;
+						break;
+					}
+				}
+				$jq2("#userIDBorrar").val(id_user);
+				$jq2("#userNameBorrar").val(user_name);
+				$jq2("#borrar").dialog("open");
+
+			});
+		});
+	</script>
+	<div id="darpermisos" title="Dar permisos">
+		<div class="container">
+			<form action="/infinance/darpermisos" method="get">
+				<label for="userID" class="control-label">Usuario ID</label>
+				<input id="userID" class="form-control" placeholder=""
+					required="true" type="text" name="userID" readonly>
+				<label for="userName" class="control-label">Usuario</label>
+				<input id="userName" class="form-control" placeholder=""
+					required="true" type="text" name="userName" readonly>
+				</br>
+				<button id="darpermisosButton"
+					class="btn btn-lg btn-primary btn-block" type="submit"" >Dar
+					permisos</button>
+			</form>
+		</div>
+	</div>
+	<div id="borrar" title="Confirmar usuario a borrar">
+		<div class="container">
+			<form action="/infinance/borraruser" method="get">
+				<label for="userIDBorrar" class="control-label">Usuario ID</label>
+				<input id="userIDBorrar" class="form-control" placeholder=""
+					required="true" type="text" name="userID" readonly>
+				<label for="userNameBorrar" class="control-label">Usuario</label>
+				<input id="userNameBorrar" class="form-control" placeholder=""
+					required="true" type="text" name="userName" readonly>
+				</br>
+				<button id="darpermisosButton"
+					class="btn btn-lg btn-primary btn-block" type="submit"" >Borrar</button>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
