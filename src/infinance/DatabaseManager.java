@@ -652,6 +652,58 @@ public class DatabaseManager {
 		}
 		
 	}
+	public static void updateLastValue(String symbol, double closePrice) {
+		Statement stmt = openConnection();
+		String update = "UPDATE "+TABLE_COMPANY+" SET "+CN_LAST_SALE+"="+closePrice + " where "+CN_SYMBOL+"="+"\""+symbol+"\";";  
+		System.out.println(update);
+		try {
+			stmt.executeUpdate(update);
+			lastError = "Sin errores";
+			closeConnection(stmt);
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			lastError="No se pudo actualizar el valor de la empresa";
+			closeConnection(stmt);
+		}
+		
+	}
+
+	public static double getLastValue(String symbol) {
+		
+		Statement stmt = openConnection();
+		String query = "SELECT * FROM  "+TABLE_COMPANY+"  WHERE "+CN_SYMBOL+"="+"\""+symbol+"\";"; 
+		System.out.println(query);
+		double lastValue=0.0;
+		try {
+			ResultSet rs=stmt.executeQuery(query);
+			while (rs.next()) {
+				
+				lastValue= rs.getDouble(CN_LAST_SALE);
+				 double value= Math.random();
+				 lastValue =lastValue+value;
+				
+			}
+			lastError = "Sin errores";
+			closeConnection(stmt);
+			return lastValue;
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Message:  " + e.getMessage());
+			System.out.println("SQLSTATE: " + e.getSQLState());
+			System.out.println("C�digo de error SQL: " + e.getErrorCode());
+			// sqle=sqle.getNextException(); // Recuperar excepci�n de SQL siguiente
+			lastError="No se pudo recuperar el ultimo valor";
+			closeConnection(stmt);
+			return lastValue;
+		}
+		
+
+	}
+
 	
 	public static int createCompany(String symbol,String name,int lastSale,int marketCap, int ADRTSO, int IPOyear,String sector, String industry,String summary) {
 		Statement stmt = openConnection();
@@ -809,4 +861,5 @@ public class DatabaseManager {
 		return lastError;
 	}
 
+	
 }

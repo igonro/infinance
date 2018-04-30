@@ -9,6 +9,8 @@ import java.util.Iterator;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
+
+import infinance.DatabaseManager;
 import model.CompanyValue;
 import model.Dates;
 
@@ -31,8 +33,13 @@ public class RequestAPI {
 			JsonNode lastNode = it.next();
 			JsonNode closeNode = lastNode.path("4. close");
 			closePrice = closeNode.asDouble();
+			DatabaseManager.updateLastValue(tickerSymbol,closePrice);
 		} catch (IOException e) {
 			System.out.println("Symbol sin valor");
+			closePrice  = DatabaseManager.getLastValue(tickerSymbol);
+		} catch (Exception e) {
+			System.out.println("Symbol sin valor");
+			closePrice  = DatabaseManager.getLastValue(tickerSymbol);
 		}
 		return closePrice;
 	}
