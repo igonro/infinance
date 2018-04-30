@@ -15,16 +15,16 @@ import model.Empresa;
 import model.UserInfo;
 
 /**
- * Servlet implementation class EditCompany
+ * Servlet implementation class AdminCompany
  */
-@WebServlet("/editcompany")
-public class EditCompany extends HttpServlet {
+@WebServlet("/admin-company")
+public class AdminCompany extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditCompany() {
+    public AdminCompany() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,9 +40,9 @@ public class EditCompany extends HttpServlet {
 			if (type>1) {
 		ServletContext sc = getServletContext();
 		ArrayList<Empresa> Empresas = DatabaseManager.busquedaTodasEmpresas();
-		request.setAttribute("Empresas", Empresas);
+				request.setAttribute("Empresas", Empresas);
 
-		RequestDispatcher rd = sc.getRequestDispatcher("/editcompany.jsp");
+		RequestDispatcher rd = sc.getRequestDispatcher("/admin-company.jsp");
 		rd.forward(request,response);	
 			}
 			else {
@@ -58,7 +58,6 @@ public class EditCompany extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		if (request.getParameter("type").equals("add")) {
 		int ipoyear = Integer.parseInt(request.getParameter("ipoyear"));
 		int marketcap = Integer.parseInt(request.getParameter("marketCap"));
