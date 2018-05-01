@@ -330,14 +330,14 @@
 				<label for="nameedit" class="control-label">Nombre</label>
 				<input id="nameedit" class="form-control" placeholder="Nombre"
 					required="true" type="text" name="nameedit">
-				<label for="lastsaleedit" class="control-label">Valor de
+				<label for="marketcapedit" class="control-label">Valor de
 					mercado</label>
-				<input id="lastsaleedit" class="form-control"
+				<input id="marketcapedit" class="form-control"
 					placeholder="Valor de mercado" required="true" type="text"
-					name="lastsaleedit">
-				<label for="addressedit" class="control-label">Adrtso</label>
-				<input id="addressedit" class="form-control" placeholder="adrtso"
-					required="true" type="text" name="addressedit">
+					name="marketcapedit">
+				<label for=lastsaleedit class="control-label">Last Sale</label>
+				<input id="lastsaleedit" class="form-control" placeholder="adrtso"
+					required="true" type="text" name="lastsaleedit">
 				<label for="ipoyearedit" class="control-label">Ipoyear</label>
 				<input id="ipoyearedit" class="form-control" placeholder="ipoyear"
 					required="true" type="text" name="ipoyearedit">

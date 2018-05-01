@@ -1,11 +1,13 @@
 
 package model;
 
+import java.math.BigDecimal;
+
 public class Empresa {
 private String symbol;
 private String name;
-private int lastsale;
-private int marketcap;
+private float lastsale;
+private BigDecimal marketcap;
 private int address;
 private String sector;
 private String industry;
@@ -39,16 +41,16 @@ public String getName() {
 public void setName(String name) {
 	this.name = name;
 }
-public int getLastsale() {
+public float getLastsale() {
 	return lastsale;
 }
 public void setLastsale(int lastscale) {
 	this.lastsale = lastscale;
 }
-public int getMarketcap() {
+public BigDecimal getMarketcap() {
 	return marketcap;
 }
-public void setMarketcap(int marketcap) {
+public void setMarketcap(BigDecimal marketcap) {
 	this.marketcap = marketcap;
 }
 public int getAddress() {
@@ -75,7 +77,7 @@ public String getSummaryquote() {
 public void setSummaryquote(String summaryquote) {
 	this.summaryquote = summaryquote;
 }
-public Empresa(String symbol, String name, int lastsale, int marketcap, int address, String sector, String industry,
+public Empresa(String symbol, String name, float lastsale, BigDecimal marketcap, int address, String sector, String industry,
 		String summaryquote, int ipoyear) {
 	super();
 	this.symbol = symbol;

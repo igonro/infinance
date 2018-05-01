@@ -34,10 +34,10 @@ public class BorrarUser extends HttpServlet {
 		
 		
 		if(DatabaseManager.deleteUser(id_user)<0) {
-			response.sendRedirect("/infinance/gestoruser");
+			response.sendRedirect("/infinance/admin-user");
 		}
 		else {
-			response.sendRedirect("/infinance/gestoruser");
+			response.sendRedirect("/infinance/admin-user");
 		}
 	}
 

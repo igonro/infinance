@@ -1,6 +1,9 @@
 package infinance;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -60,9 +63,12 @@ public class AdminCompany extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("type").equals("add")) {
 			int ipoyear = Integer.parseInt(request.getParameter("ipoyear"));
-			int marketcap = Integer.parseInt(request.getParameter("marketCap"));
+			DecimalFormat decimalFormat = new DecimalFormat();
+			decimalFormat.setParseBigDecimal(true);
+			BigDecimal marketcap =new BigDecimal(request.getParameter("marketCap"));
+			//int marketcap = Number.parse(request.getParameter("marketCap"));
 			int adrtso = Integer.parseInt(request.getParameter("adrtso"));
-			int lastsale = Integer.parseInt(request.getParameter("lastsale"));
+			float lastsale = Float.parseFloat(request.getParameter("lastsale"));
 
 			DatabaseManager.createCompany(request.getParameter("symbol"), request.getParameter("name"), lastsale,marketcap, adrtso, ipoyear, request.getParameter("sector"), request.getParameter("industry"), request.getParameter("summary"));
 			doGet(request, response);
@@ -74,9 +80,9 @@ public class AdminCompany extends HttpServlet {
 			else {
 				if (request.getParameter("type").equals("edit")) {
 					int ipoyear = Integer.parseInt(request.getParameter("ipoyearedit"));
-					int marketcap = Integer.parseInt(request.getParameter("marketcapedit"));
-					int adrtso = Integer.parseInt(request.getParameter("addressedit"));				
-					DatabaseManager.updateCompany(request.getParameter("symboledit"), request.getParameter("nameedit"), marketcap, adrtso, ipoyear, request.getParameter("sectoredit"), request.getParameter("industryedit"));
+					BigDecimal marketcap =new BigDecimal(request.getParameter("marketcapedit"));
+					float lastsale = Float.parseFloat(request.getParameter("lastsaleedit"));				
+					DatabaseManager.updateCompany(request.getParameter("symboledit"), request.getParameter("nameedit"), marketcap, lastsale, ipoyear, request.getParameter("sectoredit"), request.getParameter("industryedit"));
 					doGet(request, response);
 				}
 			}

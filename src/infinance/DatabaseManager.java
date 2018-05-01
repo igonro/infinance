@@ -1,5 +1,6 @@
 package infinance;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -173,15 +174,15 @@ public class DatabaseManager {
 			while (rs.next()) {
 				String symb = rs.getString(CN_SYMBOL);
 				String name = rs.getString(CN_NAME_COMPANY);
-				int lastscale = rs.getInt(CN_LAST_SALE);
-				int marketcap = rs.getInt(CN_MARKET);
+				float lastsale = rs.getFloat(CN_LAST_SALE);
+				BigDecimal marketcap = rs.getBigDecimal(CN_MARKETCAP);
 				int address = rs.getInt(CN_ADRTSO);
 				String sector = rs.getString(CN_SECTOR);
 				String industry = rs.getString(CN_INDUSTRY);
 				String summaryquote = rs.getString(CN_SUMMARY);
 				int ipo = rs.getInt(CN_IPOYEAR);
 
-				emp = new Empresa(symb, name, lastscale, marketcap, address, sector, industry, summaryquote,ipo);
+				emp = new Empresa(symb, name, lastsale, marketcap, address, sector, industry, summaryquote,ipo);
 			}
 			closeConnection(stmt);
 			return emp;
@@ -212,15 +213,15 @@ public class DatabaseManager {
 
 				String symbol = rs.getString(CN_SYMBOL);
 				String name = rs.getString(CN_NAME_COMPANY);
-				int lastscale = rs.getInt(CN_LAST_SALE);
-				int marketcap = rs.getInt(CN_MARKET);
+				float lastsale = rs.getFloat(CN_LAST_SALE);
+				BigDecimal marketcap = rs.getBigDecimal(CN_MARKETCAP);
 				int address = rs.getInt(CN_ADRTSO);
 				String sector = rs.getString(CN_SECTOR);
 				String industry = rs.getString(CN_INDUSTRY);
 				String summaryquote = rs.getString(CN_SUMMARY);
 				int ipo = rs.getInt(CN_IPOYEAR);
 
-				Empresa emp = new Empresa(symbol, name, lastscale, marketcap, address, sector, industry, summaryquote,ipo);
+				Empresa emp = new Empresa(symbol, name, lastsale, marketcap, address, sector, industry, summaryquote,ipo);
 				empresas.add(emp);
 
 			}
@@ -253,15 +254,15 @@ public class DatabaseManager {
 			while (rs.next()) {
 				String symbol = rs.getString(CN_SYMBOL);
 				String name = rs.getString(CN_NAME_COMPANY);
-				int lastscale = rs.getInt(CN_LAST_SALE);
-				int marketcap = rs.getInt(CN_MARKET);
+				float lastsale = rs.getFloat(CN_LAST_SALE);
+				BigDecimal marketcap = rs.getBigDecimal(CN_MARKETCAP);
 				int address = rs.getInt(CN_ADRTSO);
 				String sector = rs.getString(CN_SECTOR);
 				String industry = rs.getString(CN_INDUSTRY);
 				String summaryquote = rs.getString(CN_SUMMARY);
 				int ipo = rs.getInt(CN_IPOYEAR);
 
-				Empresa emp = new Empresa(symbol, name, lastscale, marketcap, address, sector, industry, summaryquote,ipo);
+				Empresa emp = new Empresa(symbol, name, lastsale, marketcap, address, sector, industry, summaryquote,ipo);
 				empresas.add(emp);
 
 			}
@@ -608,9 +609,9 @@ public class DatabaseManager {
 		
 	}
 	
-	public static int updateCompany(String symbol,String companyName,int marketCap, int adrtso,int ipoyear,String sector, String industry) {
+	public static int updateCompany(String symbol,String companyName,BigDecimal marketCap, float lastsale,int ipoyear,String sector, String industry) {
 		Statement stmt = openConnection();
-		String update = "UPDATE "+TABLE_COMPANY+" SET "+CN_NAME_COMPANY+"="+"\"" + companyName + "\", "+CN_MARKETCAP+"="+marketCap+","+CN_ADRTSO+"="+adrtso+","+CN_IPOYEAR+"="+ipoyear+","
+		String update = "UPDATE "+TABLE_COMPANY+" SET "+CN_NAME_COMPANY+"="+"\"" + companyName + "\", "+CN_MARKETCAP+"="+marketCap+","+CN_LAST_SALE+"="+lastsale+","+CN_IPOYEAR+"="+ipoyear+","
 				+ ""+CN_SECTOR+"="+"\"" + sector + "\","+CN_INDUSTRY+"="+"\"" + industry + "\" where "+CN_SYMBOL+"="+"\""+symbol+"\";";  
 		System.out.println(update);
 		try {
@@ -705,7 +706,7 @@ public class DatabaseManager {
 	}
 
 	
-	public static int createCompany(String symbol,String name,int lastSale,int marketCap, int ADRTSO, int IPOyear,String sector, String industry,String summary) {
+	public static int createCompany(String symbol,String name,float lastSale,BigDecimal marketCap, int ADRTSO, int IPOyear,String sector, String industry,String summary) {
 		Statement stmt = openConnection();
 
 		String insert = "insert into "+TABLE_COMPANY+" "
