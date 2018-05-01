@@ -212,7 +212,7 @@
 										value="${Empresas}">Editar</button>
 								</td>
 								<td>
-									<form action="/infinance/editcompany" method="post">
+									<form action="/infinance/admin-company" method="post">
 										<input id="symbol" class="form-control" type="hidden"
 											name="symbol" value="${Empresas.symbol}">
 										<input id="type" class="form-control" type="hidden"
@@ -283,7 +283,7 @@
 	</script>
 	<div id="addcompanydialog" class="dialog" title="Añadir Empresa">
 		<div class="container">
-			<form id="addpopupform" action="/infinance/editcompany" method="post">
+			<form id="addpopupform" action="/infinance/admin-company" method="post">
 				<label for="symbol" class="control-label">Símbolo</label>
 				<input id="symbol" class="form-control" placeholder="Símbolo"
 					required="true" type="text" name="symbol">
@@ -323,10 +323,10 @@
 	</div>
 	<div id="editcompanydialog" class="dialog" title="Editar Empresa">
 		<div class="container">
-			<form id="addpopupform" action="/infinance/editcompany" method="post">
+			<form id="editpopupform" action="/infinance/admin-company" method="post">
 				<label for="symboledit" class="control-label">Símbolo</label>
 				<input id="symboledit" class="form-control" placeholder="Símbolo"
-					required="true" type="text" name="symboledit">
+					required="true" type="text" name="symboledit" readonly>
 				<label for="nameedit" class="control-label">Nombre</label>
 				<input id="nameedit" class="form-control" placeholder="Nombre"
 					required="true" type="text" name="nameedit">
