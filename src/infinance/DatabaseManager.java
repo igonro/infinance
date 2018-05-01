@@ -683,7 +683,7 @@ public class DatabaseManager {
 			while (rs.next()) {
 				
 				lastValue= rs.getDouble(CN_LAST_SALE);
-				 double value= Math.random();
+				 double value= Math.random()*2-1;
 				 lastValue =lastValue+value;
 				
 			}

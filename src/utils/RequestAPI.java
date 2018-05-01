@@ -1,11 +1,23 @@
 package utils;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import javax.swing.Timer;
+
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,6 +30,7 @@ public class RequestAPI {
 
 	public static final String QUANDL_KEY = "6zsyn1k-S2oxc38FZfm9";
 	public static final String ALPHA_KEY = "78KJJ86U7AMFDY4T";
+	public static long ultimoError;
 
 	public static double getMostRecentCloseValue(String tickerSymbol) {
 		// Creamos una URL y establecemos un l�mite de 1 para que nos muestre un s�lo
@@ -26,18 +39,30 @@ public class RequestAPI {
 		String url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+tickerSymbol+"&interval=1min&outputsize=compact&apikey="+ALPHA_KEY;
 		double closePrice = 0.0;
 		try {
-			ObjectMapper mapper = new ObjectMapper();
-			JsonNode rootNode = mapper.readTree(new URL(url));
-			JsonNode timeseriestNode = rootNode.path("Time Series (1min)");
-			Iterator<JsonNode> it = timeseriestNode.getElements();
-			JsonNode lastNode = it.next();
-			JsonNode closeNode = lastNode.path("4. close");
-			closePrice = closeNode.asDouble();
-			DatabaseManager.updateLastValue(tickerSymbol,closePrice);
-		} catch (IOException e) {
+			if(( System.currentTimeMillis()-ultimoError)>5000) {
+				System.setProperty("sun.net.client.defaultConnectTimeout", "5000");
+				System.setProperty("sun.net.client.defaultReadTimeout", "5000");
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode rootNode = mapper.readTree(new URL(url));
+				JsonNode timeseriestNode = rootNode.path("Time Series (1min)");
+				Iterator<JsonNode> it = timeseriestNode.getElements();
+				JsonNode lastNode = it.next();
+				JsonNode closeNode = lastNode.path("4. close");
+				closePrice = closeNode.asDouble();
+				DatabaseManager.updateLastValue(tickerSymbol,closePrice);
+			}
+			else {
+				closePrice  = DatabaseManager.getLastValue(tickerSymbol);
+			}
+			
+		}catch (IOException e) {
+			ultimoError = System.currentTimeMillis();
 			System.out.println("Symbol sin valor");
+			e.printStackTrace();
 			closePrice  = DatabaseManager.getLastValue(tickerSymbol);
 		} catch (Exception e) {
+			ultimoError = System.currentTimeMillis();
+			e.printStackTrace();
 			System.out.println("Symbol sin valor");
 			closePrice  = DatabaseManager.getLastValue(tickerSymbol);
 		}
@@ -129,5 +154,10 @@ public class RequestAPI {
 		}
 		return null;
 	}
+	
+
+	
+	
+
 
 }

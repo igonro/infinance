@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.CompanyInfo;
+
 import model.CompanyValue;
 import model.Dates;
 import model.Empresa;
@@ -50,9 +50,7 @@ public class Company extends HttpServlet {
 			ServletContext sc = getServletContext();
 			String symbol = request.getParameter("symbol");
 			Empresa empresa = DatabaseManager.busquedaEmpresaPorSymbol(symbol);
-			CompanyInfo infoEmpresa = new CompanyInfo(empresa.getName(), empresa.getSymbol(), empresa.getMarketcap(),
-					empresa.getSector(), empresa.getIndustry(), 0.0);
-			request.setAttribute("infoEmpresa", infoEmpresa);
+			request.setAttribute("infoEmpresa", empresa);
 			String dateStart = request.getParameter("dateStart");
 			String dateEnd = request.getParameter("dateEnd");
 			try {

@@ -253,7 +253,7 @@
 						<tr>
 							<td>${infoEmpresa.name}</td>
 							<td>${infoEmpresa.symbol}</td>
-							<td>${infoEmpresa.price}</td>
+							<td>${infoEmpresa.lastscale}</td>
 						</tr>
 					</tbody>
 					<thead>
@@ -267,7 +267,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>${infoEmpresa.marketCap}</td>
+							<td>${infoEmpresa.ipoyear}</td>
 							<td>${infoEmpresa.sector}</td>
 							<td>${infoEmpresa.industry}</td>
 						</tr>
