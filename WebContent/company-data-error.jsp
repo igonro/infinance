@@ -253,7 +253,7 @@
 						<tr>
 							<td>${infoEmpresa.name}</td>
 							<td>${infoEmpresa.symbol}</td>
-							<td>${infoEmpresa.lastscale}</td>
+							<td>${infoEmpresa.lastsale}</td>
 						</tr>
 					</tbody>
 					<thead>

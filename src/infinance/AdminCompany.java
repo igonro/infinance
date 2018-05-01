@@ -20,14 +20,14 @@ import model.UserInfo;
 @WebServlet("/admin-company")
 public class AdminCompany extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminCompany() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AdminCompany() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,12 +38,12 @@ public class AdminCompany extends HttpServlet {
 			UserInfo userInfo= (UserInfo)request.getSession().getAttribute("user");
 			int type = userInfo.getType();
 			if (type>1) {
-		ServletContext sc = getServletContext();
-		ArrayList<Empresa> Empresas = DatabaseManager.busquedaTodasEmpresas();
+				ServletContext sc = getServletContext();
+				ArrayList<Empresa> Empresas = DatabaseManager.busquedaTodasEmpresas();
 				request.setAttribute("Empresas", Empresas);
 
-		RequestDispatcher rd = sc.getRequestDispatcher("/admin-company.jsp");
-		rd.forward(request,response);	
+				RequestDispatcher rd = sc.getRequestDispatcher("/admin-company.jsp");
+				rd.forward(request,response);	
 			}
 			else {
 				response.sendRedirect("/infinance/portfolio");
@@ -52,25 +52,25 @@ public class AdminCompany extends HttpServlet {
 		else {
 			response.sendRedirect("/infinance/login");
 		}
-		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("type").equals("add")) {
-		int ipoyear = Integer.parseInt(request.getParameter("ipoyear"));
-		int marketcap = Integer.parseInt(request.getParameter("marketCap"));
-		int adrtso = Integer.parseInt(request.getParameter("adrtso"));
-		int lastsale = Integer.parseInt(request.getParameter("lastsale"));
+			int ipoyear = Integer.parseInt(request.getParameter("ipoyear"));
+			int marketcap = Integer.parseInt(request.getParameter("marketCap"));
+			int adrtso = Integer.parseInt(request.getParameter("adrtso"));
+			int lastsale = Integer.parseInt(request.getParameter("lastsale"));
 
-		DatabaseManager.createCompany(request.getParameter("symbol"), request.getParameter("name"), lastsale,marketcap, adrtso, ipoyear, request.getParameter("sector"), request.getParameter("industry"), request.getParameter("summary"));
-		doGet(request, response);
+			DatabaseManager.createCompany(request.getParameter("symbol"), request.getParameter("name"), lastsale,marketcap, adrtso, ipoyear, request.getParameter("sector"), request.getParameter("industry"), request.getParameter("summary"));
+			doGet(request, response);
 		} else {
 			if (request.getParameter("type").equals("delete")) {
 				DatabaseManager.deleteCompany(request.getParameter("symbol"));
 				doGet(request, response);
-		}
+			}
 			else {
 				if (request.getParameter("type").equals("edit")) {
 					int ipoyear = Integer.parseInt(request.getParameter("ipoyearedit"));
@@ -78,9 +78,9 @@ public class AdminCompany extends HttpServlet {
 					int adrtso = Integer.parseInt(request.getParameter("addressedit"));				
 					DatabaseManager.updateCompany(request.getParameter("symboledit"), request.getParameter("nameedit"), marketcap, adrtso, ipoyear, request.getParameter("sectoredit"), request.getParameter("industryedit"));
 					doGet(request, response);
+				}
 			}
-			}
+		}
 	}
-	}
-	}
+}
 

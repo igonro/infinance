@@ -4,7 +4,7 @@ package model;
 public class Empresa {
 private String symbol;
 private String name;
-private int lastscale;
+private int lastsale;
 private int marketcap;
 private int address;
 private String sector;
@@ -39,11 +39,11 @@ public String getName() {
 public void setName(String name) {
 	this.name = name;
 }
-public int getLastscale() {
-	return lastscale;
+public int getLastsale() {
+	return lastsale;
 }
-public void setLastscale(int lastscale) {
-	this.lastscale = lastscale;
+public void setLastsale(int lastscale) {
+	this.lastsale = lastscale;
 }
 public int getMarketcap() {
 	return marketcap;
@@ -75,12 +75,12 @@ public String getSummaryquote() {
 public void setSummaryquote(String summaryquote) {
 	this.summaryquote = summaryquote;
 }
-public Empresa(String symbol, String name, int lastscale, int marketcap, int address, String sector, String industry,
+public Empresa(String symbol, String name, int lastsale, int marketcap, int address, String sector, String industry,
 		String summaryquote, int ipoyear) {
 	super();
 	this.symbol = symbol;
 	this.name = name;
-	this.lastscale = lastscale;
+	this.lastsale = lastsale;
 	this.marketcap = marketcap;
 	this.address = address;
 	this.sector = sector;
@@ -90,7 +90,7 @@ public Empresa(String symbol, String name, int lastscale, int marketcap, int add
 }
 @Override
 public String toString() {
-	return "symbol=" + symbol + ", name=" + name + ", lastscale=" + lastscale + ", marketcap=" + marketcap
+	return "symbol=" + symbol + ", name=" + name + ", lastsale=" + lastsale + ", marketcap=" + marketcap
 			+ ", address=" + address + ", sector=" + sector + ", industry=" + industry + ", summaryquote="
 			+ summaryquote + ", ipoyear=" + ipoyear;
 }

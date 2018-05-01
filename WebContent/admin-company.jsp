@@ -212,7 +212,7 @@
 										value="${Empresas}">Editar</button>
 								</td>
 								<td>
-									<form action="/infinance/editcompany" method="post">
+									<form action="/infinance/admin-company" method="post">
 										<input id="symbol" class="form-control" type="hidden"
 											name="symbol" value="${Empresas.symbol}">
 										<input id="type" class="form-control" type="hidden"
@@ -283,10 +283,10 @@
 	</script>
 	<div id="addcompanydialog" class="dialog" title="Añadir Empresa">
 		<div class="container">
-			<form id="addpopupform" action="/infinance/editcompany" method="post">
+			<form id="addpopupform" action="/infinance/admin-company" method="post">
 				<label for="symbol" class="control-label">Símbolo</label>
 				<input id="symbol" class="form-control" placeholder="Símbolo"
-					required="true" type="text" name="symbol">
+					required="true" type="text" name="symbol" >
 				<label for="name" class="control-label">Nombre</label>
 				<input id="name" class="form-control" placeholder="Nombre"
 					required="true" type="text" name="name">
@@ -323,18 +323,18 @@
 	</div>
 	<div id="editcompanydialog" class="dialog" title="Editar Empresa">
 		<div class="container">
-			<form id="addpopupform" action="/infinance/editcompany" method="post">
+			<form id="addpopupform" action="/infinance/admin-company" method="post">
 				<label for="symboledit" class="control-label">Símbolo</label>
 				<input id="symboledit" class="form-control" placeholder="Símbolo"
-					required="true" type="text" name="symboledit">
+					required="true" type="text" name="symboledit" readonly>
 				<label for="nameedit" class="control-label">Nombre</label>
 				<input id="nameedit" class="form-control" placeholder="Nombre"
 					required="true" type="text" name="nameedit">
-				<label for="marketcapedit" class="control-label">Valor de
+				<label for="lastsaleedit" class="control-label">Valor de
 					mercado</label>
-				<input id="marketcapedit" class="form-control"
+				<input id="lastsaleedit" class="form-control"
 					placeholder="Valor de mercado" required="true" type="text"
-					name="marketcapedit">
+					name="lastsaleedit">
 				<label for="addressedit" class="control-label">Adrtso</label>
 				<input id="addressedit" class="form-control" placeholder="adrtso"
 					required="true" type="text" name="addressedit">
