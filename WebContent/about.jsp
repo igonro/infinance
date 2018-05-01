@@ -93,7 +93,9 @@
       		</div>
       		<!-- FEATURES -->
 			<!-- FOOTER -->
+			<br><br><br><br>
       		<hr>
+			<br>
       		<footer class="container">
       		   	<p class="float-right"><a href="#">Volver &uarr;</a></p>
         		<p>© 2017-2018 Infinance Project</p>
