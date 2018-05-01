@@ -68,11 +68,7 @@
       		<input id="inputUser" class="form-control" placeholder="Usuario" required="true" autofocus="" type="text" name="user">
       		<label for="inputPassword" class="sr-only">Contraseña</label>
       		<input id="inputPassword" class="form-control" placeholder="Contraseña" required="true" type="password" name="password">
-      		<div class="checkbox mb-3">
-        		<label>
-          			<input value="remember-me" type="checkbox"> Recordarme
-        		</label>
-      		</div>
+			<br>
             <c:if test="${not empty errorMessage}">
       			<c:out value="${errorMessage}"/>
     		</c:if>

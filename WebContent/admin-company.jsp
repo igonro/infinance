@@ -323,7 +323,8 @@
 	</div>
 	<div id="editcompanydialog" class="dialog" title="Editar Empresa">
 		<div class="container">
-			<form id="addpopupform" action="/infinance/admin-company" method="post">
+
+			<form id="editpopupform" action="/infinance/admin-company" method="post">
 				<label for="symboledit" class="control-label">Símbolo</label>
 				<input id="symboledit" class="form-control" placeholder="Símbolo"
 					required="true" type="text" name="symboledit" readonly>

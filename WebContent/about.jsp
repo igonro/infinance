@@ -68,32 +68,34 @@
       		<div class="container marketing">
         		<div class="row">
           			<div class="text-center col">
-            			<img class="team-img rounded-circle" src="img/data.jpeg" alt="Generic placeholder image" width="140" height="140"><br>
+            			<img class="team-img rounded-circle" src="img/avatar.jpg" alt="Generic placeholder image" width="140" height="140"><br>
             			<h3>Juan Fernández Otero</h3>
-            			<h5>Administrador de bases de datos.</h5><p>Amplia experiencia en blabla.</p>
+            			<h5>Administrador de bases de datos.</h5>
           			</div>
           			<div class="text-center col">
-            			<img class="team-img rounded-circle" src="img/data.jpeg" alt="Generic placeholder image" width="140" height="140"><br>
+            			<img class="team-img rounded-circle" src="img/avatar.jpg" alt="Generic placeholder image" width="140" height="140"><br>
             			<h3>Francisco García Vázquez</h3>
-            			<h5>Desarrollador de back-end.</h5><p>Amplia experiencia en blabla.</p>
+            			<h5>Desarrollador de back-end.</h5>
           			</div>
         		</div>
         		<div class="row">
           			<div class="text-center col">
-            			<img class="team-img rounded-circle" src="img/data.jpeg" alt="Generic placeholder image" width="140" height="140"><br>
+            			<img class="team-img rounded-circle" src="img/avatar.jpg" alt="Generic placeholder image" width="140" height="140"><br>
             			<h3>Gabriel González Castro</h3>
-            			<h5>Especialista en ciberseguridad.</h5><p>Experiencia en blabla.</p>
+            			<h5>Especialista en ciberseguridad.</h5>
           			</div>
           			<div class="text-center col">
-            			<img class="team-img rounded-circle" src="img/data.jpeg" alt="Generic placeholder image" width="140" height="140"><br>
+            			<img class="team-img rounded-circle" src="img/avatar.jpg" alt="Generic placeholder image" width="140" height="140"><br>
             			<h3>Iago González Rodríguez</h3>
-            			<h5>Desarrollador de front-end.</h5><p>Amplia experiencia en HTML5, CSS3, Bootstrap y metodología Agile.</p>
+            			<h5>Desarrollador de front-end.</h5>
           			</div>
         		</div>
       		</div>
       		<!-- FEATURES -->
 			<!-- FOOTER -->
+			<br><br><br><br>
       		<hr>
+			<br>
       		<footer class="container">
       		   	<p class="float-right"><a href="#">Volver &uarr;</a></p>
         		<p>© 2017-2018 Infinance Project</p>
