@@ -471,7 +471,7 @@ public class DatabaseManager {
 
 		String insert = "update " + TABLE_USER + " " + "SET " + CN_USER + "=" + "\"" + user + "\"," + CN_EMAIL + "="
 				+ "\"" + email + "\"," + CN_FIRST_NAME + "=" + "\"" + firstName + "\"," + CN_LAST_NAME + "=" + "\""
-				+ lastName + "\"," + CN_PHONE + "=" + "\"" + phone + "\"" + " WHERE " + CN_ID_USER + "=" + id + ";";
+				+ lastName + "\"," + CN_PHONE + "=" + phone  + " WHERE " + CN_ID_USER + "=" + id + ";";
 		System.out.println(insert);
 		try {
 			stmt.executeUpdate(insert);

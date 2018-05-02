@@ -63,8 +63,9 @@ public class Settings extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		DatabaseManager.updateUserInfo(1, request.getParameter("user"), request.getParameter("email"),
+		UserInfo userInfo= (UserInfo)request.getSession().getAttribute("user");
+		int id_user= userInfo.getUserID();
+		DatabaseManager.updateUserInfo(id_user, request.getParameter("user"), request.getParameter("email"),
 				request.getParameter("name"), request.getParameter("lastName"), request.getParameter("phoneNumber"));
 		doGet(request, response);
 	}
