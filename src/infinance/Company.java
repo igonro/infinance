@@ -20,6 +20,7 @@ import model.CompanyValue;
 import model.Dates;
 import model.Empresa;
 import model.UserInfo;
+import utils.DatabaseManager;
 import utils.RequestAPI;
 
 /**

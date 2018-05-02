@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Empresa;
 import model.UserInfo;
+import utils.DatabaseManager;
 
 /**
  * Servlet implementation class AdminCompany

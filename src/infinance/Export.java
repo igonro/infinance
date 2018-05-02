@@ -17,6 +17,7 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import model.UserInfo;
+import utils.DatabaseManager;
 
 /**
  * Servlet implementation class export

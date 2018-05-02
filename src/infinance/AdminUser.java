@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.PortfolioUser;
 import model.Usuario;
+import utils.DatabaseManager;
 
 /**
  * Servlet implementation class AdminUser

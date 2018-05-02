@@ -22,7 +22,6 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import infinance.DatabaseManager;
 import model.CompanyValue;
 import model.Dates;
 

@@ -1,4 +1,4 @@
-package infinance;
+package utils;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -15,7 +15,6 @@ import model.Empresa;
 import model.HistoryUser;
 import model.PortfolioUser;
 import model.UserInfo;
-import utils.RequestAPI;
 
 public class DatabaseManager {
 	// Tabla usuario
@@ -431,7 +430,7 @@ public class DatabaseManager {
 
 	}
 
-	static Usuario getUserInfo(int id) {
+	public static Usuario getUserInfo(int id) {
 		Statement stmt = openConnection();
 		String query = "Select * from " + TABLE_USER + " where " + CN_ID_USER + "=" + "\"" + id + "\";";
 		System.out.println(query);
@@ -466,7 +465,7 @@ public class DatabaseManager {
 
 	}
 
-	static int updateUserInfo(int id, String user, String email, String firstName, String lastName, String phone) {
+	public static int updateUserInfo(int id, String user, String email, String firstName, String lastName, String phone) {
 		Statement stmt = openConnection();
 
 		String insert = "update " + TABLE_USER + " " + "SET " + CN_USER + "=" + "\"" + user + "\"," + CN_EMAIL + "="
@@ -491,7 +490,7 @@ public class DatabaseManager {
 
 	}
 
-	static int changePassword(int id, String oldPassword, String newPassword) {
+	public static int changePassword(int id, String oldPassword, String newPassword) {
 		Statement stmt = openConnection();
 		String query = "Select * from " + TABLE_USER + " where " + CN_ID_USER + "=" + "\"" + id + "\";";
 		System.out.println(query);

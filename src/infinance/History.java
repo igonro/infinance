@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.HistoryUser;
 import model.UserInfo;
+import utils.DatabaseManager;
 
 @WebServlet("/history")
 public class History extends HttpServlet {

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.HistoryUser;
 import model.PortfolioUser;
 import model.UserInfo;
+import utils.DatabaseManager;
 
 @WebServlet("/portfolio")
 public class Portfolio extends HttpServlet {
