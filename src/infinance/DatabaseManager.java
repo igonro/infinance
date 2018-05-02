@@ -855,6 +855,9 @@ public class DatabaseManager {
 				lastError = "El numero " + errorArray[1] + " ya esta registrado";
 			}
 		}
+		else {
+			lastError = "Compruebe los datos del registro";
+		}
 
 	}
 
