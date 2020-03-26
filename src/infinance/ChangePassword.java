@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import model.UserInfo;
+import utils.DatabaseManager;
 
 /**
  * Servlet implementation class CheckPassword
@@ -31,18 +35,21 @@ public class ChangePassword extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+		int id_user= ((UserInfo)request.getSession().getAttribute("user")).getUserID();
+		int error = DatabaseManager.changePassword(id_user ,request.getParameter("password"), request.getParameter("newpassword"));
+		/*response.sendRedirect("/infinance/settings?error="+error);*/
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+        response.getWriter().write(gson.toJson(error));		
+        }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int id_user= ((UserInfo)request.getSession().getAttribute("user")).getUserID();
-		DatabaseManager.changePassword(id_user ,request.getParameter("password"), request.getParameter("newpassword"));
-		response.sendRedirect("/settings.jsp");
+	doGet(request,response);
 	}
 
 }

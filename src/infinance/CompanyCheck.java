@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import model.Empresa;
+import utils.DatabaseManager;
 
 /**
  * Servlet implementation class CompanyCheck

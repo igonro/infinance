@@ -1,31 +1,29 @@
 
 package model;
 
+import java.math.BigDecimal;
+
 public class Empresa {
 private String symbol;
 private String name;
-private int lastscale;
-private int marketcap;
-private String address;
+private float lastsale;
+private BigDecimal marketcap;
+private int address;
 private String sector;
 private String industry;
 private String summaryquote;
+private int ipoyear;
 
 
 
-public Empresa(String symbol, String name, int lastscale, int marketcap, String address, String sector, String industry,
-		String summaryquote) {
-	super();
-	this.symbol = symbol;
-	this.name = name;
-	this.lastscale = lastscale;
-	this.marketcap = marketcap;
-	this.address = address;
-	this.sector = sector;
-	this.industry = industry;
-	this.summaryquote = summaryquote;
+
+
+public int getIpoyear() {
+	return ipoyear;
 }
-
+public void setIpoyear(int ipoyear) {
+	this.ipoyear = ipoyear;
+}
 public Empresa(String symbol) {
 	super();
 	this.symbol = symbol;
@@ -43,22 +41,22 @@ public String getName() {
 public void setName(String name) {
 	this.name = name;
 }
-public int getLastscale() {
-	return lastscale;
+public float getLastsale() {
+	return lastsale;
 }
-public void setLastscale(int lastscale) {
-	this.lastscale = lastscale;
+public void setLastsale(int lastscale) {
+	this.lastsale = lastscale;
 }
-public int getMarketcap() {
+public BigDecimal getMarketcap() {
 	return marketcap;
 }
-public void setMarketcap(int marketcap) {
+public void setMarketcap(BigDecimal marketcap) {
 	this.marketcap = marketcap;
 }
-public String getAddress() {
+public int getAddress() {
 	return address;
 }
-public void setAddress(String address) {
+public void setAddress(int address) {
 	this.address = address;
 }
 public String getSector() {
@@ -79,11 +77,25 @@ public String getSummaryquote() {
 public void setSummaryquote(String summaryquote) {
 	this.summaryquote = summaryquote;
 }
+public Empresa(String symbol, String name, float lastsale, BigDecimal marketcap, int address, String sector, String industry,
+		String summaryquote, int ipoyear) {
+	super();
+	this.symbol = symbol;
+	this.name = name;
+	this.lastsale = lastsale;
+	this.marketcap = marketcap;
+	this.address = address;
+	this.sector = sector;
+	this.industry = industry;
+	this.summaryquote = summaryquote;
+	this.ipoyear = ipoyear;
+}
 @Override
 public String toString() {
-	return "Empresa [symbol=" + symbol + ", name=" + name + ", lastscale=" + lastscale + ", marketcap=" + marketcap
+	return "symbol=" + symbol + ", name=" + name + ", lastsale=" + lastsale + ", marketcap=" + marketcap
 			+ ", address=" + address + ", sector=" + sector + ", industry=" + industry + ", summaryquote="
-			+ summaryquote + "]";
+			+ summaryquote + ", ipoyear=" + ipoyear;
 }
+
 
 }

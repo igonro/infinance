@@ -47,8 +47,7 @@
             			<li class="nav-item dropdown">
               				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span data-feather="info"></span> Acerca de</a>
               				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				                <a class="dropdown-item" href="/infinance/about-team"><span data-feather="users"></span> Sobre nosotros</a>
-				                <a class="dropdown-item" href="/infinance/about-contact"><span data-feather="mail"></span> Contacto</a>
+				                <a class="dropdown-item" href="/infinance/about"><span data-feather="users"></span> Sobre nosotros</a>
               				</div>
             			</li>
           			</ul>
@@ -69,11 +68,7 @@
       		<input id="inputUser" class="form-control" placeholder="Usuario" required="true" autofocus="" type="text" name="user">
       		<label for="inputPassword" class="sr-only">Contraseña</label>
       		<input id="inputPassword" class="form-control" placeholder="Contraseña" required="true" type="password" name="password">
-      		<div class="checkbox mb-3">
-        		<label>
-          			<input value="remember-me" type="checkbox"> Recordarme
-        		</label>
-      		</div>
+			<br>
             <c:if test="${not empty errorMessage}">
       			<c:out value="${errorMessage}"/>
     		</c:if>

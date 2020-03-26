@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.UserInfo;
+import utils.DatabaseManager;
 
 /**
  * Servlet implementation class LoginServlet
@@ -34,15 +35,15 @@ public class Login extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int iduser = DatabaseManager.login(request.getParameter("user"), request.getParameter("password"));
-		if (iduser == -1) {
+		UserInfo userInfo = DatabaseManager.login(request.getParameter("user"), request.getParameter("password"));
+		if (userInfo.getUserID() == -1) {
 			System.out.println("Usuario no registrado");
 			request.setAttribute("errorMessage", DatabaseManager.getLastError());
 
 			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("user", new UserInfo((request.getParameter("user")), iduser));
+			session.setAttribute("user", userInfo);
 			response.sendRedirect("/infinance/portfolio");
 		}
 

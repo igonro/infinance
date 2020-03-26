@@ -15,10 +15,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.CompanyInfo;
+
 import model.CompanyValue;
 import model.Dates;
 import model.Empresa;
+import model.UserInfo;
+import utils.DatabaseManager;
 import utils.RequestAPI;
 
 /**
@@ -42,48 +44,49 @@ public class Company extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		ServletContext sc = getServletContext();
-		String symbol = request.getParameter("symbol");
-		Empresa empresa = DatabaseManager.busquedaEmpresaPorSymbol(symbol);
-		CompanyInfo infoEmpresa = new CompanyInfo(empresa.getName(), empresa.getSymbol(), empresa.getMarketcap(),
-				empresa.getSector(), empresa.getIndustry(), 0.0);
-		request.setAttribute("infoEmpresa", infoEmpresa);
-		String dateStart = request.getParameter("dateStart");
-		String dateEnd = request.getParameter("dateEnd");
-		try {
-
-			if (dateStart != null && dateEnd != null) {
-				if (checkDates(dateStart, dateEnd)) {
-					ArrayList<CompanyValue> company = RequestAPI.callAPIbyDate(symbol, dateStart, dateEnd);
-					request.setAttribute("Company", company);
-					Dates dates = new Dates(dateStart, dateEnd);
+		if (request.getSession().getAttribute("user") != null) {
+			UserInfo userInfo= (UserInfo)request.getSession().getAttribute("user");
+			int type = userInfo.getType();
+			request.setAttribute("type", type);
+			ServletContext sc = getServletContext();
+			String symbol = request.getParameter("symbol");
+			Empresa empresa = DatabaseManager.busquedaEmpresaPorSymbol(symbol);
+			request.setAttribute("infoEmpresa", empresa);
+			String dateStart = request.getParameter("dateStart");
+			String dateEnd = request.getParameter("dateEnd");
+			try {
+				if (dateStart != null && dateEnd != null) {
+					if (checkDates(dateStart, dateEnd)) {
+						ArrayList<CompanyValue> company = RequestAPI.callAPIbyDate(symbol, dateStart, dateEnd);
+						request.setAttribute("Company", company);
+						Dates dates = new Dates(dateStart, dateEnd);
+						request.setAttribute("Dates", dates);
+						RequestDispatcher rd = sc.getRequestDispatcher("/company.jsp");
+						rd.forward(request, response);
+					} else {
+						RequestDispatcher rd = sc.getRequestDispatcher("/company-data-error.jsp");
+						rd.forward(request, response);
+					}
+				} else {
+					Dates dates = RequestAPI.getOldestandNewestDate(symbol);
 					request.setAttribute("Dates", dates);
+					ArrayList<CompanyValue> company = RequestAPI.callAPIbyTicker(symbol);
+					request.setAttribute("Company", company);
 					RequestDispatcher rd = sc.getRequestDispatcher("/company.jsp");
 					rd.forward(request, response);
-				} else {
-					RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
-					rd.forward(request, response);
 				}
-			} else {
-				Dates dates = RequestAPI.getOldestandNewestDate(symbol);
-				request.setAttribute("Dates", dates);
-				ArrayList<CompanyValue> company = RequestAPI.callAPIbyTicker(symbol);
-				request.setAttribute("Company", company);
-				RequestDispatcher rd = sc.getRequestDispatcher("/company.jsp");
+			} catch (java.io.IOException e) {
+				System.out.println("io");
+				RequestDispatcher rd = sc.getRequestDispatcher("/company-data-error.jsp");
+				rd.forward(request, response);
+			} catch (java.lang.NullPointerException e) {
+				System.out.println("nullpointer");
+				RequestDispatcher rd = sc.getRequestDispatcher("/company-data-error.jsp");
 				rd.forward(request, response);
 			}
-
-		} catch (java.io.IOException e) {
-			System.out.println("io");
-			RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
-			rd.forward(request, response);
-		} catch (java.lang.NullPointerException e) {
-			System.out.println("nullpointer");
-			RequestDispatcher rd = sc.getRequestDispatcher("/dashboarderror.jsp");
-			rd.forward(request, response);
+		} else {
+			response.sendRedirect("/infinance/login");
 		}
-
 	}
 
 	/**

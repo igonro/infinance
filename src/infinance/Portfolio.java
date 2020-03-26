@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.HistoryUser;
 import model.PortfolioUser;
 import model.UserInfo;
+import utils.DatabaseManager;
 
 @WebServlet("/portfolio")
 public class Portfolio extends HttpServlet {
@@ -27,15 +28,16 @@ public class Portfolio extends HttpServlet {
 			System.out.println("GET DEL PORTFOLIO");
 			ServletContext sc = getServletContext();
 		
-
-			int id_user= ((UserInfo)request.getSession().getAttribute("user")).getUserID();
+			UserInfo userInfo= (UserInfo)request.getSession().getAttribute("user");
+			int id_user= userInfo.getUserID();
+			int type = userInfo.getType();
 			ArrayList<PortfolioUser>  portfolioUser =   DatabaseManager.getPortfolio( id_user);
 			request.setAttribute("PortfolioUser", portfolioUser);
+			request.setAttribute("type", type);
 			RequestDispatcher rd = sc.getRequestDispatcher("/portfolio.jsp");
 			rd.forward(request,response);
 			
 		} else {
-
 			response.sendRedirect("/infinance/login");
 		}
 		

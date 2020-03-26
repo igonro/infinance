@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.HistoryUser;
 import model.UserInfo;
+import utils.DatabaseManager;
 
 @WebServlet("/history")
 public class History extends HttpServlet {
@@ -27,6 +28,9 @@ public class History extends HttpServlet {
 			System.out.println("GET DEL HISTORY");
 			ServletContext sc = getServletContext();
 			int id_user= ((UserInfo)request.getSession().getAttribute("user")).getUserID();
+			UserInfo userInfo= (UserInfo)request.getSession().getAttribute("user");
+			int type = userInfo.getType();
+			request.setAttribute("type", type);
 			ArrayList<HistoryUser>  historyUser =   DatabaseManager.getHistory( id_user);
 			request.setAttribute("HistoryUser", historyUser);
 			RequestDispatcher rd = sc.getRequestDispatcher("/history.jsp");
